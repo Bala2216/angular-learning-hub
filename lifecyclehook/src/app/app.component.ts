@@ -24,5 +24,6 @@ export class AppComponent {
       phone: '',
       age: '',
     };
+    console.log('User added:', this.users);
   }
 }
