@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { UserlistComponent } from './userlist/userlist.component';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule],
+  imports: [FormsModule, UserlistComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
