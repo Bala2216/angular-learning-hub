@@ -1,0 +1,62 @@
+<div class="container">
+  <h2>{{ surveyForm.value.title | uppercase }}</h2>
+
+  <!-- Reactive Form -->
+  <form [formGroup]="surveyForm" *ngIf="!previewMode">
+    <label>Survey Title:</label>
+    <input formControlName="title" placeholder="Enter survey title" />
+
+    <div formArrayName="questions">
+      <div *ngFor="let question of questions.controls; let i = index" [formGroupName]="i">
+        <label>{{ question.value.label }}</label>
+        <input formControlName="label" placeholder="Enter question text" />
+
+        <div *ngIf="question.value.type === 'multiple'">
+          <label>Options:</label>
+          <div *ngFor="let opt of question.value.options; let j = index">
+            <input [value]="opt" />
+          </div>
+        </div>
+
+        <button (click)="removeQuestion(i)">Remove</button>
+      </div>
+    </div>
+
+    <button type="button" (click)="addQuestion('text')">Add Text Question</button>
+    <button type="button" (click)="addQuestion('rating')">Add Rating Question</button>
+    <button type="button" (click)="addQuestion('multiple')">Add Multiple Choice Question</button>
+    <br /><br />
+    <button type="button" (click)="togglePreview()">Preview Survey</button>
+    <button type="button" (click)="saveSurvey()">Save Survey</button>
+  </form>
+
+  <!-- Preview Mode -->
+  <div *ngIf="previewMode">
+    <h3>Preview: {{ surveyForm.value.title }}</h3>
+    <ul>
+      <li *ngFor="let q of surveyForm.value.questions">
+        {{ q.label }} ({{ q.type }})
+      </li>
+    </ul>
+    <button (click)="togglePreview()">Back to Edit</button>
+  </div>
+
+  <!-- Template-driven Form -->
+  <h3>Feedback Form</h3>
+  <form #feedbackForm="ngForm" (ngSubmit)="submitFeedback()">
+    <label>Name:</label>
+    <input name="name" [(ngModel)]="feedback.name" required />
+    <label>Comments:</label>
+    <input name="comments" [(ngModel)]="feedback.comments" />
+    <button type="submit">Submit Feedback</button>
+  </form>
+
+  <!--JSON Form---->
+  <h3>JSON Form</h3>
+  <form>
+    <div *ngFor="let field of jsonFormSchema">
+      <label>{{ field.label }}:</label>
+      <input [type]="field.type" [name]="field.name" />
+    </div>
+  </form>
+</div>
