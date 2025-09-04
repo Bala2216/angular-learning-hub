@@ -1,24 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { HeaderComponent } from './header/header.component';
+import { Component } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [HeaderComponent],
+  imports: [FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.user.name = 'Kanna';
-    }, 2000);
-  }
-
+export class AppComponent {
   title = 'Lifecyclehook';
-
+  users: { name: string; phone: string; age: string }[] = [];
   user = {
-    name: 'Vinoth',
-    gender: 'Male',
-    age: 30,
+    name: '',
+    phone: '',
+    age: '',
   };
+
+  onSubmit(form: NgForm) {
+    console.log('Form submitted:', form.value);
+    this.users.push({ ...this.user });
+    this.user = {
+      name: '',
+      phone: '',
+      age: '',
+    };
+  }
 }

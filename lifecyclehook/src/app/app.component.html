@@ -1,2 +1,17 @@
 <h1>{{ title }}</h1>
-<app-header [name]="user.name"> </app-header>
+
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+  <label>
+    Name:
+    <input type="text" [(ngModel)]="user.name" name="name" />
+  </label>
+  <label>
+    Phone:
+    <input type="text" [(ngModel)]="user.phone" name="phone" />
+  </label>
+  <label>
+    Age:
+    <input type="text" [(ngModel)]="user.age" name="age" />
+  </label>
+  <button type="submit">Submit</button>
+</form>
