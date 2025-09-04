@@ -18,13 +18,18 @@ export class AppComponent {
   };
 
   onSubmit(form: NgForm) {
-    console.log('Form submitted:', form.value);
-    this.users.push({ ...this.user });
-    this.user = {
-      name: '',
-      phone: '',
-      age: '',
-    };
-    console.log('User added:', this.users);
+    if (form.valid) {
+      // Check if the form is valid before processing
+      console.log('Form submitted:', form.value);
+      this.users.push({ ...this.user });
+      this.user = {
+        name: '',
+        phone: '',
+        age: '',
+      };
+      console.log('User added:', this.users);
+    } else {
+      alert('Please fill in all required fields.');
+    }
   }
 }
