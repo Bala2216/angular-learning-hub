@@ -1,0 +1,36 @@
+<div class="employee-table-container">
+  <h2>Employee List</h2>
+
+  <table *ngIf="sortedEmployees.length > 0; else noEmployees">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Department</th>
+        <th>Joining Date</th>
+        <th>Profile</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of sortedEmployees; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.email }}</td>
+        <td>{{ emp.phone }}</td>
+        <td>{{ emp.department }}</td>
+        <td>{{ emp.joiningDate }}</td>
+        <td *ngIf="emp.department === 'HR'">{{ emp.hrLevel }}</td>
+        <td *ngIf="emp.department === 'Engineering'">{{ emp.languages }}</td>
+        <td *ngIf="emp.department === 'Marketing'">{{ emp.experience }} years</td>
+        <td><button (click)="onDelete(i)" class="red-button">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noEmployees>
+    <p class="no-data">No employees added yet.</p>
+  </ng-template>
+</div>
