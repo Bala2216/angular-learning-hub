@@ -1,11 +1,21 @@
 @if (users.length !== 0) {
 <h2>User List</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (user of users; track user) {
+    <tr>
+      <td>{{ user.name }}</td>
+      <td>{{ user.phone }}</td>
+      <td>{{ user.age }}</td>
+    </tr>
+    }
+  </tbody>
+</table>
 }
-<ul>
-  @for (user of users; track user) {
-  <li>
-    <strong>Name:</strong> {{ user.name }} | <strong>Phone:</strong>
-    {{ user.phone }} | <strong>Age:</strong> {{ user.age }}
-  </li>
-  }
-</ul>
