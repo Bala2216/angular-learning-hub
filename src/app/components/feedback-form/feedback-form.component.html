@@ -1,0 +1,46 @@
+<h3>Feedback Form</h3>
+<form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
+  <label>Name:</label>
+  <input
+    formControlName="name"
+    placeholder="Enter name"
+    [ngClass]="{
+      'valid-input':
+        feedbackForm.get('name')?.valid && feedbackForm.get('name')?.touched,
+      'invalid-input':
+        feedbackForm.get('name')?.invalid && feedbackForm.get('name')?.touched
+    }"
+  />
+
+  <label>Phone:</label>
+  <input
+    formControlName="phone"
+    placeholder="Enter phone"
+    [ngClass]="{
+      'valid-input':
+        feedbackForm.get('phone')?.valid && feedbackForm.get('phone')?.touched,
+      'invalid-input':
+        feedbackForm.get('phone')?.invalid && feedbackForm.get('phone')?.touched
+    }"
+  />
+
+  <label>Date:</label>
+  <input
+    formControlName="date"
+    placeholder="Enter date"
+    [ngClass]="{
+      'valid-input':
+        feedbackForm.get('date')?.valid && feedbackForm.get('date')?.touched,
+      'invalid-input':
+        feedbackForm.get('date')?.invalid && feedbackForm.get('date')?.touched
+    }"
+  />
+
+  <label>Comments:</label>
+  <input formControlName="comments" placeholder="Enter comments" />
+
+  <p>
+    <strong>Preview:</strong> {{ feedbackForm.value.comments | slice : 0 : 30 }}
+  </p>
+  <button type="submit">Submit Feedback</button>
+</form>

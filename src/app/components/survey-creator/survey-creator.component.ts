@@ -1,34 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-survey-creator',
   templateUrl: './survey-creator.component.html',
-  styleUrls: ['./survey-creator.component.scss']
+  styleUrls: ['./survey-creator.component.scss'],
 })
 export class SurveyCreatorComponent implements OnInit {
   surveyForm: FormGroup;
-  previewMode = false;
-  feedback = {
-    name: '',
-    comments: ''
-  };
-  jsonFormSchema = [
-    { label: 'Email', type: 'email', name: 'email' },
-    { label: 'Age', type: 'number', name: 'age' }
-  ];
+  @ViewChild('surveyTitleInput') surveyTitleInput!: ElementRef;
 
   constructor(private fb: FormBuilder) {
     this.surveyForm = this.fb.group({
       title: ['', Validators.required],
-      questions: this.fb.array([])
+      questions: this.fb.array([]),
     });
   }
 
   ngOnInit(): void {
     const savedSurvey = localStorage.getItem('surveyData');
     if (savedSurvey) {
-      this.surveyForm.setValue(JSON.parse(savedSurvey));
+      const parsed = JSON.parse(savedSurvey);
+      if (parsed.title && parsed.title.trim() !== '') {
+        this.surveyForm.setValue(parsed);
+      } else {
+        localStorage.removeItem('surveyData'); // Clear invalid data
+      }
     }
   }
 
@@ -40,7 +37,7 @@ export class SurveyCreatorComponent implements OnInit {
     const question = this.fb.group({
       type: [type],
       label: ['', Validators.required],
-      options: this.fb.array(type === 'multiple' ? [''] : [])
+      options: this.fb.array(type === 'multiple' ? [''] : []),
     });
     this.questions.push(question);
   }
@@ -49,16 +46,20 @@ export class SurveyCreatorComponent implements OnInit {
     this.questions.removeAt(index);
   }
 
-  togglePreview() {
-    this.previewMode = !this.previewMode;
-  }
-
   saveSurvey() {
-    localStorage.setItem('surveyData', JSON.stringify(this.surveyForm.value));
-    alert('Survey saved to local storage!');
+    const title = this.surveyForm.get('title')?.value;
+    if (title && title.trim() !== '') {
+      localStorage.setItem('surveyData', JSON.stringify(this.surveyForm.value));
+      alert('Survey saved to local storage!');
+    } else {
+      localStorage.removeItem('surveyData');
+      alert('Survey title is empty. Data not saved.');
+    }
   }
 
-  submitFeedback() {
-    alert(`Feedback submitted by ${this.feedback.name}`);
+  clearSurvey() {
+    this.surveyForm.reset();
+    this.questions.clear();
+    localStorage.removeItem('surveyData');
   }
 }
