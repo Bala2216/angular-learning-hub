@@ -1,0 +1,13 @@
+<form #myForm="ngForm" (ngSubmit)="updateDetails(myForm.value)">
+    <label for="name">Name: </label>
+    <input id="name" type="text" name="name" ngModel /><br /><br />
+    <label for="name">Department: </label>
+    <input id="name" type="text" name="dept" ngModel /><br /><br />
+    <label for="name">Salary: </label>
+    <input id="name" type="text" name="salary" ngModel /><br /><br />
+    <button>Update Details</button> &nbsp;<button (click)="hideEmpDetails()">Show/Hide Employee Details</button>
+</form>
+
+<br />
+
+<app-emp-details [empDetails]="empDetails" *ngIf="isUserFormVisible" #BHeader></app-emp-details>
