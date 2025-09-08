@@ -1,43 +1,73 @@
-form {
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-}
-
-label {
+:host {
   display: block;
-  margin-top: 15px;
-  font-weight: 600;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-input {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  transition: border-color 0.3s ease;
+h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #3f51b5;
+  text-align: center;
+}
+
+jsonforms {
+  display: block;
+  margin-bottom: 1.5rem;
+
+  ::ng-deep .mat-form-field {
+    width: 100%;
+  }
+
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 1rem;
+  }
+}
+
+p {
+  font-size: 1rem;
+  margin: 1rem 0;
+  color: #333;
+
+  strong {
+    color: #555;
+  }
 }
 
 button {
-  margin-top: 20px;
-  padding: 8px 16px;
-  background-color: #28a745;
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  background-color: #3f51b5;
   color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #303f9f;
+  }
 }
 
-button:hover {
-  background-color: #218838;
+::ng-deep .jsonforms-control {
+  margin-bottom: 1rem;
+
+  &.valid input,
+  &.valid textarea {
+    border: 2px solid #4caf50 !important;
+    background-color: #e8f5e9;
+  }
+
+  &.invalid input,
+  &.invalid textarea {
+    border: 2px solid #f44336 !important;
+    background-color: #ffebee;
+  }
 }
 
-.valid-input {
-  border-color: green;
-}
 
-.invalid-input {
-  border-color: red;
-}

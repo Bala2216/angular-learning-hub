@@ -7,6 +7,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
 import { SurveyPreviewComponent } from './components/survey-preview/survey-preview.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JsonFormsModule } from '@jsonforms/angular';
+import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,9 @@ import { SurveyPreviewComponent } from './components/survey-preview/survey-previ
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    JsonFormsModule,
+    JsonFormsAngularMaterialModule,
     RouterModule,
     AppRoutingModule,
     ReactiveFormsModule,

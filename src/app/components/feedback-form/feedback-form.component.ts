@@ -1,26 +1,49 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { feedbackSchema, feedbackUISchema } from './feedback.schema';
+import { angularMaterialRenderers } from '@jsonforms/angular-material';
 
 @Component({
   selector: 'app-feedback-form',
   templateUrl: './feedback-form.component.html',
-  styleUrls: ['./feedback-form.component.scss']
+  styleUrls: ['./feedback-form.component.scss'],
 })
 export class FeedbackFormComponent {
-  feedbackForm: FormGroup;
+  schema = feedbackSchema;
+  uiSchema = feedbackUISchema;
 
-  constructor(private fb: FormBuilder) {
-    this.feedbackForm = this.fb.group({
-      name: ['', [Validators.required, Validators.pattern(/^[A-Z][a-zA-Z_ ]*$/)]],
-      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-      date: ['', [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/)]],
-      comments: [''],
-    });
+  data: any = {
+    name: '',
+    phone: '',
+    date: '',
+    comments: ''
+  };
+
+  renderers = angularMaterialRenderers;
+
+  sanitizePattern(pattern: string): string {
+    return pattern.replace(/\\\\/g, '\\');
   }
 
   submitFeedback() {
-    if (this.feedbackForm.valid) {
-      alert(`Feedback submitted by ${this.feedbackForm.value.name}`);
+    const name = (this.data?.name || '').trim();
+    const phone = (this.data?.phone || '').trim();
+    const date = (this.data?.date || '').trim();
+
+    const namePattern = new RegExp(this.sanitizePattern(this.schema.properties.name.pattern));
+    const phonePattern = new RegExp(this.sanitizePattern(this.schema.properties.phone.pattern));
+    const datePattern = new RegExp(this.sanitizePattern(this.schema.properties.date.pattern));
+
+    console.log('Name:', name, 'Valid:', namePattern.test(name));
+    console.log('Phone:', phone, 'Valid:', phonePattern.test(phone));
+    console.log('Date:', date, 'Valid:', datePattern.test(date));
+
+    const isValid =
+      namePattern.test(name) &&
+      phonePattern.test(phone) &&
+      datePattern.test(date);
+
+    if (isValid) {
+      alert(`Feedback submitted by ${name}`);
     } else {
       alert('Please correct the feedback form before submitting.');
     }
