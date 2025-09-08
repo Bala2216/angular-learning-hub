@@ -13,7 +13,7 @@
   <tbody>
     @for (user of users; track user) {
     <tr>
-      <td>{{ user.name }}</td>
+      <td>{{ user.name | titlecase }}</td>
       <td>{{ user.phone }}</td>
       <td>{{ user.age }}</td>
       <td>{{ user.date }}</td>
