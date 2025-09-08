@@ -1,19 +1,4 @@
 <h1>{{ title }}</h1>
 
-<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
-  <label>
-    Name:
-    <input type="text" [(ngModel)]="user.name" name="name" required />
-  </label>
-  <label>
-    Phone:
-    <input type="text" [(ngModel)]="user.phone" name="phone" required />
-  </label>
-  <label>
-    Age:
-    <input type="text" [(ngModel)]="user.age" name="age" required />
-  </label>
-  <button type="submit">Submit</button>
-</form>
-
+<app-adduser (userAdded)="users.push($event)"></app-adduser>
 <app-userlist [users]="users"></app-userlist>

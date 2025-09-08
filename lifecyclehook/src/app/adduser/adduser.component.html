@@ -1,1 +1,15 @@
-<p>adduser works!</p>
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+  <label>
+    Name:
+    <input type="text" [(ngModel)]="user.name" name="name" required />
+  </label>
+  <label>
+    Phone:
+    <input type="text" [(ngModel)]="user.phone" name="phone" required />
+  </label>
+  <label>
+    Age:
+    <input type="text" [(ngModel)]="user.age" name="age" required />
+  </label>
+  <button type="submit">Submit</button>
+</form>

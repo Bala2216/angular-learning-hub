@@ -1,35 +1,20 @@
 import { Component } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { UserlistComponent } from './userlist/userlist.component';
+import { AdduserComponent } from './adduser/adduser.component';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, UserlistComponent],
+  imports: [FormsModule, UserlistComponent, AdduserComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'Lifecyclehook';
   users: { name: string; phone: string; age: string }[] = [];
-  user = {
-    name: '',
-    phone: '',
-    age: '',
-  };
 
-  onSubmit(form: NgForm) {
-    if (form.valid) {
-      // Check if the form is valid before processing
-      console.log('Form submitted:', form.value);
-      this.users.push({ ...this.user });
-      this.user = {
-        name: '',
-        phone: '',
-        age: '',
-      };
-      console.log('User added:', this.users);
-    } else {
-      alert('Please fill in all required fields.');
-    }
+  onUserAdded(newUser: { name: string; phone: string; age: string }) {
+    this.users.push(newUser);
+    console.log('User added:', this.users);
   }
 }
