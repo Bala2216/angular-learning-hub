@@ -47,10 +47,26 @@ export class AdduserComponent {
   ngOnInit() {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
-      phone: ['', Validators.required],
-      age: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      age: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[0-9]+$'),
+          Validators.min(0),
+          Validators.max(100),
+        ],
+      ],
       status: ['active', Validators.required],
     });
+  }
+
+  get phone() {
+    return this.userForm.get('phone');
+  }
+
+  get age() {
+    return this.userForm.get('age');
   }
 
   onSubmit() {

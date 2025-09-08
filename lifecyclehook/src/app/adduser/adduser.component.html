@@ -14,26 +14,56 @@
   <button type="submit">Submit</button>
 </form> -->
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <label>
-    Name:
-    <input type="text" formControlName="name" />
-  </label>
-  <label>
-    Phone:
-    <input type="text" formControlName="phone" />
-  </label>
-  <label>
-    Age:
-    <input type="text" formControlName="age" />
-  </label>
-  <legend>Status:</legend>
-  <label>
-    <input type="radio" value="active" formControlName="status" />
-    Active
-  </label>
-  <label>
-    <input type="radio" value="inactive" formControlName="status" />
-    Inactive
-  </label>
+  <!-- Name field -->
+  <div>
+    <label>
+      Name:
+      <input type="text" formControlName="name" />
+    </label>
+  </div>
+
+  <!-- Phone field -->
+  <div>
+    <label>
+      Phone:
+      <input type="text" formControlName="phone" />
+    </label>
+    @if (phone?.invalid && (phone?.dirty || phone?.touched)) {
+    @if(phone?.errors?.['required']) {
+    <span>Phone is required.</span>
+    } @if(phone?.errors?.['pattern']) {
+    <span>Phone number must be exactly 10 digits.</span>
+    } }
+  </div>
+
+  <!-- Age field -->
+  <div>
+    <label>
+      Age:
+      <input type="text" formControlName="age" />
+    </label>
+    @if (age?.invalid && (age?.dirty || age?.touched)) {
+    @if(age?.errors?.['required']) {
+    <span>Age is required.</span>
+    } @if(age?.errors?.['pattern']) {
+    <span>Age must be a number.</span>
+    } @if(age?.errors?.['min'] || age?.errors?.['max']) {
+    <span>Age must be between 0 and 100.</span>
+    } }
+  </div>
+
+  <!-- Status radio button group -->
+  <div>
+    <legend>Status:</legend>
+    <label>
+      <input type="radio" value="active" formControlName="status" />
+      Active
+    </label>
+    <label>
+      <input type="radio" value="inactive" formControlName="status" />
+      Inactive
+    </label>
+  </div>
+
   <button type="submit" [disabled]="userForm.invalid">Submit</button>
 </form>

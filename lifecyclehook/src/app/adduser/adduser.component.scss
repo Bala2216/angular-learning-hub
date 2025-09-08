@@ -1,0 +1,9 @@
+form > div {
+  margin-bottom: 1rem; // Add some space below each form field group
+}
+
+span {
+  color: red; // Style validation error messages
+  font-size: 0.8em;
+  margin-left: 0.5rem;
+}
