@@ -1,9 +1,15 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-adduser',
-  imports: [FormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './adduser.component.html',
   styleUrl: './adduser.component.scss',
 })
@@ -15,21 +21,40 @@ export class AdduserComponent {
     age: string;
   }>();
 
-  user = {
-    name: '',
-    phone: '',
-    age: '',
-  };
+  // user = {
+  //   name: '',
+  //   phone: '',
+  //   age: '',
+  // };
 
-  onSubmit(form: NgForm) {
-    if (form.valid) {
-      // Emit the user data to the parent component
-      this.userAdded.emit({ ...this.user });
+  // onSubmit(form: NgForm) {
+  //   if (form.valid) {
+  //     // Emit the user data to the parent component
+  //     this.userAdded.emit({ ...this.user });
 
-      // Reset the form after submission
-      form.resetForm();
-    } else {
-      alert('Please fill in all required fields.');
+  //     // Reset the form after submission
+  //     form.resetForm();
+  //   } else {
+  //     alert('Please fill in all required fields.');
+  //   }
+  // }
+
+  userForm!: FormGroup;
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit() {
+    this.userForm = this.fb.group({
+      name: ['', Validators.required],
+      phone: ['', Validators.required],
+      age: ['', Validators.required],
+    });
+  }
+
+  onSubmit() {
+    if (this.userForm.valid) {
+      this.userAdded.emit(this.userForm.value);
+      this.userForm.reset();
     }
   }
 }
