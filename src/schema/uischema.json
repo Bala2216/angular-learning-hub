@@ -1,0 +1,35 @@
+{
+  "type": "VerticalLayout",
+  "elements": [
+    { 
+      "type": "Control", 
+      "scope": "#/properties/name", 
+      "options": { "format": "textbox" }  
+    },
+    { 
+      "type": "Control", 
+      "scope": "#/properties/email", 
+      "options": { "format": "textbox" }  
+    },
+    { 
+      "type": "Control", 
+      "scope": "#/properties/gender",
+      "options": { "format": "radio" }
+    },
+    { 
+      "type": "Control", 
+      "scope": "#/properties/department",
+      "options": { "format": "dropdown" }
+    },
+    { 
+      "type": "Control", 
+      "scope": "#/properties/employmentType",
+      "options": { "format": "radio" }
+    },
+    { 
+      "type": "Control", 
+      "scope": "#/properties/iAgree",
+      "label": "I agree to the terms and conditions"
+    }
+  ]
+}

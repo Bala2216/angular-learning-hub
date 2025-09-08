@@ -1,0 +1,28 @@
+<div class="container">
+    <h3>Staff Onboarding Form</h3>
+<form [formGroup]="staffForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+        <mat-label for="name">Name</mat-label>
+        <input matInput id="name" type="text" formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label for="phoneNumber">Phone Number</mat-label>
+        <input matInput id="phoneNumber" type="number" formControlName="phoneNumber">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="half-width">
+    <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+  <p>Complete the form to enable button.</p>
+    <button mat-raised-button color="primary" [disabled]="!staffForm.valid">
+        Submit
+    </button>
+  <!-- <button matButton="elevated" [disabled]="!staffForm.valid">Submit</button> -->
+  <!-- <button type="submit" >Submit</button> -->
+
+</form>
+</div>

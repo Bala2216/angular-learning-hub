@@ -1,0 +1,18 @@
+.example-card {
+  max-width: 400px;
+  margin-top: 15%;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.dev/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+.container {
+display: grid; /* Makes the container a grid */
+  grid-template-columns: 1fr 1fr 1fr; /* Creates three equal-width columns */
+  gap: 10px;
+}
+.item {
+  width: 100px;
+  height: 100px;
+}

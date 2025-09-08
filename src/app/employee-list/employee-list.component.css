@@ -1,0 +1,22 @@
+table {
+  width: 100%;
+}
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.flex-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.button-aligh{
+      float: right;
+    bottom: 54px;
+}
+.m-button-right-15{
+  margin-right: 15px;
+}

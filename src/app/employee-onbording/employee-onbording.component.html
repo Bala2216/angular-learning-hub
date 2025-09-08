@@ -1,0 +1,12 @@
+<h1>Employee Onboarding Form</h1>
+<jsonforms
+  [data]="data"
+  [schema]="schema"
+  [uischema]="uischema"
+  [renderers]="renderers"
+  (dataChange)="onChange($event)">
+</jsonforms>
+
+<button mat-raised-button color="primary" (click)="submitForm()">
+  Submit
+</button>
