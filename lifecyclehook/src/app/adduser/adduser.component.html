@@ -52,6 +52,20 @@
     } }
   </div>
 
+  <!-- Date field -->
+  <div>
+    <label>
+      Date:
+      <input type="date" formControlName="date" />
+    </label>
+    @if (date?.invalid && (date?.dirty || date?.touched)) {
+    @if(date?.errors?.['required']) {
+    <span>Date is required.</span>
+    } @if(date?.errors?.['pattern']) {
+    <span>Date must be in YYYY-MM-DD format.</span>
+    } }
+  </div>
+
   <!-- Status radio button group -->
   <div>
     <legend>Status:</legend>

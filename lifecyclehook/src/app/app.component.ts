@@ -10,13 +10,20 @@ import { AdduserComponent } from './adduser/adduser.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'Lifecyclehook';
-  users: { name: string; phone: string; age: string; status: string }[] = [];
+  title = 'Reactive Forms';
+  users: {
+    name: string;
+    phone: number;
+    age: number;
+    date: string;
+    status: string;
+  }[] = [];
 
   onUserAdded(newUser: {
     name: string;
-    phone: string;
-    age: string;
+    phone: number;
+    age: number;
+    date: string;
     status: string;
   }) {
     this.users.push(newUser);

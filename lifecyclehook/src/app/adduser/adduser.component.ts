@@ -17,9 +17,10 @@ export class AdduserComponent {
   // Use @Output() to emit an event when a user is submitted
   @Output() userAdded = new EventEmitter<{
     name: string;
-    phone: string;
-    age: string;
-    status: string; // Add status to the emitted event
+    phone: number;
+    age: number;
+    date: string;
+    status: string;
   }>();
 
   // user = {
@@ -57,6 +58,16 @@ export class AdduserComponent {
           Validators.max(100),
         ],
       ],
+      date: [
+        '',
+        [
+          Validators.required,
+          // Regex for YYYY-MM-DD format validation
+          Validators.pattern(
+            '^\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$'
+          ),
+        ],
+      ],
       status: ['active', Validators.required],
     });
   }
@@ -67,6 +78,10 @@ export class AdduserComponent {
 
   get age() {
     return this.userForm.get('age');
+  }
+
+  get date() {
+    return this.userForm.get('date');
   }
 
   onSubmit() {

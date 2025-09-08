@@ -10,8 +10,9 @@ import { Component, Input } from '@angular/core';
 export class UserlistComponent {
   @Input() users: {
     name: string;
-    phone: string;
-    age: string;
+    phone: number;
+    age: number;
+    date: string;
     status: string;
   }[] = [];
 }
