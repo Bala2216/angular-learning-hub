@@ -12,3 +12,13 @@ td {
 th {
   background-color: #f2f2f2;
 }
+
+.active-user {
+  background-color: #a3e8a3; // Light green background
+  color: #1f7a1f; // Dark green text for contrast
+}
+
+.inactive-user {
+  background-color: #f6c0c0; // Light red background
+  color: #b52828; // Dark red text for contrast
+}

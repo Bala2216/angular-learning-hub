@@ -19,6 +19,7 @@ export class AdduserComponent {
     name: string;
     phone: string;
     age: string;
+    status: string; // Add status to the emitted event
   }>();
 
   // user = {
@@ -48,13 +49,14 @@ export class AdduserComponent {
       name: ['', Validators.required],
       phone: ['', Validators.required],
       age: ['', Validators.required],
+      status: ['active', Validators.required],
     });
   }
 
   onSubmit() {
     if (this.userForm.valid) {
       this.userAdded.emit(this.userForm.value);
-      this.userForm.reset();
+      this.userForm.reset({ status: 'active' });
     }
   }
 }

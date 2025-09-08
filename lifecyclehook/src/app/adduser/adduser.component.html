@@ -26,5 +26,14 @@
     Age:
     <input type="text" formControlName="age" />
   </label>
+  <legend>Status:</legend>
+  <label>
+    <input type="radio" value="active" formControlName="status" />
+    Active
+  </label>
+  <label>
+    <input type="radio" value="inactive" formControlName="status" />
+    Inactive
+  </label>
   <button type="submit" [disabled]="userForm.invalid">Submit</button>
 </form>

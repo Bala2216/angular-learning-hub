@@ -11,10 +11,14 @@ import { AdduserComponent } from './adduser/adduser.component';
 })
 export class AppComponent {
   title = 'Lifecyclehook';
-  users: { name: string; phone: string; age: string }[] = [];
+  users: { name: string; phone: string; age: string; status: string }[] = [];
 
-  onUserAdded(newUser: { name: string; phone: string; age: string }) {
+  onUserAdded(newUser: {
+    name: string;
+    phone: string;
+    age: string;
+    status: string;
+  }) {
     this.users.push(newUser);
-    console.log('User added:', this.users);
   }
 }

@@ -8,5 +8,10 @@ import { Component, Input } from '@angular/core';
   styleUrl: './userlist.component.scss',
 })
 export class UserlistComponent {
-  @Input() users: { name: string; phone: string; age: string }[] = [];
+  @Input() users: {
+    name: string;
+    phone: string;
+    age: string;
+    status: string;
+  }[] = [];
 }
