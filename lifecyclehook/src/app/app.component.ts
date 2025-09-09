@@ -11,6 +11,7 @@ import { AdduserComponent } from './adduser/adduser.component';
 })
 export class AppComponent {
   title = 'Reactive Forms';
+  jsontitle = 'Json Forms';
   users: {
     name: string;
     phone: number;
