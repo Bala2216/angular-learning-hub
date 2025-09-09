@@ -2,10 +2,17 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserlistComponent } from './userlist/userlist.component';
 import { AdduserComponent } from './adduser/adduser.component';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, UserlistComponent, AdduserComponent],
+  imports: [
+    FormsModule,
+    UserlistComponent,
+    AdduserComponent,
+    RouterModule,
+    RouterLink,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
