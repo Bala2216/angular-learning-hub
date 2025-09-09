@@ -1,0 +1,38 @@
+<div class="mt-4 ms-4">
+  <h2>All Employees</h2>
+
+  <div class="d-flex mt-3">
+    <input
+      type="text"
+      placeholder="Search..."
+      [(ngModel)]="searchValue"
+      (input)="onSearch(searchValue)"
+      class="search-field ps-3"
+    />
+  </div>
+  <div *ngIf="users.length > 0" class="d-flex  flex-wrap mt-4" style="display: inline-flex;">
+    <div
+      class="card d-flex me-4 mb-4"
+      *ngFor="let user of users"
+      [style.backgroundColor]="user.gender === 'Female' ? 'pink' : 'lightblue'"
+    >
+      <i
+        class="bi display-3"
+        [ngClass]="{
+          'bi-person-standing-dress': user.gender === 'Female',
+          'bi-person-fill': user.gender === 'Male'
+        }"
+        style="font-size: 3.5rem"
+      ></i>
+      <div class="d-flex flex-column align-items-start text-start">
+        <span class="detail">Name: {{ user.name }}</span>
+        <span class="detail">Email: {{ user.email }}</span>
+        <span class="detail">City: {{ user.address.city }}</span>
+        <span class="detail">Gender: {{ user.gender }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="users.length === 0" class="mt-5">
+    <p class="text-danger">No employees found</p>
+</div>

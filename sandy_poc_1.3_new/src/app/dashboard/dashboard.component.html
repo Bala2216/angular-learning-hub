@@ -1,0 +1,11 @@
+<div class="container-fluid ps-5">
+
+  <h1 class="display-4 mt-5" >Dashboard</h1>
+
+  <div class="d-flex flex-row flex-wrap mt-4">
+  <div class="card d-flex justify-content-center me-4 mb-4" (click)="formNavigation(card.route)" *ngFor="let card of cards">
+    <i class="{{ card.icon }} display-3" style="font-size: 3.5rem;"></i>
+     <span>{{ card.title }}</span>
+  </div>
+</div>
+</div>
