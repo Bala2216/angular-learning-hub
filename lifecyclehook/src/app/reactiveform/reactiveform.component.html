@@ -1,1 +1,2 @@
-<p>reactiveform works!</p>
+<app-adduser (userAdded)="users.push($event)"></app-adduser>
+<app-userlist [users]="users"></app-userlist>
