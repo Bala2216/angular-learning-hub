@@ -10,53 +10,35 @@ import { angularMaterialRenderers } from '@jsonforms/angular-material';
 })
 export class JsonformComponent {
   renderers = angularMaterialRenderers;
-  uischema = {
-    type: 'VerticalLayout',
-    elements: [
-      {
-        type: 'Control',
-        label: false,
-        scope: '#/properties/done',
-      },
-      {
-        type: 'Control',
-        scope: '#/properties/name',
-      },
-      {
-        type: 'HorizontalLayout',
-        elements: [
-          {
-            type: 'Control',
-            scope: '#/properties/due_date',
-          },
-          {
-            type: 'Control',
-            scope: '#/properties/recurrence',
-          },
-        ],
-      },
-    ],
+
+  data = {
+    name: '',
+    phone: '',
+    age: '',
+    date: '',
+    status: 'active',
   };
+
   schema = {
     type: 'object',
     properties: {
-      name: {
-        type: 'string',
-        minLength: 1,
-      },
-      done: {
-        type: 'boolean',
-      },
-      due_date: {
-        type: 'string',
-        format: 'date',
-      },
-      recurrence: {
-        type: 'string',
-        enum: ['Never', 'Daily', 'Weekly', 'Monthly'],
-      },
+      name: { type: 'string' },
+      phone: { type: 'string', pattern: '^[0-9]{10}$' },
+      age: { type: 'number', minimum: 0, maximum: 100 },
+      date: { type: 'string', format: 'date' },
+      status: { type: 'string', enum: ['active', 'inactive'] },
     },
-    required: ['name', 'due_date'],
+    required: ['name', 'phone', 'age', 'date', 'status'],
   };
-  data = {};
+
+  uischema = {
+    type: 'VerticalLayout',
+    elements: [
+      { type: 'Control', scope: '#/properties/name' },
+      { type: 'Control', scope: '#/properties/phone' },
+      { type: 'Control', scope: '#/properties/age' },
+      { type: 'Control', scope: '#/properties/date' },
+      { type: 'Control', scope: '#/properties/status' },
+    ],
+  };
 }
