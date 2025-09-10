@@ -2,14 +2,13 @@ import { Component } from '@angular/core';
 import { JsonFormsModule } from '@jsonforms/angular';
 import { angularMaterialRenderers } from '@jsonforms/angular-material';
 import { CommonModule } from '@angular/common';
+import { UserlistComponent } from '../userlist/userlist.component';
 
 @Component({
   selector: 'app-jsonform',
-  // Add CommonModule to imports to use directives like *ngFor
-  imports: [JsonFormsModule, CommonModule],
+  imports: [JsonFormsModule, CommonModule, UserlistComponent],
   templateUrl: './jsonform.component.html',
   styleUrl: './jsonform.component.scss',
-  standalone: true, // Use standalone components for this example
 })
 export class JsonformComponent {
   renderers = angularMaterialRenderers;
@@ -65,20 +64,20 @@ export class JsonformComponent {
   }
 
   onSubmit() {
-    // if (this.isFormValid) {
-    this.users.push({ ...this.data });
+    if (this.isFormValid) {
+      this.users.push({ ...this.data });
 
-    // Reset the form data after submission
-    this.data = {
-      name: '',
-      phone: '',
-      age: '',
-      date: '',
-      status: 'active',
-    };
-    this.isFormValid = false; // Reset form validity state
+      // Reset the form data after submission
+      this.data = {
+        name: '',
+        phone: '',
+        age: '',
+        date: '',
+        status: 'active',
+      };
+      this.isFormValid = false; // Reset form validity state
 
-    // console.log('Submitted users:', this.users);
-    // }
+      // console.log('Submitted users:', this.users);
+    }
   }
 }
