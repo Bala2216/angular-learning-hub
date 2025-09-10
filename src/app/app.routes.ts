@@ -6,6 +6,7 @@ import { Dashboard } from './dashboard/dashboard';
 import { FormRendererComponent } from './form-renderer/form-renderer';
 import { Products } from './Hooks/products/products';
 import { Onboarding } from './employee/onboarding/onboarding';
+import { JsonformsIo } from './jsonforms-io/jsonforms-io';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -15,6 +16,7 @@ export const routes: Routes = [
     { path: 'employee/onBoarding', component: FormRendererComponent },
     { path: 'dashboard', component: Dashboard },
     { path: 'products', component: Products },
-    { path: 'user', component: Onboarding }
+    { path: 'user', component: Onboarding },
+    { path: 'jsonforms-io', component: JsonformsIo }
     // { path: 'rxjsbasic', component: Rxjsbasic }
 ];

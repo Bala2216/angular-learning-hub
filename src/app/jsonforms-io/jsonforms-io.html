@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <jsonforms 
+                [(data)]="data" 
+                [schema]="schema" 
+                [uischema]="uischema" 
+                [renderers]="renderers"
+                validationMode="ValidateAndShow">
+            </jsonforms>
+            <button (click)="onSubmit()" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</div>
