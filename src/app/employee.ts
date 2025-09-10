@@ -3,4 +3,5 @@ export interface EmployeeData {
   email: string;
   department: string;
   employmentType: string;
+  gender: string;
 }

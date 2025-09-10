@@ -6,7 +6,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SubscriptionService } from '../subscription-service';
-import { OverviewColorDirective } from '../overview-color.directive';
 import { EmployeeListComponent } from '../employee-list/employee-list.component';
 import { BehaviorSubject } from 'rxjs';
 import { Subscription, interval } from 'rxjs';
@@ -15,7 +14,7 @@ import { StaffListComponent } from '../staff-list/staff-list.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [MatToolbarModule, CommonModule, RouterModule, OverviewColorDirective,
+  imports: [MatToolbarModule, CommonModule, RouterModule,
     MatButtonModule, EmployeeListComponent, 
     MatIconModule, MatCardModule, MatButtonModule, StaffListComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,

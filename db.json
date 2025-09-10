@@ -1,0 +1,71 @@
+{
+  "employees": [
+    {
+      "name": "John Doe",
+      "email": "John@gmail.com",
+      "department": "IT",
+      "employmentType": "Full Time",
+      "gender": "male",
+      "id": "776a"
+    },
+    {
+      "name": "Jane Doe",
+      "email": "Jane@gmail.com",
+      "department": "HR",
+      "employmentType": "Part Time",
+      "gender": "female",
+      "id": "4cdc"
+    },
+    {
+      "id": "c33a",
+      "name": "jamine",
+      "email": "jamine@jasu.com",
+      "department": "IT",
+      "employmentType": "Full-Time",
+      "gender": "female"
+    },
+    {
+      "id": "9505",
+      "name": "kibana",
+      "email": "kibana@k.com",
+      "department": "Accounts",
+      "employmentType": "Full-Time",
+      "gender": "male"
+    },
+    {
+      "id": "8a8a",
+      "name": "jasmine",
+      "email": "jasmine@2lcom",
+      "department": "Accounts",
+      "employmentType": "Full-Time",
+      "gender": "Female"
+    },
+    {
+      "id": "946b",
+      "name": "jammy",
+      "email": "jammy@fil@.com",
+      "department": "IT",
+      "employmentType": "Full-Time",
+      "gender": "Male"
+    },
+    {
+      "id": "91c8",
+      "name": "priya",
+      "email": "priya@g.com",
+      "department": "IT",
+      "employmentType": "Full-Time",
+      "gender": "Female"
+    }
+  ],
+  "staff": [
+    {
+      "name": "Alice Smith",
+      "phoneNumber": "123-456-7890",
+      "date": "2023-10-01",
+      "id": "0f8c"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

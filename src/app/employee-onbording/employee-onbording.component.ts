@@ -15,6 +15,7 @@ import uischema from '../../schema/uischema.json';
 import { SubscriptionService } from '../subscription-service';
 import { EmployeeData } from '../employee';
 import { Router } from '@angular/router';
+import { EmployeeService } from '../employee.service';
 
 @Component({
   selector: 'app-employee-onbording',
@@ -30,7 +31,7 @@ export class EmployeeOnbordingComponent {
   uischema = uischema;
   data: { name?: string; email?: string; department?: string; employmentType?: string; gender?: string } = {};
   
-  constructor(private router: Router, private subscriptionService: SubscriptionService) {}
+  constructor(private employeeService: EmployeeService, private router: Router, private subscriptionService: SubscriptionService) {}
   renderers = [ 
     ...angularMaterialRenderers,
     {
@@ -66,10 +67,21 @@ export class EmployeeOnbordingComponent {
       name: this.data.name || 'John Doe',
       email: this.data.email || '',
       department: this.data.department || '',  
-      employmentType: this.data.employmentType || ''
+      employmentType: this.data.employmentType || '',
+      gender: this.data.gender || 'male',
     };
     this.subscriptionService.add(employee);
     this.data = {name: '', email: '', department: ''};
-    this.router.navigate(['']);
+    this.employeeService.saveEmployees(employee).subscribe({
+      next: (response: any) => { console.log('Employee saved successfully:', response); 
+        this.router.navigate(['']); },
+      error: (error: any) => { console.error('Error saving employee:', error); }
+    })
+    // this.employeeService.saveEmployees(employee).subscribe(response => {
+    //   console.log('Employee saved successfully:', response);
+    //   this.router.navigate(['']);
+    // }, error => {
+    //   console.error('Error saving employee:', error);
+    // });
   }
 }

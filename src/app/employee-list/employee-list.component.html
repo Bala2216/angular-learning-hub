@@ -1,40 +1,49 @@
 <div fxLayout="column" fxLayoutGap="16px" class="p-4">
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <h2>Employee List</h2>
-    <p>{{message}}</p>
+    <p >{{message}}</p>
     <button mat-raised-button color="primary" class="button-aligh" (click)="toDashboard()">Dashboard</button>
 
     <button mat-raised-button color="primary" class="button-aligh m-button-right-15" (click)="toenroll()">Add Employee</button>
   </div>
 
   <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Search by name</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search by Name" #input>
+      </mat-form-field>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
   <!-- Position Column -->
-  <ng-container matColumnDef="name">
+  <ng-container matColumnDef="name" >
     <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <td mat-cell *matCellDef="let element" [appOverviewColor]="element.gender"> {{element.name}}</td>
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="email">
     <th mat-header-cell *matHeaderCellDef > Email </th>
-    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    <td mat-cell *matCellDef="let element" [appOverviewColor]="element.gender"> {{element.email}} </td>
   </ng-container>
 
   <!-- Weight Column -->
   <ng-container matColumnDef="department">
     <th mat-header-cell *matHeaderCellDef> Department </th>
-    <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+    <td mat-cell *matCellDef="let element" [appOverviewColor]="element.gender"> {{element.department}} </td>
   </ng-container>
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="employmentType">
     <th mat-header-cell *matHeaderCellDef> Employment Type </th>
-    <td mat-cell *matCellDef="let element"> {{element.employmentType}} </td>
+    <td mat-cell *matCellDef="let element" [appOverviewColor]="element.gender"> {{element.employmentType}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="gender">
+    <th mat-header-cell *matHeaderCellDef> Gender </th>
+    <td mat-cell class="cap-t" *matCellDef="let element" [appOverviewColor]="element.gender"> {{element.gender}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

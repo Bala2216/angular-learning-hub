@@ -20,3 +20,6 @@ table {
 .m-button-right-15{
   margin-right: 15px;
 }
+.cap-t{
+  text-transform: capitalize;
+}
