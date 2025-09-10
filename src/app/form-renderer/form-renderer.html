@@ -3,78 +3,58 @@
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <div class="row">
       @for (control of formSchema.formControls; track control.name) {
-        <div [ngClass]="control.class" class="form-group mb-3">
-          <label [for]="control.name" class="form-label"><b>{{ control.label }}</b></label>
+      <div [ngClass]="control.class" class="form-group mb-3">
+        <label [for]="control.name" class="form-label"><b>{{ control.label }}</b></label>
 
-            @if (['text', 'email', 'date'].includes(control.type)) {
-                <input
-                [type]="control.type"
-                class="form-control"
-                [formControlName]="control.name"
-                [placeholder]="control.placeholder"
-                [id]="control.name"
-                />
-            }
+        @if (['text', 'email', 'date'].includes(control.type)) {
+        <input [type]="control.type" class="form-control" [formControlName]="control.name"
+          [placeholder]="control.placeholder" [id]="control.name" />
+        }
 
-            @if (control.type === 'radio') {
-                @for (opt of control.options; track opt.value) {
-                <div class="form-check">
-                    <input
-                        class="form-check-input"
-                        [id]="control.name + '_' + opt.value"
-                        [value]="opt.value"
-                        [formControlName]="control.name"
-                        type="radio"
-                        [name]="control.name"
-                    />
-                    <label class="form-check-label" [for]="control.name + '_' + opt.value">{{ opt.label }}</label>
-                </div>
-                }
-            }
+        @if (control.type === 'radio') {
+        @for (opt of control.options; track opt.value) {
+        <div class="form-check">
+          <input class="form-check-input" [id]="control.name + '_' + opt.value" [value]="opt.value"
+            [formControlName]="control.name" type="radio" [name]="control.name" />
+          <label class="form-check-label" [for]="control.name + '_' + opt.value">{{ opt.label }}</label>
+        </div>
+        }
+        }
 
-           @if (control.type === 'select') {
-            <select
-                class="form-control"
-                [formControlName]="control.name"
-                [id]="control.name"
-            >
-                <option value="" disabled selected>{{ control.placeholder || 'Select' }}</option>
-                @for (opt of control.options; track opt.value) {
-                <option [value]="opt.value">{{ opt.label }}</option>
-                }
-                </select>
-            }
+        @if (control.type === 'select') {
+        <select class="form-control" [formControlName]="control.name" [id]="control.name">
+          <option value="" disabled selected>{{ control.placeholder || 'Select' }}</option>
+          @for (opt of control.options; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+          }
+        </select>
+        }
 
-            @if (control.type === 'textarea') {
-                <textarea
-                    class="form-control"
-                    [formControlName]="control.name"
-                    [id]="control.name"
-                    [placeholder]="control.placeholder"
-                    rows="4"
-                ></textarea>
-            }
+        @if (control.type === 'textarea') {
+        <textarea class="form-control" [formControlName]="control.name" [id]="control.name"
+          [placeholder]="control.placeholder" rows="4"></textarea>
+        }
 
-          @if (formGroup.get(control.name)?.invalid && formGroup.get(control.name)?.touched) {
-            <div class="text-danger mt-1">
-              @if (formGroup.get(control.name)?.errors?.['required']) {
-                <div>This field is required.</div>
-              }
-              @if (formGroup.get(control.name)?.errors?.['minlength']) {
-                <div>Minimum length not met.</div>
-              }
-              @if (formGroup.get(control.name)?.errors?.['maxlength']) {
-                <div>Maximum length exceeded.</div>
-              }
-              @if (formGroup.get(control.name)?.errors?.['pattern']) {
-                <div>Invalid format.</div>
-              }
-              @if (formGroup.get(control.name)?.errors?.['email']) {
-                <div>Invalid email address.</div>
-              }
-            </div>
+        @if (formGroup.get(control.name)?.invalid && formGroup.get(control.name)?.touched) {
+        <div class="text-danger mt-1">
+          @if (formGroup.get(control.name)?.errors?.['required']) {
+          <div>This field is required.</div>
+          }
+          @if (formGroup.get(control.name)?.errors?.['minlength']) {
+          <div>Minimum length not met.</div>
+          }
+          @if (formGroup.get(control.name)?.errors?.['maxlength']) {
+          <div>Maximum length exceeded.</div>
+          }
+          @if (formGroup.get(control.name)?.errors?.['pattern']) {
+          <div>Invalid format.</div>
+          }
+          @if (formGroup.get(control.name)?.errors?.['email']) {
+          <div>Invalid email address.</div>
           }
         </div>
+        }
+      </div>
       }
     </div>
 

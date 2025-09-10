@@ -1,21 +1,11 @@
 <div class="container mt-5">
   <h2 class="mb-4">Registration Form</h2>
 
-  <!-- ngForm -->
   <form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
-    
-    <!-- ngModelGroup: Personal Info -->
     <div ngModelGroup="personal" class="mb-3">
       <label>Name</label>
-      <input
-        type="text"
-        name="name"
-        class="form-control"
-        [(ngModel)]="employee.personal.name"
-        required
-        #name="ngModel"
-      />
-      <!-- Specific Error -->
+      <input type="text" name="name" class="form-control" [(ngModel)]="employee.personal.name" required
+        #name="ngModel" />
       <div *ngIf="name.invalid && name.touched" class="text-danger">
         Name is required.
       </div>
@@ -23,51 +13,26 @@
 
     <div ngModelGroup="personal" class="mb-3">
       <label>Email</label>
-      <input
-        type="email"
-        name="email"
-        class="form-control"
-        [(ngModel)]="employee.personal.email"
-        required
-        email
-        #email="ngModel"
-      />
+      <input type="email" name="email" class="form-control" [(ngModel)]="employee.personal.email" required email
+        #email="ngModel" />
       <div *ngIf="email.invalid && email.touched" class="text-danger">
         <div *ngIf="email.errors?.['required']">Email is required.</div>
         <div *ngIf="email.errors?.['email']">Invalid email format.</div>
       </div>
     </div>
 
-    <!-- Radio Buttons -->
     <div class="mb-3">
       <label>Gender</label><br />
       <div class="form-check form-check-inline" *ngFor="let g of ['Male', 'Female', 'Other']">
-        <input
-          type="radio"
-          class="form-check-input"
-          name="gender"
-          [(ngModel)]="employee.personal.gender"
-          [value]="g"
-          required
-          #gender="ngModel"
-        />
+        <input type="radio" class="form-check-input" name="gender" [(ngModel)]="employee.personal.gender" [value]="g"
+          required #gender="ngModel" />
         <label class="form-check-label">{{ g }}</label>
       </div>
-      <!-- <div *ngIf="form.getgender.invalid && gender.touched" class="text-danger">
-        Gender is required.
-      </div> -->
     </div>
 
-    <!-- Dropdown -->
     <div class="mb-3">
       <label>Department</label>
-      <select
-        name="department"
-        class="form-select"
-        [(ngModel)]="employee.department"
-        required
-        #department="ngModel"
-      >
+      <select name="department" class="form-select" [(ngModel)]="employee.department" required #department="ngModel">
         <option value="">-- Select --</option>
         <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
       </select>
@@ -76,16 +41,9 @@
       </div>
     </div>
 
-    <!-- Checkboxes -->
     <div class="mb-3 form-check">
-      <input
-        type="checkbox"
-        name="terms"
-        class="form-check-input"
-        [(ngModel)]="employee.terms"
-        required
-        #terms="ngModel"
-      />
+      <input type="checkbox" name="terms" class="form-check-input" [(ngModel)]="employee.terms" required
+        #terms="ngModel" />
       <label class="form-check-label">
         I agree to the onboarding terms
       </label>
@@ -94,29 +52,17 @@
       </div>
     </div>
 
-    <!-- Role Selection (Radio Buttons) -->
     <div class="mb-3">
       <label>Employment Type</label><br />
       <div class="form-check form-check-inline" *ngFor="let r of roles">
-        <input
-          type="radio"
-          class="form-check-input"
-          name="role"
-          [(ngModel)]="employee.role"
-          [value]="r"
-          required
-          #role="ngModel"
-        />
+        <input type="radio" class="form-check-input" name="role" [(ngModel)]="employee.role" [value]="r" required
+          #role="ngModel" />
         <label class="form-check-label">{{ r }}</label>
       </div>
-      <!-- <div *ngIf="role.invalid && role.touched" class="text-danger">
-        Select your employment type.
-      </div> -->
     </div>
 
-    <!-- Submit Button -->
     <button class="btn btn-primary w-100" type="submit" [disabled]="form.invalid">
-      Submit Onboarding
+      Submit
     </button>
   </form>
 </div>
