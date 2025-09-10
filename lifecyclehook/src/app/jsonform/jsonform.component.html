@@ -1,6 +1,45 @@
-<jsonforms
-  [data]="data"
-  [schema]="schema"
-  [uischema]="uischema"
-  [renderers]="renderers"
-></jsonforms>
+<div class="form-container">
+  <h3>Add New User</h3>
+  <jsonforms
+    [data]="data"
+    [schema]="schema"
+    [uischema]="uischema"
+    [renderers]="renderers"
+    [validationMode]="'ValidateAndShow'"
+    (dataChange)="onDataChange($event)"
+  ></jsonforms>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!isFormValid"
+    (click)="onSubmit()"
+  >
+    Add User
+  </button>
+</div>
+
+<!-- List of Submitted Users -->
+<div class="user-list-container" *ngIf="users.length > 0">
+  <h3>Users</h3>
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Age</th>
+        <th>Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.name | titlecase }}</td>
+        <td>{{ user.phone }}</td>
+        <td>{{ user.age }}</td>
+        <td>{{ user.date }}</td>
+        <td>{{ user.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
