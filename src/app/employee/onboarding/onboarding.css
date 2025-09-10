@@ -1,0 +1,21 @@
+.container {
+  max-width: 650px;
+  background-color: #fdfdfd;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #2c3e50;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+}
+
+.text-danger {
+  font-size: 0.9em;
+}

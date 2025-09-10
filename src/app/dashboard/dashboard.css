@@ -1,0 +1,27 @@
+.container {
+  max-width: 1000px;
+}
+
+.widget {
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.widget:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-body h5 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.card-body h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.bi {
+  opacity: 0.7;
+}

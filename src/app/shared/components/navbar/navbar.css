@@ -1,0 +1,17 @@
+.navbar {
+  margin-bottom: 30px;
+  border-bottom: 3px solid #007bff;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+.nav-link {
+  color: #f0f0f0 !important;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}

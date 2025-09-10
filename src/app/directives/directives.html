@@ -1,0 +1,161 @@
+<h4 class="text-center text-success">Directives</h4>
+
+<div class="row">
+  <div class="col-2">
+    <div class="card">
+      <div class="card-header bg-warning">1. Component Directives</div>
+      <div class="card-body">@component()</div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card">
+      <div class="card-header bg-warning">2. Structural Directives</div>
+      <div class="card-body">
+        <div>
+          <h6 class="text-center text-success">@ if Direcive</h6>
+          @if (isLoggedIn) {
+          <p class="text-center">Welcome, Chalapathi!</p>
+          } @else {
+          <p class="text-center">Please log in to continue.</p>
+          }
+          <hr />
+
+          <h6 class="text-center text-success">@ for Direcive</h6>
+          <ul>
+            @for (product of products; track product.id) {
+            <li>{{ product.name }}</li>
+            } @empty {
+            <li>No items available</li>
+            }
+          </ul>
+
+          <h6 class="text-center text-success">@ switch Direcive</h6>
+          @switch (status) { @case ('pending') {
+          <p class="text-center text-warning">Payment is pending...</p>
+          } @case ('success') {
+          <p class="text-center text-success">Payment successful</p>
+          } @case ('failed') {
+          <p class="text-center text-danger">Payment failed</p>
+          } @default {
+          <p>Status unknown</p>
+          } }
+          <hr />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-header bg-warning">3. Attribute Directives</div>
+      <div class="card-body">
+        <div>
+          <h4 class="text-center text-success">ngClass</h4>
+
+          <b>1. Apply a Single Class Conditionally</b>
+          <p [ngClass]="isActive ? 'active' : 'inactive'">User Status</p>
+
+          <b>2. Apply Multiple Classes Conditionally (Object Syntax)</b>
+          <button [ngClass]="{
+              active: isActive,
+              disabled: isDisabled
+            }" class="btn">
+            Button
+          </button>
+          <br />
+
+          <b>3. Apply Classes from an Array</b>
+          <p [ngClass]="['big-text', 'highlight']">Hello World</p>
+          <br />
+
+          <b>4. Combine Static & Dynamic Classes</b>
+          <p class="base" [ngClass]="{ success: isSuccess, error: isError }">
+            Status Message
+          </p>
+          <br />
+
+          <b>5. Apply Class from Component Variable</b>
+          <p [ngClass]="currentClass">Dynamic Class Example</p>
+          <br />
+          <hr />
+          <h4 class="text-center text-success">ngStyle</h4>
+
+          <b>1. Apply a Single Style Dynamically</b>
+          <p [ngStyle]="{ color: textColor }">Dynamic text color</p>
+
+          <b>2. Apply Multiple Styles Dynamically</b>
+          <p [ngStyle]="{
+              color: isError ? 'red' : 'green',
+              'font-size': fontSize + 'px'
+            }">
+            Status Message
+          </p>
+
+          <b>3. Bind Styles from a Component Object</b>
+
+          <p [ngStyle]="myStyles">Styled Text</p>
+
+          <b>4. Conditional Styling with Button Click</b>
+          <button (click)="toggleHighlight()">Toggle Highlight</button>
+
+          <p [ngStyle]="{
+              'background-color': isHighlighted ? 'yellow' : 'transparent',
+              padding: '10px'
+            }">
+            Click the button to highlight me!
+          </p>
+
+          5. Combine Static and Dynamic Styles
+          <p style="border: 1px solid black; padding: 5px" [ngStyle]="{ color: isActive ? 'green' : 'gray' }">
+            User Status
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card">
+      <div class="card-header bg-warning">4. Custom Validation</div>
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <!-- Email Field -->
+          <label>Email:</label>
+          <input type="text" formControlName="email" class="form-control" />
+
+          @if (form.get('email')?.touched && form.get('email')?.invalid) {
+          <div>
+            @if (form.get('email')?.errors?.['required']) {
+            <small>Email is required</small>
+            } @if (form.get('email')?.errors?.['invalidEmail']) {
+            <small>Invalid email format</small>
+            }
+          </div>
+          }
+
+          <!-- Phone Field -->
+          <label>Phone:</label>
+          <input type="text" formControlName="phone" class="form-control" />
+
+          @if (form.get('phone')?.touched && form.get('phone')?.invalid) {
+          <div>
+            @if (form.get('phone')?.errors?.['required']) {
+            <small>Phone is required</small>
+            } @if (form.get('phone')?.errors?.['invalidPhone']) {
+            <small>Invalid phone number</small>
+            }
+          </div>
+          }
+
+          <br>
+          <button type="submit" [disabled]="form.invalid" class="btn btn-warning">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card">
+      <div class="card-header bg-warning">5. ngRx State Managemnt</div>
+      <div class="card-body">
+      </div>
+    </div>
+  </div>
+</div>

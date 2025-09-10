@@ -1,0 +1,8 @@
+.active { color: green; font-weight: bold; }
+.inactive { color: gray; }
+.disabled { opacity: 0.5; }
+.success { background-color: lightgreen; }
+.error { background-color: pink; }
+.big-text { font-size: 24px; }
+.highlight { background-color: yellow; }
+.base { padding: 5px; border: 1px solid black; }
