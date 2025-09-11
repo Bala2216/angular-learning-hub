@@ -1,0 +1,19 @@
+<div class="container-fluid ps-5">
+  <h1 class="my-4 display-4">Newly Created Employee Details</h1>
+
+
+  <div class="mt-5" *ngIf="data && data.firstName">
+    <p>Name: {{ data.firstName }} {{ data.lastName }}</p>
+    <p>Date of Joining: {{ data.doj }}</p>
+    <p>Designation: {{ data.autocompleteEnum }}</p>
+    <p>Phone Number: {{ data.number }}</p>
+    <p>Address: {{ data.address }}</p>
+    <p>Email: {{ data.email }}</p>
+  </div>
+
+  <div class="mt-5" *ngIf="!data || !data.firstName">
+    <p>No employee data available.</p>
+  </div>
+
+  <button class="btn mt-4 brown-btn" (click)="onCancel()">Dashboard</button>
+</div>

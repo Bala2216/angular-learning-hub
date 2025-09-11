@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <h1 class="mt-4 display-4">HR Dept Employee Registration</h1>
+  </div>
+  <form *ngIf="!success" [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="row mb-4">
+          <div class="col-sm-3">
+            <label for="name" class="label-name">
+              Name<span class="required text-danger">*</span>
+            </label>
+          </div>
+          <div class="col-sm-8">
+            <input
+              id="name"
+              type="text"
+              formControlName="name"
+              class="form-control"
+              placeholder="Name"
+              [ngClass]="{
+                'valid': f['name'].valid && (f['name'].touched || submitted),
+                'invalid': f['name'].invalid && (f['name'].touched || submitted)
+              }"
+            />
+            <div
+              *ngIf="(f['name'].invalid && (f['name'].touched || submitted))"
+              class="text-danger mt-2"
+            >
+              Please enter your Name
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-sm-3">
+            <label for="email" class="label-name">
+              Email<span class="required text-danger">*</span>
+            </label>
+          </div>
+          <div class="col-sm-8">
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              class="form-control"
+              placeholder="Employee Email"
+              [ngClass]="{
+                'valid': f['email'].valid && (f['email'].touched || submitted),
+                'invalid': f['email'].invalid && (f['email'].touched || submitted)
+              }"
+            />
+            <div
+              *ngIf="f['email'].errors?.['required'] && (f['email'].touched || submitted)"
+              class="text-danger mt-2"
+            >
+              Please enter your Email
+            </div>
+            <div
+              *ngIf="f['email'].errors?.['email'] && (f['email'].touched || submitted)"
+              class="text-danger mt-2"
+            >
+              Please enter a valid Email format
+            </div>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-sm-3">
+            <label for="skills" class="label-name">
+              Skills
+            </label>
+          </div>
+          <div class="col-sm-8">
+            <textarea
+              id="skills"
+              formControlName="skills"
+              class="form-control"
+              placeholder="Mention skills"
+            ></textarea>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-12 text-center">
+            <button type="button" class="cancel me-3" (click)="onCancel()">
+              Cancel
+            </button>
+            <button
+              class="save ms-3"
+              type="submit"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+    <div *ngIf="success" class="text-center mt-5">
+      <h2 class="mb-4">Employee Registered Successfully!</h2>
+      <button class="btn brown-btn" (click)="onCancel()">
+        Go to Dashboard
+      </button>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<mat-form-field class="mt-5 ms-4">
+  <mat-label>Role</mat-label>
+  <mat-select [(ngModel)]="selectedRole" (selectionChange)="changeRole($event.value)">
+    @for (role of roles; track role) {
+      <mat-option [value]="role.value">{{role.viewValue}}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>

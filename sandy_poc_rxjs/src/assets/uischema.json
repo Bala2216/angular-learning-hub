@@ -1,0 +1,49 @@
+{
+  "type": "VerticalLayout",
+  "elements": [
+    {
+      "type": "Control",
+      "scope": "#/properties/firstName"
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/lastName"
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/date",
+      "label": "Date of Birth"
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/department",
+      "label": "Department",
+      "options": {
+        "readonly": true
+      }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/designation",
+      "label": "Designation",
+      "options": {
+        "autocomplete": true
+      }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/number",
+      "label": "Phone Number"
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/address",
+      "label": "Address"
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/email",
+      "label": "Email"
+    }
+  ]
+}

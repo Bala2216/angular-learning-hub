@@ -1,0 +1,20 @@
+  <mat-toolbar class="d-flex justify-content-between align-items-center" color="primary">
+    <div class="d-flex">
+  <button matIconButton class="example-icon d-flex" aria-label="Example icon-button with menu icon">
+    <mat-icon class="me-2">menu</mat-icon>
+  </button>
+  <span class="header-title" (click)="onMenuClick()">Work Force Management</span>
+</div>
+   <div class="d-flex mt-3" *ngIf="showSearchbar">
+    <input
+      type="text"
+      placeholder="Search..."
+      [(ngModel)]="searchValue"
+      (input)="onSearch(searchValue)"
+      class="search-field ps-3"
+    />
+  </div>
+  <div class="d-flex align-items-center">
+    <span class="ms-2">Role: {{selectedRole}}</span>
+  </div>
+</mat-toolbar>
