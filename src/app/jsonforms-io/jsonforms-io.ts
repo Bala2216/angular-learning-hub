@@ -5,8 +5,7 @@ import { jsonSchema, uiSchema } from '../forms-schema/form1-json-schema';
 
 @Component({
   selector: 'app-jsonforms-io',
-  imports: [JsonFormsModule,
-    JsonFormsAngularMaterialModule],
+  imports: [JsonFormsModule, JsonFormsAngularMaterialModule],
   templateUrl: './jsonforms-io.html',
   styleUrl: './jsonforms-io.css'
 })
