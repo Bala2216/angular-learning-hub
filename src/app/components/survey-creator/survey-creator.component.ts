@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RoleService } from '../../services/role.service';
 
 @Component({
   selector: 'app-survey-creator',
@@ -8,9 +9,10 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SurveyCreatorComponent implements OnInit {
   surveyForm: FormGroup;
-  @ViewChild('surveyTitleInput') surveyTitleInput!: ElementRef;
+  selectedRole = '';
+  @ViewChild('surveyTitleInput', { static: false }) surveyTitleInput?: ElementRef;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private roleService: RoleService) {
     this.surveyForm = this.fb.group({
       title: ['', Validators.required],
       questions: this.fb.array([]),
@@ -18,15 +20,21 @@ export class SurveyCreatorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.selectedRole = this.roleService.roleSignalValue;
+
     const savedSurvey = localStorage.getItem('surveyData');
     if (savedSurvey) {
       const parsed = JSON.parse(savedSurvey);
       if (parsed.title && parsed.title.trim() !== '') {
         this.surveyForm.setValue(parsed);
       } else {
-        localStorage.removeItem('surveyData'); // Clear invalid data
+        localStorage.removeItem('surveyData');
       }
     }
+
+    setTimeout(() => {
+      this.surveyTitleInput?.nativeElement.focus();
+    }, 0);
   }
 
   get questions(): FormArray {
@@ -61,5 +69,12 @@ export class SurveyCreatorComponent implements OnInit {
     this.surveyForm.reset();
     this.questions.clear();
     localStorage.removeItem('surveyData');
+    this.surveyTitleInput?.nativeElement.focus();
+  }
+
+  onRoleChange(event: Event) {
+    const selectedRole = (event.target as HTMLSelectElement).value;
+    this.selectedRole = selectedRole;
+    this.roleService.setRole(selectedRole);
   }
 }

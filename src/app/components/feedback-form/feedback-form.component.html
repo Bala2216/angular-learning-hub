@@ -1,13 +1,14 @@
-<h3>Feedback Form</h3>
+<div class="feedback-form-container">
+  <h3>Feedback Form</h3>
 
-<jsonforms
-  [(data)]="data"
-  [schema]="schema"
-  [uischema]="uiSchema"
-  [renderers]="renderers">
-</jsonforms>
+  <jsonforms
+    [(data)]="data"
+    [schema]="schema"
+    [uischema]="uiSchema"
+    [renderers]="renderers">
+  </jsonforms>
 
+  <p><strong>Preview:</strong> {{ data?.comments | slice: 0:30 }}</p>
 
-<p><strong>Preview:</strong> {{ data?.comments | slice: 0:30 }}</p>
-
-<button mat-raised-button color="primary" (click)="submitFeedback()">Submit Feedback</button>
+  <button mat-raised-button color="primary" (click)="submitFeedback()">Submit Feedback</button>
+</div>

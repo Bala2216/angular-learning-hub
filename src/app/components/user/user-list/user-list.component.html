@@ -1,5 +1,6 @@
 <div class="user-list-container">
-  <div class="search-box">
+
+  <div class="search-box" *ngIf="role === 'Admin'">
     <input
       type="text"
       [(ngModel)]="searchText"

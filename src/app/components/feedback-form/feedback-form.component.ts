@@ -10,6 +10,7 @@ import { angularMaterialRenderers } from '@jsonforms/angular-material';
 export class FeedbackFormComponent {
   schema = feedbackSchema;
   uiSchema = feedbackUISchema;
+  renderers = angularMaterialRenderers;
 
   data: any = {
     name: '',
@@ -17,8 +18,6 @@ export class FeedbackFormComponent {
     date: '',
     comments: ''
   };
-
-  renderers = angularMaterialRenderers;
 
   sanitizePattern(pattern: string): string {
     return pattern.replace(/\\\\/g, '\\');
@@ -32,10 +31,6 @@ export class FeedbackFormComponent {
     const namePattern = new RegExp(this.sanitizePattern(this.schema.properties.name.pattern));
     const phonePattern = new RegExp(this.sanitizePattern(this.schema.properties.phone.pattern));
     const datePattern = new RegExp(this.sanitizePattern(this.schema.properties.date.pattern));
-
-    console.log('Name:', name, 'Valid:', namePattern.test(name));
-    console.log('Phone:', phone, 'Valid:', phonePattern.test(phone));
-    console.log('Date:', date, 'Valid:', datePattern.test(date));
 
     const isValid =
       namePattern.test(name) &&
