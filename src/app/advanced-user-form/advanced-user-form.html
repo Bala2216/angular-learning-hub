@@ -22,6 +22,7 @@
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Address</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody> 
@@ -33,15 +34,15 @@
                     <td>{{user.age}}</td>
                     <td>                     
                         @if(user.gender === 'male' || user.gender === 'Male') {
-                            <button class="btn btn-warning">{{user.gender | capitalizeFirst}}</button>
+                            <button class="btn btn-warning btn-sm">{{user.gender | capitalizeFirst}}</button>
                         } @else {
-                            <button class="btn btn-primary">{{user.gender | capitalizeFirst}}</button>
+                            <button class="btn btn-primary btn-sm">{{user.gender | capitalizeFirst}}</button>
                         }
                     </td>                        
                     <td>{{user.birthDate | customDate}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.phone}}</td>
-                    <td>
+                    <td class="w-25">
                         <p class="text-center">
                             {{user?.address?.address}} | 
                             {{user?.address?.city}} |
@@ -50,6 +51,17 @@
                             {{user?.address?.country}}-{{user?.address?.postalCode}}
                         </p>
                     </td>
+                    <td class="text-center">
+  <div class="d-flex justify-content-center gap-2">
+    <button class="btn btn-sm btn-outline-primary" (click)="onEdit(user)">
+      <i class="bi bi-pencil-square"></i>
+    </button>
+    <button class="btn btn-sm btn-outline-danger" (click)="onDelete(user)">
+      <i class="bi bi-trash"></i>
+    </button>
+  </div>
+</td>
+
                 </tr>
                 } @empty {
                 <tr>

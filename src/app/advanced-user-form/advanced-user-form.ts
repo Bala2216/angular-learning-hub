@@ -16,14 +16,14 @@ import { CustomDatePipe } from '../pipes/custom-date-pipe';
   styleUrl: './advanced-user-form.css'
 })
 export class AdvancedUserForm implements OnInit {
-  renderers =  angularMaterialRenderers;
+  renderers = angularMaterialRenderers;
   schema = AdvancedUserFormJsonSchema
   uischema = AdvancedUserFormUISchema
   data: any = {};
-  usersList: AdvancedUserFormModel[] = [];  
+  usersList: AdvancedUserFormModel[] = [];
   searchText: string = '';
 
-  constructor(private advancedUserFormService: advancedUserFormService) {}
+  constructor(private advancedUserFormService: advancedUserFormService) { }
 
   ngOnInit(): void {
     this.advancedUserFormService.getUsers().subscribe(resp => {
@@ -32,8 +32,8 @@ export class AdvancedUserForm implements OnInit {
       this.sortUsersByIdDesc();
     })
   }
-  
-sortUsersByIdDesc() {
+
+  sortUsersByIdDesc() {
     this.usersList.sort((a, b) => b.id - a.id);
   }
 
@@ -41,14 +41,20 @@ sortUsersByIdDesc() {
     this.data = event
     console.log('event.data', event)
   }
-  
+
   onSubmit() {
     console.log('Submit Data', this.data)
     this.advancedUserFormService.createUser(this.data).subscribe((resp: any) => {
       console.log('created', resp)
-      this.usersList.push({...resp})
+      this.usersList.push({ ...resp })
       this.sortUsersByIdDesc();
       this.data = {}
     })
+  }
+  onEdit(user: AdvancedUserFormModel) {
+    console.log('onEdit', user)
+  }
+  onDelete(user: AdvancedUserFormModel) {
+    console.log('onDelete', user)
   }
 }
