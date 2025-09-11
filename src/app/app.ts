@@ -4,11 +4,10 @@ import { Navbar } from './shared/components/navbar/navbar';
 import { AuthStore } from './services/auth';
 import { JsonFormsModule } from '@jsonforms/angular';
 import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar, JsonFormsModule, JsonFormsAngularMaterialModule, HttpClientModule
+  imports: [RouterOutlet, Navbar, JsonFormsModule, JsonFormsAngularMaterialModule
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
