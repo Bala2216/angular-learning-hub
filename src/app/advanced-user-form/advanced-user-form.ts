@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { UserFilterPipe } from '../pipes/user-filter-pipe';
 import { CapitalizeFirstPipe } from '../pipes/capitalize-first-pipe';
 import { CustomDatePipe } from '../pipes/custom-date-pipe';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-advanced-user-form',
@@ -23,13 +24,22 @@ export class AdvancedUserForm implements OnInit {
   usersList: AdvancedUserFormModel[] = [];
   searchText: string = '';
 
+  totalUsers: number = 0;
+  maleUsers: number = 0;
+  femaleUsers: number = 0;
+
   constructor(private advancedUserFormService: advancedUserFormService) { }
 
   ngOnInit(): void {
+    this.getUsersList()
+  }
+
+  getUsersList() {
     this.advancedUserFormService.getUsers().subscribe(resp => {
       console.log('getUsersList', resp.users)
       this.usersList = resp.users
-      this.sortUsersByIdDesc();
+      this.sortUsersByIdDesc()
+      this.updateUserCounts()
     })
   }
 
@@ -49,12 +59,58 @@ export class AdvancedUserForm implements OnInit {
       this.usersList.push({ ...resp })
       this.sortUsersByIdDesc();
       this.data = {}
+      this.closeModal()
+      this.updateUserCounts()
     })
   }
+
   onEdit(user: AdvancedUserFormModel) {
     console.log('onEdit', user)
+    alert('Ready for Edit: ' + JSON.stringify(user))
+    this.data = user
   }
+
   onDelete(user: AdvancedUserFormModel) {
-    console.log('onDelete', user)
+    if (confirm('Are you sure to delete?')) {
+      console.log('onDelete', user)
+      this.usersList = this.usersList.filter((data: AdvancedUserFormModel) => data.id !== user.id);
+    }
+  }
+
+
+  updateUserCounts(): void {
+    this.totalUsers = this.usersList.length;
+    this.maleUsers = this.usersList.filter((user: AdvancedUserFormModel) => user.gender.toLowerCase() === 'male').length;
+    this.femaleUsers = this.usersList.filter((user: AdvancedUserFormModel) => user.gender.toLowerCase() === 'female').length;
+  }
+
+
+  reloadUsers(): void {
+    this.usersList = []
+    setTimeout(() => {
+      this.getUsersList()      
+    }, 100);
+  }
+
+  modalInstance: any;
+  ngAfterViewInit() {
+    const modalEl = document.getElementById('exampleModal');
+    if (modalEl) {
+      this.modalInstance = new bootstrap.Modal(modalEl);
+    }
+  }
+
+  openModal() {
+    this.modalInstance?.show();
+  }
+
+  closeModal() {
+    this.modalInstance?.hide();
+    // Fallback: remove backdrop manually if needed
+    const backdrop = document.querySelector('.modal-backdrop');
+    if (backdrop) {
+      backdrop.remove();
+    }
+    document.body.classList.remove('modal-open');
   }
 }
