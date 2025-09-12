@@ -13,4 +13,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./jsonform/jsonform.component').then((m) => m.JsonformComponent),
   },
+  {
+    path: 'users',
+    loadComponent: () =>
+      import('./user-card/user-card.component').then(
+        (m) => m.UserCardComponent
+      ),
+  },
 ];

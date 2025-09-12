@@ -10,4 +10,5 @@ import { RouterLink, RouterModule } from '@angular/router';
 export class AppComponent {
   title = 'Reactive Forms';
   jsontitle = 'Json Forms';
+  users = 'Users Data';
 }
