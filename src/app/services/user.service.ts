@@ -1,22 +1,43 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface User {
+  id: number;
   name: string;
-  gender: string;
-  date: string;
+  username: string;
+  email: string;
+  body: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private dataUrl = 'assets/data/users.json';
+  private usersApi = 'https://jsonplaceholder.typicode.com/users';
+  private commentsApi = 'https://jsonplaceholder.typicode.com/comments';
 
   constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.dataUrl);
-  }
+  getUsers(searchText: string = ''): Observable<User[]> {
+  const users$ = this.http.get<any[]>(`${this.usersApi}?name_like=${searchText}`);
+  const comments$ = this.http.get<any[]>(this.commentsApi);
+
+  return forkJoin([users$, comments$]).pipe(
+    map(([users, comments]) => {
+      return users.map(user => {
+        const comment = comments.find(c => c.id === user.id);
+        return {
+          id: user.id,
+          name: user.name,
+          username: user.username,
+          email: user.email,
+          body: comment?.body || 'No comment available'
+        };
+      });
+    })
+  );
+}
 }

@@ -1,23 +1,20 @@
 <div class="user-list-container">
 
   <div class="search-box" *ngIf="role === 'Admin'">
-    <input
-      type="text"
-      [(ngModel)]="searchText"
-      placeholder="Search users..."
-      class="search-input"
-    />
+    <app-input [(searchText)]="searchText"></app-input>
   </div>
 
   <div class="user-cards">
     <div
       class="user-card"
       *ngFor="let user of users | userFilter: searchText"
-      [appGenderColor]="user.gender"
+      [appGenderColor]="user.email" 
+      [title]="user.email.split('@')[1]" 
     >
       <h3>{{ user.name }}</h3>
-      <p><strong>Gender:</strong> {{ user.gender }}</p>
-      <p><strong>Date:</strong> {{ user.date }}</p>
+      <p><strong>Username:</strong> {{ user.username }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Comment:</strong> {{ user.body }}</p>
     </div>
   </div>
 </div>
