@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { angularMaterialRenderers } from '@jsonforms/angular-material';
-import { AdvancedUserFormJsonSchema, AdvancedUserFormUISchema } from '../forms-schema/advanced-user-form';
+import {
+  AdvancedUserFormJsonSchema,
+  AdvancedUserFormUISchema,
+} from '../forms-schema/advanced-user-form';
 import { JsonFormsModule } from '@jsonforms/angular';
 import { advancedUserFormService } from '../services/advanced-user-form-service';
 import { AdvancedUserFormModel } from '../models/advanced-user-form';
@@ -14,12 +17,12 @@ import * as bootstrap from 'bootstrap';
   selector: 'app-advanced-user-form',
   imports: [JsonFormsModule, FormsModule, UserFilterPipe, CapitalizeFirstPipe, CustomDatePipe],
   templateUrl: './advanced-user-form.html',
-  styleUrl: './advanced-user-form.css'
+  styleUrl: './advanced-user-form.css',
 })
 export class AdvancedUserForm implements OnInit {
   renderers = angularMaterialRenderers;
-  schema = AdvancedUserFormJsonSchema
-  uischema = AdvancedUserFormUISchema
+  schema = AdvancedUserFormJsonSchema;
+  uischema = AdvancedUserFormUISchema;
   data: any = {};
   usersList: AdvancedUserFormModel[] = [];
   searchText: string = '';
@@ -28,19 +31,19 @@ export class AdvancedUserForm implements OnInit {
   maleUsers: number = 0;
   femaleUsers: number = 0;
 
-  constructor(private advancedUserFormService: advancedUserFormService) { }
+  constructor(private advancedUserFormService: advancedUserFormService) {}
 
   ngOnInit(): void {
-    this.getUsersList()
+    this.getUsersList();
   }
 
   getUsersList() {
-    this.advancedUserFormService.getUsers().subscribe(resp => {
-      console.log('getUsersList', resp.users)
-      this.usersList = resp.users
-      this.sortUsersByIdDesc()
-      this.updateUserCounts()
-    })
+    this.advancedUserFormService.getUsers().subscribe((resp) => {
+      console.log('getUsersList', resp.users);
+      this.usersList = resp.users;
+      this.sortUsersByIdDesc();
+      this.updateUserCounts();
+    });
   }
 
   sortUsersByIdDesc() {
@@ -48,47 +51,49 @@ export class AdvancedUserForm implements OnInit {
   }
 
   onDataChange(event: any) {
-    this.data = event
-    console.log('event.data', event)
+    this.data = event;
+    console.log('event.data', event);
   }
 
   onSubmit() {
-    console.log('Submit Data', this.data)
+    console.log('Submit Data', this.data);
     this.advancedUserFormService.createUser(this.data).subscribe((resp: any) => {
-      console.log('created', resp)
-      this.usersList.push({ ...resp })
+      console.log('created', resp);
+      this.usersList.push({ ...resp });
       this.sortUsersByIdDesc();
-      this.data = {}
-      this.closeModal()
-      this.updateUserCounts()
-    })
+      this.data = {};
+      this.closeModal();
+      this.updateUserCounts();
+    });
   }
 
   onEdit(user: AdvancedUserFormModel) {
-    console.log('onEdit', user)
-    alert('Ready for Edit: ' + JSON.stringify(user))
-    this.data = user
+    console.log('onEdit', user);
+    alert('Ready for Edit: ' + JSON.stringify(user));
+    this.data = user;
   }
 
   onDelete(user: AdvancedUserFormModel) {
     if (confirm('Are you sure to delete?')) {
-      console.log('onDelete', user)
+      console.log('onDelete', user);
       this.usersList = this.usersList.filter((data: AdvancedUserFormModel) => data.id !== user.id);
     }
   }
 
-
   updateUserCounts(): void {
     this.totalUsers = this.usersList.length;
-    this.maleUsers = this.usersList.filter((user: AdvancedUserFormModel) => user.gender.toLowerCase() === 'male').length;
-    this.femaleUsers = this.usersList.filter((user: AdvancedUserFormModel) => user.gender.toLowerCase() === 'female').length;
+    this.maleUsers = this.usersList.filter(
+      (user: AdvancedUserFormModel) => user.gender.toLowerCase() === 'male'
+    ).length;
+    this.femaleUsers = this.usersList.filter(
+      (user: AdvancedUserFormModel) => user.gender.toLowerCase() === 'female'
+    ).length;
   }
 
-
   reloadUsers(): void {
-    this.usersList = []
+    this.usersList = [];
     setTimeout(() => {
-      this.getUsersList()      
+      this.getUsersList();
     }, 100);
   }
 
