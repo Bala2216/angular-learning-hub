@@ -9,7 +9,7 @@
   <!-- added bgcolor class based on user.id -->
   <div
     class="card"
-    *ngFor="let user of users"
+    *ngFor="let user of users | userFilter : searchText"
     [ngClass]="{
       'card-bgredient': user.id % 2 === 0,
       'card-bgradient2': user.id % 2 !== 0
