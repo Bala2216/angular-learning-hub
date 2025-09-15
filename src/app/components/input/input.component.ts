@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-input',
@@ -10,15 +9,7 @@ export class InputComponent {
   @Input() searchText: string = '';
   @Output() searchTextChange = new EventEmitter<string>();
 
-  private inputSubject = new Subject<string>();
-
-  constructor() {
-    this.inputSubject.pipe(debounceTime(300)).subscribe(value => {
-      this.searchTextChange.emit(value);
-    });
-  }
-
-  onInputChange(value: string) {
-    this.inputSubject.next(value);
+  onSearchChange(value: string): void {
+    this.searchTextChange.emit(value);
   }
 }

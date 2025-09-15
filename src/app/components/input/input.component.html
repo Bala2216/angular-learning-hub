@@ -1,8 +1,7 @@
-
 <input
   type="text"
-  [(ngModel)]="searchText"
-  (ngModelChange)="onInputChange($event)"
+  class="search-input"
+  [ngModel]="searchText"
+  (ngModelChange)="onSearchChange($event)"
   placeholder="Search users..."
-  class="search-input"  
 />

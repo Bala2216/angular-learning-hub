@@ -1,8 +1,8 @@
 <div class="user-list-container">
 
-  <div class="search-box" *ngIf="role === 'Admin'">
-    <app-input [(searchText)]="searchText"></app-input>
-  </div>
+<div class="search-box" *ngIf="role === 'Admin'">
+  <app-input [(searchText)]="searchText" (searchTextChange)="onSearchChange($event)"></app-input>
+</div>
 
   <div class="user-cards">
     <div
