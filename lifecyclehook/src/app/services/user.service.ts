@@ -14,4 +14,9 @@ export class UserService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.apiURL);
   }
+
+  searchUsers(query: string): Observable<User[]> {
+    const url = `${this.apiURL}?q=${query}`;
+    return this.http.get<User[]>(url);
+  }
 }

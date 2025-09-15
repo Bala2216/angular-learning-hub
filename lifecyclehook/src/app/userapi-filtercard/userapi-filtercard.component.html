@@ -1,1 +1,23 @@
-<p>userapi-filtercard works!</p>
+<h1>User Lists</h1>
+<input
+  type="text"
+  [formControl]="searchControl"
+  placeholder="Search by name or phone number or city"
+  class="search-input"
+/>
+<div class="user-list">
+  <!-- added bgcolor class based on user.id -->
+  <div
+    class="card"
+    *ngFor="let user of users"
+    [ngClass]="{
+      'card-bgredient': user.id % 2 === 0,
+      'card-bgradient2': user.id % 2 !== 0
+    }"
+  >
+    <h3>{{ user.name }}</h3>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p>Phone: {{ user.phone }}</p>
+    <p>City: {{ user.address.city }}</p>
+  </div>
+</div>
