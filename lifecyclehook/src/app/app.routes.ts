@@ -20,4 +20,11 @@ export const routes: Routes = [
         (m) => m.UserCardComponent
       ),
   },
+  {
+    path: 'apiusers',
+    loadComponent: () =>
+      import('./userapi-filtercard/userapi-filtercard.component').then(
+        (m) => m.UserapiFiltercardComponent
+      ),
+  },
 ];
