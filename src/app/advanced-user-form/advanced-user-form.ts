@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import * as bootstrap from 'bootstrap';
 import { SearchInput } from '../components/search-input/search-input';
 import { UserTable } from '../components/user-table/user-table';
+import { response } from 'express';
+import { catchError, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-advanced-user-form',
@@ -37,9 +39,20 @@ export class AdvancedUserForm implements OnInit {
   }
 
   getUsersList() {
-    this.advancedUserFormService.getUsers().subscribe((resp) => {
-      console.log('getUsersList', resp.users);
-      this.usersList = resp.users;
+    this.advancedUserFormService.getUsers().pipe(
+      map(response => response.users),
+      map(users => users.map((user: any) => ({
+        ...user,
+        fullName: `${user.firstName} ${user.lastName}`,
+        gender: user.gender.charAt(0).toUpperCase() + user.gender.slice(1) 
+      }))),
+      catchError(error => {
+        console.error('Error fetching users', error);
+        return of([]) // Return empty array on error
+      })
+    ).subscribe((transformedUsers) => {
+      console.log('transformedUsers ', transformedUsers );
+      this.usersList = transformedUsers ;
       this.sortUsersByIdDesc();
       this.updateUserCounts();
     });
