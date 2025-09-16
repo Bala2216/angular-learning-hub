@@ -4,7 +4,6 @@ import { UserService } from '../services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
-import { UserFilterPipe } from '../pipes/user-filter.pipe';
 
 @Component({
   selector: 'app-userapi-filtercard',
@@ -22,7 +21,7 @@ export class UserapiFiltercardComponent {
     });
   }
 
-  ngnInit() {
+  ngOnInit() {
     this.searchControl.valueChanges
       .pipe(
         debounceTime(300),
