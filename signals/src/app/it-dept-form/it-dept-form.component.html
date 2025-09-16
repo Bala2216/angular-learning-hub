@@ -1,0 +1,32 @@
+<div  class="container-fluid px-5">
+  <h1 class="mt-4 display-4">IT Dept employee Registration</h1>
+
+
+<div
+  class="mt-5 d-flex align-items-start"
+  style="min-height: 60vh"
+>
+  <div class="w-100" style="max-width: 600px">
+    <jsonforms
+      [data]="data"
+      [schema]="schema"
+      [uischema]="uischema"
+      [renderers]="renderers"
+      [config]="{ submitted: submitted }"
+      [validationMode]="validationMode"
+      (dataChange)="onDataChange($event)"
+    ></jsonforms>
+    <div *ngIf="data?.designation" class="mt-4 mb-2">
+      <div class="d-flex align-items-center">
+        <span class="me-2">Selected Designation:</span>
+        <div class="designation-badge px-3 py-1"
+             [style.background-color]="data?.designation | colourCode">
+          {{ data?.designation }}
+        </div>
+      </div>
+    </div>
+    <button class="btn mt-4 mb-5 brown-btn" (click)="onSubmit()">Submit</button>
+  </div>
+</div>
+
+</div>

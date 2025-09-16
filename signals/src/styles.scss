@@ -1,0 +1,45 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+.brown-btn {
+  background-color: burlywood;
+  color: white;
+  height: 40px;
+  width: 250px;
+  border: none;
+}
+.brown-btn:hover,
+.brown-btn:active,
+.brown-btn:focus {
+  background-color: #deb887;
+  color: white;
+  border: none;
+}
+
+.save {
+  background-color: burlywood;
+}
+
+.save, .cancel{
+  border: none;
+  width: 100px;
+  height: 38px;
+  border-radius: 5px;
+}
+
+textarea{
+  resize: none;
+}
+
+.valid{
+  border-color: rgb(51, 234, 51);
+}
+
+.invalid{
+  border-color: red;
+}
+

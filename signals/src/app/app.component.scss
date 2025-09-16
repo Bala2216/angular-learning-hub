@@ -1,0 +1,9 @@
+:host ::ng-deep .textcontrolrenderer {
+  width: 40vw !important;
+}
+
+/* Hide all mat-error messages unless form is submitted */
+:host ::ng-deep form:not(.submitted) .mat-error {
+  display: none;
+}
+

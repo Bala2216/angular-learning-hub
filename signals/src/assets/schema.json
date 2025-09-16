@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "department": {
+      "type": "string",
+      "default": "IT"
+    },
+    "designation": {
+      "type": "string",
+      "enum": ["ATC", "TC", "STC"]
+    },
+    "number": {
+      "type": "string",
+      "pattern": "^[0-9]{10}$",
+      "minLength": 10,
+      "maxLength": 10
+    },
+    "address":{
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    }
+  },
+  "required": ["firstName", "date", "designation", "number", "address", "email"]
+}
