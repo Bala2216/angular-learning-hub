@@ -1,8 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService, User } from '../../../services/user.service';
 import { RoleService } from '../../../services/role.service';
-import { Subject, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import {
+  Subject,
+  BehaviorSubject,
+  combineLatest
+} from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  tap,
+  takeUntil
+} from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-list',
@@ -14,8 +24,9 @@ export class UserListComponent implements OnInit, OnDestroy {
   searchText: string = '';
   role: string = 'Guest';
 
-  private searchSubject = new Subject<string>();
-  private searchSubscription!: Subscription;
+  destroy$ = new Subject<void>();
+  private searchSubject = new BehaviorSubject<string>('');
+  private roleSubject = new BehaviorSubject<string>(this.role);
 
   constructor(
     private userService: UserService,
@@ -23,28 +34,38 @@ export class UserListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.roleService.role$.subscribe(role => {
-      this.role = role;
-    });
+    this.roleService.role$
+      .pipe(
+        tap(role => this.roleSubject.next(role)),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
 
-    
-    this.searchSubscription = this.searchSubject.pipe(
-      debounceTime(300), 
-      distinctUntilChanged(), 
-      switchMap(search => this.userService.getUsers(search)) 
-    ).subscribe(data => {
-      this.users = data;
-    });
-
-    this.searchSubject.next('');
+    combineLatest([
+      this.roleSubject.asObservable(),
+      this.searchSubject.pipe(
+        debounceTime(300),
+        distinctUntilChanged()
+      )
+    ])
+      .pipe(
+        tap(([role, search]) => {
+          this.role = role;
+          this.searchText = search;
+        }),
+        switchMap(([_, search]) => this.userService.getUsers(search)),
+        tap(users => this.users = users),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 
   onSearchChange(search: string): void {
-    this.searchText = search;
     this.searchSubject.next(search);
   }
 
   ngOnDestroy(): void {
-    this.searchSubscription.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
