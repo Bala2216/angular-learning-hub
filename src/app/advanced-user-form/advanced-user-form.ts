@@ -11,8 +11,7 @@ import { FormsModule } from '@angular/forms';
 import * as bootstrap from 'bootstrap';
 import { SearchInput } from '../components/search-input/search-input';
 import { UserTable } from '../components/user-table/user-table';
-import { response } from 'express';
-import { catchError, map, of } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, map, of, Subject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-advanced-user-form',
@@ -26,36 +25,75 @@ export class AdvancedUserForm implements OnInit {
   uischema = AdvancedUserFormUISchema;
   data: any = {};
   usersList: AdvancedUserFormModel[] = [];
-  searchText: string = '';
 
   totalUsers: number = 0;
   maleUsers: number = 0;
   femaleUsers: number = 0;
 
+  searchText: string = '';
+  private searchSubject$ = new Subject<string>();
   constructor(private advancedUserFormService: advancedUserFormService) {}
 
   ngOnInit(): void {
     this.getUsersList();
+    this.searchUsersInAPI();
+  }
+
+  onSearchInputChange(searchTerm: string): void {
+    // this.searchText = searchTerm;
+    this.searchSubject$.next(searchTerm);
+  }
+
+  searchUsersInAPI(): void {
+    this.searchSubject$
+      .pipe(
+        debounceTime(250),
+        distinctUntilChanged(),
+        switchMap((query: string) =>
+          this.advancedUserFormService.searchUsers(query).pipe(
+            map((response) =>
+              response.users.map((user: any) => ({
+                ...user,
+                fullName: `${user.firstName} ${user.lastName}`,
+                gender: user.gender.charAt(0).toUpperCase() + user.gender.slice(1),
+              }))
+            ),
+            catchError((error) => {
+              console.error('Search error', error);
+              return of([]);
+            })
+          )
+        )
+      )
+      .subscribe((results: AdvancedUserFormModel[]) => {
+        this.usersList = results;
+        this.sortUsersByIdDesc();
+        this.updateUserCounts();
+      });
   }
 
   getUsersList() {
-    this.advancedUserFormService.getUsers().pipe(
-      map(response => response.users),
-      map(users => users.map((user: any) => ({
-        ...user,
-        fullName: `${user.firstName} ${user.lastName}`,
-        gender: user.gender.charAt(0).toUpperCase() + user.gender.slice(1) 
-      }))),
-      catchError(error => {
-        console.error('Error fetching users', error);
-        return of([]) // Return empty array on error
-      })
-    ).subscribe((transformedUsers) => {
-      console.log('transformedUsers ', transformedUsers );
-      this.usersList = transformedUsers ;
-      this.sortUsersByIdDesc();
-      this.updateUserCounts();
-    });
+    this.advancedUserFormService
+      .getUsers()
+      .pipe(
+        map((response) =>
+          response.users.map((user: any) => ({
+            ...user,
+            fullName: `${user.firstName} ${user.lastName}`,
+            gender: user.gender.charAt(0).toUpperCase() + user.gender.slice(1),
+          }))
+        ),
+        catchError((error) => {
+          console.error('Error fetching users', error);
+          return of([]); // Return empty array on error
+        })
+      )
+      .subscribe((transformedUsers) => {
+        console.log('transformedUsers ', transformedUsers);
+        this.usersList = transformedUsers;
+        this.sortUsersByIdDesc();
+        this.updateUserCounts();
+      });
   }
 
   sortUsersByIdDesc() {
@@ -68,10 +106,13 @@ export class AdvancedUserForm implements OnInit {
   }
 
   onSubmit() {
-    // console.log('Submit Data', this.data);
     this.advancedUserFormService.createUser(this.data).subscribe((resp: any) => {
       console.log('created', resp);
-      this.usersList.push({ ...resp });
+      this.usersList.push({
+        ...resp,
+        fullName: `${resp.firstName} ${resp.lastName}`,
+        gender: resp.gender.charAt(0).toUpperCase() + resp.gender.slice(1),
+      });
       this.sortUsersByIdDesc();
       this.data = {};
       this.closeModal();

@@ -2,6 +2,7 @@ export interface AdvancedUserFormModel {
     id: number;
     firstName: string;
     lastName: string;
+    fullName?: string;
     age?: number;
     gender: string;
     email: string;

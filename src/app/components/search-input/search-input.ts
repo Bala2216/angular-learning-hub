@@ -9,9 +9,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class SearchInput {
   @Input() searchText: string = '';
-  @Output() searchTextChange = new EventEmitter<String>();
+  @Output() searchTextChange = new EventEmitter<string>();
 
-  onSearchChange(value: String) {
+  onSearchChange(value: string) {
     this.searchTextChange.emit(value);
   }
 }

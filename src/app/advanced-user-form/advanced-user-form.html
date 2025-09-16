@@ -4,7 +4,10 @@
     <div class="card-body">
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
-          <app-search-input [(searchText)]="searchText"></app-search-input>
+          <app-search-input
+            [searchText]="searchText"
+            (searchTextChange)="onSearchInputChange($event)"
+          ></app-search-input>
 
           <div class="d-flex gap-2 float-right">
             <span class="badge bg-primary fs-7 px-2 py-2">Total: {{ totalUsers }}</span>

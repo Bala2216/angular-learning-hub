@@ -13,10 +13,12 @@
     </tr>
   </thead>
   <tbody>
-    @for(user of usersList | userFilter:searchText; track user.id) {
+    // The bellow line is commented to avoid filter from custom fitlers
+    <!-- @for(user of usersList | userFilter:searchText; track user.id) { -->
+    @for(user of usersList; track user.id) {
     <tr>
       <th scope="row">#{{ user.id }}</th>
-      <td>{{ user.fullName | capitalizeFirst }}</td>
+      <td>{{ user.fullName ?? '' | capitalizeFirst }}</td>
       <td>{{ user.age }}</td>
       <td>
         @if(user.gender === 'Male') {
