@@ -10,12 +10,16 @@ import { EmployeeListComponent } from '../employee-list/employee-list.component'
 import { BehaviorSubject } from 'rxjs';
 import { Subscription, interval } from 'rxjs';
 import { StaffListComponent } from '../staff-list/staff-list.component';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectChange } from '@angular/material/select';
+import {MatSelectModule} from '@angular/material/select';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [MatToolbarModule, CommonModule, RouterModule,
-    MatButtonModule, EmployeeListComponent, 
+  imports: [FormsModule, MatSelectModule, MatToolbarModule, CommonModule, RouterModule,
+    MatButtonModule, EmployeeListComponent, MatInputModule, MatFormFieldModule,
     MatIconModule, MatCardModule, MatButtonModule, StaffListComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './dashboard.component.html',
@@ -32,33 +36,47 @@ export class DashboardComponent implements OnInit, DoCheck, OnDestroy   {
     
   }
 
+  onSelectionChange(event: MatSelectChange): void {
+    //console.log('Selected value123:', event);
+    const filterValue = event.value;
+   // console.log('filterValue:::::', filterValue);
+    // Perform actions based on the selected value
+    this.subscriptionService.setGenderSelection(filterValue);
+  }
+
+  applyFilter(event: Event) {
+      const filterValue = (event.target as HTMLInputElement).value;
+      // Implement filtering logic here if needed
+      this.subscriptionService.setString(filterValue);
+  }
+
   ngOnDestroy(): void {
-    console.log('ngOnDestroy: CleanupComponent destroyed.');
+    //console.log('ngOnDestroy: CleanupComponent destroyed.');
     this.subscription.unsubscribe(); // Unsubscribe to prevent memory leak
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit: ParentComponent initialized.');
+    //console.log('ngOnInit: ParentComponent initialized.');
     // Perform data fetching or other initialization tasks here
   }
 
   ngDoCheck(): void {
-    console.log('ngDoCheck: Custom change detection check.');
+    //console.log('ngDoCheck: Custom change detection check.');
     // Implement custom change detection logic here
   }
   ngAfterContentInit(): void {
-    console.log('4. ngAfterContentInit called')
+    //console.log('4. ngAfterContentInit called')
   }
 
   ngAfterContentChecked(): void {
-    console.log('5. ngAfterContentChecked called')
+   // console.log('5. ngAfterContentChecked called')
   }
 
   ngAfterViewInit(): void {
-    console.log('6. ngAfterViewInit called')
+   // console.log('6. ngAfterViewInit called')
   }
 
   ngAfterViewChecked(): void {
-    console.log('7. ngAfterViewChecked called')
+   // console.log('7. ngAfterViewChecked called')
   }
 }

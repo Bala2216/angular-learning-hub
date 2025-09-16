@@ -18,7 +18,7 @@ export class OverviewColorDirective implements OnChanges  {
   //   this.highlight('');
   // }
 
-  ngOnChanges(changes: SimpleChanges): void {console.log('Directive123', this.gender)
+  ngOnChanges(changes: SimpleChanges): void {//console.log('Directive123', this.gender)
     if (this.gender.toLocaleLowerCase() === 'female') {
       this.renderer.setStyle(this.el.nativeElement, 'background-color', '#D3D3D3');
       this.renderer.setStyle(this.el.nativeElement, 'color', '#000099');

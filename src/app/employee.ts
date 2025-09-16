@@ -4,4 +4,11 @@ export interface EmployeeData {
   department: string;
   employmentType: string;
   gender: string;
+  role?: string;
+}
+
+export interface Role {
+  it: string;
+  accounts: string;
+  management: string
 }

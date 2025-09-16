@@ -34,10 +34,25 @@
     </mat-card-actions>
   </mat-card>
   <div>
+    
     <app-staff-list></app-staff-list>
   </div>
 
   </div>
+  <mat-form-field appearance="outline">
+        <mat-label>Search by name's</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search by Name" #input>
+    </mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>Role</mat-label>
+  <mat-select (selectionChange)="onSelectionChange($event)">
+      <mat-option value="">All</mat-option>
+      <mat-option value="admin">Admin</mat-option>
+      <mat-option value="admin-read">Read-Only</mat-option>
+    
+  </mat-select>
+</mat-form-field>
+
   <app-employee-list [message]="'This is the list of employees onborded'"></app-employee-list>
 
 </div>
