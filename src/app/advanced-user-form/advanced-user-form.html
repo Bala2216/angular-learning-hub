@@ -1,111 +1,72 @@
 <div class="container">
-    <div class="card">
-        <div class="card-header bg-info text-dark   ">
-            Users Management
-        </div>
-        <div class="card-body">
-            <div class="container">
-                <div class="d-flex justify-content-between align-items-center">
-                    <input type="text" class="form-control mb-3 search-input float-right w-25"
-                        placeholder="Search users..." [(ngModel)]="searchText" />
+  <div class="card">
+    <div class="card-header bg-info text-dark">Users Management</div>
+    <div class="card-body">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <app-search-input [(searchText)]="searchText"></app-search-input>
 
-                    <div class="d-flex gap-2 float-right">
-                        <span class="badge bg-primary fs-7 px-2 py-2">Total: {{ totalUsers }}</span>
-                        <span class="badge bg-success fs-7 px-2 py-2">Male: {{ maleUsers }}</span>
-                        <span class="badge bg-danger fs-7 px-2 py-2">Female: {{ femaleUsers }}</span>
-                    </div>
+          <div class="d-flex gap-2 float-right">
+            <span class="badge bg-primary fs-7 px-2 py-2">Total: {{ totalUsers }}</span>
+            <span class="badge bg-success fs-7 px-2 py-2">Male: {{ maleUsers }}</span>
+            <span class="badge bg-danger fs-7 px-2 py-2">Female: {{ femaleUsers }}</span>
+          </div>
 
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-outline-secondary" (click)="reloadUsers()">
-                            <i class="bi bi-arrow-clockwise"></i> Reload
-                        </button>
-                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                            <i class="bi bi-plus-circle"></i> Add User
-                        </button>
-                    </div>
-                </div>
-                <table class="table table-bordered table-striped small">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Age</th>
-                            <th>Gender</th>
-                            <th>DOB</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Address</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for(user of usersList | userFilter:searchText; track user.id) {
-                        <tr>
-                            <th scope="row">#{{user.id}}</th>
-                            <td>{{user.firstName | capitalizeFirst}}</td>
-                            <td>{{user.lastName | capitalizeFirst}}</td>
-                            <td>{{user.age}}</td>
-                            <td>
-                                @if(user.gender === 'male' || user.gender === 'Male') {
-                                <button class="btn btn-warning btn-sm">{{user.gender | capitalizeFirst}}</button>
-                                } @else {
-                                <button class="btn btn-primary btn-sm">{{user.gender | capitalizeFirst}}</button>
-                                }
-                            </td>
-                            <td>{{user.birthDate | customDate}}</td>
-                            <td>{{user.email}}</td>
-                            <td>{{user.phone}}</td>
-                            <td class="w-25">
-                                <p class="text-center">
-                                    {{user?.address?.address}} <b>|</b>
-                                    {{user?.address?.city}} <b>|</b>
-                                    {{user?.address?.state}} <b>|</b>
-                                    {{user?.address?.stateCode}} <b>|</b>
-                                    {{user?.address?.country}}-{{user?.address?.postalCode}}
-                                </p>
-                            </td>
-                            <td class="text-center">
-                                <div class="d-flex justify-content-center gap-2">
-                                    <button class="btn btn-sm btn-outline-primary" (click)="onEdit(user)">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-danger" (click)="onDelete(user)">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        } @empty {
-                        <tr>
-                            <td colspan="10" class="text-center">No users are available...</td>
-                        </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+          <div class="d-flex gap-2">
+            <button class="btn btn-outline-secondary" (click)="reloadUsers()">
+              <i class="bi bi-arrow-clockwise"></i> Reload
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary btn-sm"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <i class="bi bi-plus-circle"></i> Add User
+            </button>
+          </div>
         </div>
+
+        <app-user-table
+          [usersList]="usersList"
+          [searchText]="searchText"
+          (onEdit)="onEdit($event)"
+          (onDelete)="onDelete($event)"
+        ></app-user-table>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Users Form</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <jsonforms [(data)]="data" [schema]="schema" [uischema]="uischema" [renderers]="renderers"
-                    validationMode="ValidateAndShow" (dataChange)="onDataChange($event)">
-                </jsonforms>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="onSubmit()">Save changes</button>
-            </div>
-        </div>
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Users Form</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <jsonforms
+          [(data)]="data"
+          [schema]="schema"
+          [uischema]="uischema"
+          [renderers]="renderers"
+          validationMode="ValidateAndShow"
+          (dataChange)="onDataChange($event)"
+        >
+        </jsonforms>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmit()">Save changes</button>
+      </div>
     </div>
+  </div>
 </div>

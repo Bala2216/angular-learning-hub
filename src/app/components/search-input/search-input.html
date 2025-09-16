@@ -1,0 +1,7 @@
+<input
+  type="text"
+  class="form-control mb-3 search-input float-right"
+  placeholder="Search users..."
+  [ngModel]="searchText"
+  (ngModelChange)="onSearchChange($event)"
+/>
