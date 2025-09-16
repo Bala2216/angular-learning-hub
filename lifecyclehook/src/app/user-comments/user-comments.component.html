@@ -1,1 +1,21 @@
-<p>user-comments works!</p>
+<h2>Users with Comments</h2>
+<div class="user-container">
+  <div
+    class="user-card"
+    *ngFor="let user of users"
+    [ngClass]="{
+      'card-bgredient': user.id % 2 === 0,
+      'card-bgradient2': user.id % 2 !== 0
+    }"
+  >
+    <h3>{{ user.name }}</h3>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <h4>Comments:</h4>
+    <ul>
+      <li *ngFor="let comment of user.comments">
+        <strong>{{ comment.name }}</strong
+        >: {{ comment.body }}
+      </li>
+    </ul>
+  </div>
+</div>
