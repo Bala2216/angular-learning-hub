@@ -27,4 +27,11 @@ export const routes: Routes = [
         (m) => m.UserapiFiltercardComponent
       ),
   },
+  {
+    path: 'userscomments',
+    loadComponent: () =>
+      import('./user-comments/user-comments.component').then(
+        (m) => m.UserCommentsComponent
+      ),
+  },
 ];

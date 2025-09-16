@@ -12,4 +12,5 @@ export class AppComponent {
   jsontitle = 'Json Forms';
   users = 'Users Data';
   usersAPIFilter = 'Users API Filter';
+  usersComments = 'Users Comments';
 }
