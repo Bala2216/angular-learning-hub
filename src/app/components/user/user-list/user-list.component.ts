@@ -14,6 +14,10 @@ import {
   takeUntil
 } from 'rxjs/operators';
 
+import { Store } from '@ngrx/store';
+import { addUser } from '../../../store/user/user.actions'; 
+
+
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -23,6 +27,12 @@ export class UserListComponent implements OnInit, OnDestroy {
   users: User[] = [];
   searchText: string = '';
   role: string = 'Guest';
+  newUser: Partial<User> = {
+    name: '',
+    username: '',
+    email: '',
+    body: ''
+  };
 
   destroy$ = new Subject<void>();
   private searchSubject = new BehaviorSubject<string>('');
@@ -30,7 +40,9 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   constructor(
     private userService: UserService,
+    private store: Store,
     private roleService: RoleService
+
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +75,27 @@ export class UserListComponent implements OnInit, OnDestroy {
   onSearchChange(search: string): void {
     this.searchSubject.next(search);
   }
+
+  showAddForm = false;
+
+toggleAddForm(): void {
+  this.showAddForm = !this.showAddForm;
+}
+
+onAddUser(): void {
+  if (
+    this.newUser.name?.trim() &&
+    this.newUser.username?.trim() &&
+    this.newUser.email?.trim()
+  ) {
+    
+    this.store.dispatch(addUser({ user: this.newUser as User }));
+    this.newUser = { name: '', username: '', email: '', body: '' };
+    this.showAddForm = false;
+  } else {
+    alert('Please fill in all required fields.');
+  }
+}
 
   ngOnDestroy(): void {
     this.destroy$.next();

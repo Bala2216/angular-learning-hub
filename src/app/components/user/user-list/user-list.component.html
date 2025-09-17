@@ -1,15 +1,31 @@
 <div class="user-list-container">
+  <div class="search-box" *ngIf="role === 'Admin'">
+    <div class="search-add-wrapper">
+      <app-input [(searchText)]="searchText" (searchTextChange)="onSearchChange($event)"></app-input>
+      <button class="add-user-button" (click)="toggleAddForm()">+ Add User</button>
+    </div>
+  </div>
 
-<div class="search-box" *ngIf="role === 'Admin'">
-  <app-input [(searchText)]="searchText" (searchTextChange)="onSearchChange($event)"></app-input>
-</div>
+  <div class="modal-backdrop" *ngIf="showAddForm">
+    <div class="modal-content">
+      <h2>Add New User</h2>
+      <input [(ngModel)]="newUser.name" placeholder="Name" />
+      <input [(ngModel)]="newUser.username" placeholder="Username" />
+      <input [(ngModel)]="newUser.email" placeholder="Email" />
+      <textarea [(ngModel)]="newUser.body" placeholder="Comment"></textarea>
+      <div class="modal-actions">
+        <button (click)="onAddUser()">Save</button>
+        <button class="cancel" (click)="toggleAddForm()">Cancel</button>
+      </div>
+    </div>
+  </div>
 
   <div class="user-cards">
     <div
-      class="user-card"
+      class="user-card boxed"
       *ngFor="let user of users | userFilter: searchText"
-      [appGenderColor]="user.email" 
-      [title]="user.email.split('@')[1]" 
+      [appGenderColor]="user.email"
+      [title]="user.email.split('@')[1]"
     >
       <h3>{{ user.name }}</h3>
       <p><strong>Username:</strong> {{ user.username }}</p>

@@ -17,6 +17,10 @@ import { InputComponent } from '../input/input.component';
     CommonModule,
     FormsModule
   ],
-  exports: [UserListComponent]
+  exports: [UserListComponent,
+    InputComponent,
+    UserFilterPipe,
+    EmailDomainDirective
+  ]
 })
 export class UserModule {}
