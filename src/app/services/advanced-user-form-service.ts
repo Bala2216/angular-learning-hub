@@ -7,18 +7,22 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class advancedUserFormService {
-  private baseUrl: string = 'https://dummyjson.com/users';
+  private baseUrl: string = 'https://dummyjson.com';
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<any> {
-    return this.http.get(this.baseUrl);
+    return this.http.get(`${this.baseUrl}/users`);
   }
 
   searchUsers(query: string | null): Observable<any> {
-    return this.http.get(`${this.baseUrl}/search?q=${query}`);
+    return this.http.get(`${this.baseUrl}/users/search?q=${query}`);
+  }
+
+  getPostsByUserId(userId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/posts/user/${userId}`);
   }
   
   createUser(user: AdvancedUserFormModel): Observable<any> {
-    return this.http.post<any>(this.baseUrl + '/add', user);
+    return this.http.post<any>(this.baseUrl + '/users/add', user);
   }
 }

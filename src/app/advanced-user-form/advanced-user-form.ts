@@ -11,7 +11,19 @@ import { FormsModule } from '@angular/forms';
 import * as bootstrap from 'bootstrap';
 import { SearchInput } from '../components/search-input/search-input';
 import { UserTable } from '../components/user-table/user-table';
-import { catchError, debounceTime, distinctUntilChanged, map, of, Subject, switchMap } from 'rxjs';
+import {
+  catchError,
+  concatMap,
+  debounceTime,
+  distinctUntilChanged,
+  from,
+  map,
+  mergeMap,
+  of,
+  Subject,
+  switchMap,
+  toArray,
+} from 'rxjs';
 
 @Component({
   selector: 'app-advanced-user-form',
@@ -25,6 +37,7 @@ export class AdvancedUserForm implements OnInit {
   uischema = AdvancedUserFormUISchema;
   data: any = {};
   usersList: AdvancedUserFormModel[] = [];
+  usersWithPosts: any[] = [];
 
   totalUsers: number = 0;
   maleUsers: number = 0;
@@ -35,8 +48,10 @@ export class AdvancedUserForm implements OnInit {
   constructor(private advancedUserFormService: advancedUserFormService) {}
 
   ngOnInit(): void {
-    this.getUsersList();
-    this.searchUsersInAPI();
+    this.getUsersListOnInitialLoad();
+    this.searchUsersInAPISwitchMap(); // Need cancellation of previous request
+    // this.searchUsersAndPostsWithMergeMap(); //Need concurrency
+    // this.searchUsersAndPostsWithconcatMap(); //Need sequential execution
   }
 
   onSearchInputChange(searchTerm: string): void {
@@ -44,7 +59,81 @@ export class AdvancedUserForm implements OnInit {
     this.searchSubject$.next(searchTerm);
   }
 
-  searchUsersInAPI(): void {
+  searchUsersAndPostsWithconcatMap(): void {
+    this.searchSubject$
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        concatMap((query: string) =>
+          this.advancedUserFormService.searchUsers(query).pipe(
+            map((res) => res.users),
+            concatMap((users) =>
+              from(users).pipe(
+                concatMap((user: any) =>
+                  this.advancedUserFormService.getPostsByUserId(user.id).pipe(
+                    map((posts) => ({
+                      ...user,
+                      fullName: `${user.firstName} ${user.lastName}`,
+                      gender: user.gender.charAt(0).toUpperCase() + user.gender.slice(1),
+                      posts,
+                    })),
+                    catchError(() => of({ ...user, posts: [] }))
+                  )
+                ),
+                toArray()
+              )
+            ),
+            catchError((err) => {
+              console.error('Search error:', err);
+              return of([]);
+            })
+          )
+        )
+      )
+      .subscribe((results) => {
+        this.usersWithPosts = results;
+        console.log('Users with posts (sequential):', results);
+      });
+  }
+
+  searchUsersAndPostsWithMergeMap(): void {
+    this.searchSubject$
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        mergeMap((query: string) =>
+          this.advancedUserFormService.searchUsers(query).pipe(
+            map((res) => res.users),
+            mergeMap((users) =>
+              from(users).pipe(
+                mergeMap((user: any) =>
+                  this.advancedUserFormService.getPostsByUserId(user.id).pipe(
+                    map((posts) => ({
+                      ...user,
+                      fullName: `${user.firstName} ${user.lastName}`,
+                      gender: user.gender.charAt(0).toUpperCase() + user.gender.slice(1),
+                      posts,
+                    })),
+                    catchError(() => of({ ...user, posts: [] }))
+                  )
+                ),
+                toArray()
+              )
+            ),
+            catchError((err) => {
+              console.error('Search error:', err);
+              return of([]);
+            })
+          )
+        )
+      )
+      .subscribe((results) => {
+        this.usersWithPosts = results;
+        console.log('Users with posts:', results);
+      });
+  }
+
+  searchUsersInAPISwitchMap(): void {
     this.searchSubject$
       .pipe(
         debounceTime(250),
@@ -72,7 +161,7 @@ export class AdvancedUserForm implements OnInit {
       });
   }
 
-  getUsersList() {
+  getUsersListOnInitialLoad() {
     this.advancedUserFormService
       .getUsers()
       .pipe(
@@ -144,7 +233,7 @@ export class AdvancedUserForm implements OnInit {
   reloadUsers(): void {
     this.usersList = [];
     setTimeout(() => {
-      this.getUsersList();
+      this.getUsersListOnInitialLoad();
     }, 20);
   }
 
