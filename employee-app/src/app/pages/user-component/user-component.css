@@ -1,0 +1,25 @@
+.user-list-container {
+  display: grid;
+  /* This creates a responsive grid of cards */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px; /* Space between the cards */
+}
+.user-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  padding: 20px;
+  transition: transform 0.2s; /* Smooth transition for hover effect */
+  margin-top: 30px;
+}
+.search{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+.search-input {
+  width: 50%;
+  height: 50px;
+  border: 3px solid darkmagenta;
+}

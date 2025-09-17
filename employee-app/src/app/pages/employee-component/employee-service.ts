@@ -28,7 +28,8 @@ export class EmployeeService {
       joiningDate: employee.joiningDate,
       hrLevel: employee.hrLevel,
       languages: employee.languages,
-      experience: employee.experience
+      experience: employee.experience,
+      status: employee.status,
     });
     this.saveEmployees();
   }

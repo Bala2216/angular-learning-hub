@@ -32,3 +32,11 @@ thead {
   cursor: pointer;
   border-radius: 10px;
 }
+
+.active-status {
+  color: green;
+}
+
+.inactive-status {
+  color: red;
+}

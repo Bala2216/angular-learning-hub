@@ -1,0 +1,61 @@
+{
+  "formTitle": "Employee Feedback Form",
+  "fields": [
+    {
+      "label": "Employee Name",
+      "name": "employeeName",
+      "type": "input",
+      "inputType": "text",
+      "placeholder": "Enter your full name",
+      "required": true
+    },
+    {
+      "label": "Department",
+      "name": "department",
+      "type": "select",
+      "options": [
+        { "label": "Engineering", "value": "engineering" },
+        { "label": "HR", "value": "hr" },
+        { "label": "Finance", "value": "finance" },
+        { "label": "Sales", "value": "sales" }
+      ],
+      "required": true
+    },
+    {
+      "label": "Work Environment",
+      "name": "workEnvironment",
+      "type": "radio",
+      "options": [
+        { "label": "Excellent", "value": "excellent" },
+        { "label": "Good", "value": "good" },
+        { "label": "Average", "value": "average" },
+        { "label": "Poor", "value": "poor" }
+      ],
+      "required": true
+    },
+    {
+      "label": "Facilities Provided",
+      "name": "facilities",
+      "type": "checkbox",
+      "options": [
+        { "label": "Cafeteria", "value": "cafeteria" },
+        { "label": "Transport", "value": "transport" },
+        { "label": "Health Insurance", "value": "healthInsurance" },
+        { "label": "Gym", "value": "gym" }
+      ]
+    },
+    {
+      "label": "Feedback Date",
+      "name": "feedbackDate",
+      "type": "date",
+      "required": true
+    },
+    {
+      "label": "Additional Comments",
+      "name": "comments",
+      "type": "input",
+      "inputType": "textarea",
+      "placeholder": "Write your feedback here..."
+    }
+  ]
+}

@@ -1,28 +1,20 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule} from '@angular/common';
 import { EmployeeService } from './employee-service';
 import { EmployeeListComponent } from "../employee-list-component/employee-list-component";
+import { EmployeeFormComponent } from "../employee-form-component/employee-form-component";
 
 @Component({
   selector: 'app-employee-component',
-  imports: [FormsModule, CommonModule, EmployeeListComponent],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, EmployeeListComponent, EmployeeFormComponent],
   templateUrl: './employee-component.html',
   styleUrl: './employee-component.css'
 })
 
 export class EmployeeComponent implements OnInit{
   showForm = false;
-  employee = {
-    name: '',
-    email: '',
-    phone: '',
-    department: '',
-    joiningDate: '',
-    hrLevel: '',
-    languages: '',
-    experience: null
-  };
 
   private employeeService = inject(EmployeeService);
 
@@ -30,30 +22,18 @@ export class EmployeeComponent implements OnInit{
 
   ngOnInit(): void {
     this.employeeList =  this.employeeService.getEmployeeList();
-   }
-
- // employeeList: any = this.employeeService.getEmployeeList();
+  }
 
   toggleView() {
     this.showForm = !this.showForm;
   }
 
-  onSubmit() {
-    this.employeeService.addEmployee(this.employee)
-
-    this.employee = {
-      name: '',
-      email: '',
-      phone: '',
-      department: '',
-      joiningDate: '',
-      hrLevel: '',
-      languages: '',
-      experience: null
-    }
-
+  handleAddEmployee(newEmployee: any) {
+    this.employeeService.addEmployee(newEmployee);
+    this.employeeList = this.employeeService.getEmployeeList();
     this.showForm = false;
   }
+
 
   handleDelete(index: number) {
     this.employeeService.deleteEmployee(index);

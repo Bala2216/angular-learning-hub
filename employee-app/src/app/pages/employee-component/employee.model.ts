@@ -6,5 +6,6 @@ export interface EmployeeType {
   joiningDate: string,
   hrLevel: string,
   languages: string,
-  experience: null
+  experience: null,
+  status: boolean
 }
