@@ -3,6 +3,7 @@
     <div class="search-add-wrapper">
       <app-input [(searchText)]="searchText" (searchTextChange)="onSearchChange($event)"></app-input>
       <button class="add-user-button" (click)="toggleAddForm()">+ Add User</button>
+      <button class="clear-user-button" (click)="clearPersistedUsers()">Clear Added Users</button>
     </div>
   </div>
 

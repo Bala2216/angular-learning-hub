@@ -21,7 +21,7 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUsers(searchText: string = ''): Observable<User[]> {
-    const users$ = this.http.get<any[]>(`${this.usersApi}?name_like=${searchText}`);
+    const users$ = this.http.get<any[]>(searchText ? `${this.usersApi}?name_like=${searchText}` : this.usersApi);
     const comments$ = this.http.get<any[]>(this.commentsApi);
 
     return forkJoin([users$, comments$]).pipe(

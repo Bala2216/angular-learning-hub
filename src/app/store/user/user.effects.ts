@@ -1,26 +1,33 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { loadUsers, setUsers } from './user.actions';
 import { UserService } from '../../services/user.service';
-import { loadUsers, loadUsersSuccess } from './user.actions';
-import { switchMap, map } from 'rxjs/operators';
+import { map, switchMap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable()
 export class UserEffects {
-  loadUsers$;
+  private actions$ = inject(Actions);
+  private userService = inject(UserService);
 
-  constructor(
-    private actions$: Actions,
-    private userService: UserService
-  ) {
-    this.loadUsers$ = createEffect(() =>
-      this.actions$.pipe(
-        ofType(loadUsers),
-        switchMap(({ searchText }) =>
-          this.userService.getUsers(searchText).pipe(
-            map(users => loadUsersSuccess({ users }))
-          )
-        )
-      )
-    );
-  }
+  loadUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadUsers),
+      switchMap(() => {
+        const stored = localStorage.getItem('userState');
+        if (stored) {
+          const users = JSON.parse(stored);
+          return of(setUsers({ users }));
+        } else {
+          return this.userService.getUsers().pipe(
+            map(users => {
+              localStorage.setItem('userState', JSON.stringify(users));
+              return setUsers({ users });
+            }),
+            catchError(() => of(setUsers({ users: [] })))
+          );
+        }
+      })
+    )
+  );
 }
