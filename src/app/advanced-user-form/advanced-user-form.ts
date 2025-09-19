@@ -16,6 +16,7 @@ import {
   concatMap,
   debounceTime,
   distinctUntilChanged,
+  filter,
   from,
   map,
   mergeMap,
@@ -52,11 +53,31 @@ export class AdvancedUserForm implements OnInit {
     this.searchUsersInAPISwitchMap(); // Need cancellation of previous request
     // this.searchUsersAndPostsWithMergeMap(); //Need concurrency
     // this.searchUsersAndPostsWithconcatMap(); //Need sequential execution
+    this.searchUserWithFilter();
   }
 
   onSearchInputChange(searchTerm: string): void {
     // this.searchText = searchTerm;
     this.searchSubject$.next(searchTerm);
+  }
+
+  searchUserWithFilter(): void {
+    this.searchSubject$
+      .pipe(
+        filter((query: string) => query.trim().length > 2), // Ignore short/empty queries
+        debounceTime(300), // Wait for user to stop typing
+        distinctUntilChanged(), // Avoid duplicate searches
+        switchMap((query: string) =>
+          this.advancedUserFormService.searchUsers(query).pipe(
+            map((res) => res.users),
+            catchError(() => of([]))
+          )
+        )
+      )
+      .subscribe((users) => {
+        this.usersList = users;
+         console.log('Users with filter concept:', this.usersList);
+      });
   }
 
   searchUsersAndPostsWithconcatMap(): void {
