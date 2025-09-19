@@ -6,6 +6,7 @@ import { EmployeeComponent } from './pages/employee-component/employee-component
 import { EmployeeFeedbackComponent } from './pages/employee-feedback-component/employee-feedback-component';
 import { UserComponent } from './pages/user-component/user-component';
 import { JsonFormsFeedbackComponent } from './pages/json-forms-feedback-component/json-forms-feedback-component';
+import { StoreUsersComponent } from './pages/store-users-component/store-users-component';
 
 export const routes: Routes = [
   {
@@ -40,6 +41,10 @@ export const routes: Routes = [
       {
         path: 'jsonFeedback',
         component: JsonFormsFeedbackComponent
+      },
+      {
+        path: 'storeUsers',
+        component: StoreUsersComponent
       }
     ]
   }

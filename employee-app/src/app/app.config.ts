@@ -2,11 +2,11 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessC
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { JsonFormsModule } from '@jsonforms/angular';
-import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
 import { routes } from './app.routes';
-
-
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { userReducer } from './store/reducer';
+import { UserEffects } from './store/effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,7 +15,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideAnimations(),
-    //importProvidersFrom(JsonFormsModule, JsonFormsAngularMaterialModule)
-  ]
+    provideStore({users: userReducer}),
+    provideEffects([UserEffects])
+]
 };
 
