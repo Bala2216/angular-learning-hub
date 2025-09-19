@@ -5,23 +5,22 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserFilterPipe } from '../../pipes/user-filter.pipe';
 import { EmailDomainDirective } from '../../directives/emaildomain-color.directive';
 import { InputComponent } from '../input/input.component';
+import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
     UserListComponent,
     InputComponent,
     UserFilterPipe,
-    EmailDomainDirective
+    EmailDomainDirective,
   ],
-  imports: [
-    CommonModule,
-    FormsModule
-  ],
+  imports: [CommonModule, FormsModule, MatTableModule, AgGridModule],
   exports: [
     UserListComponent,
     InputComponent,
     UserFilterPipe,
-    EmailDomainDirective
-  ]
+    EmailDomainDirective,
+  ],
 })
 export class UserModule {}
