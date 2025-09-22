@@ -1,0 +1,88 @@
+
+
+<form #userForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="mb-2">
+    <div class="mb-2">Employee Form</div>
+    <label for="name">Name:</label
+    ><input
+      type="text"
+      id="name"
+      name="name"
+      [(ngModel)]="userData.name"
+      #name="ngModel"
+      required
+      placeholder="Enter Your Name"
+    />
+    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-red-500 text-sm mt-1">
+        <div *ngIf="name.errors?.['required']">Name is required</div>
+    </div>
+  </div>
+  <div class="mb-2 flex">
+    <label class="block text-sm font-medium text-gray-700 mr-2">Gender:</label>
+    <div class="flex">
+      <label class="flex items-center cursor-pointer mr-2">
+        <input
+          type="radio"
+          id="gender"
+          name="gender"
+          [(ngModel)]="userData.gender"
+          value="male"
+          required
+        />
+        <span>Male</span>
+      </label>
+      <label class="flex items-center cursor-pointer">
+        <input
+          type="radio"
+          id="gender"
+          name="gender"
+          [(ngModel)]="userData.gender"
+          value="female"
+          required
+        />
+        <span>Female</span>
+    </label>
+    </div>
+  </div>
+  <div class="mb-2">
+    <label for="age" class="form-label">Age:</label
+    ><input
+      type="text"
+      id="age"
+      name="age"
+      #age="ngModel"
+      [(ngModel)]="userData.age"
+      required
+      placeholder="Enter Your Age"
+    />
+    <div *ngIf="age.invalid && (age.dirty || age.touched)" class="text-red-500 text-sm mt-1">
+        <div *ngIf="age.errors?.['required']">Age is required</div>
+    </div>
+  </div>
+  <div>
+    <label for="phoneNumber">Phone Number:</label
+    ><input
+      type="tel"
+      id="phoneNumber"
+      name="phoneNumber"
+      #phoneNumber="ngModel"
+      required
+      [(ngModel)]="userData.phoneNumber"
+      pattern="[0-9]{10}"
+      placeholder="Enter Your Phone Number"
+    />
+    <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="text-red-500 text-sm mt-1">
+        <div *ngIf="phoneNumber.errors?.['required']">Phone number is required</div>
+        <div *ngIf="phoneNumber.errors?.['pattern']">Please enter a valid 10 digit phone number</div>
+    </div>
+  </div>
+  <div>
+    <button
+      type="submit"
+      [disabled]="!userForm.valid"
+      class="bg-blue-600 text-white py-2 px-4 rounded-md"
+    >
+      Submit
+    </button>
+  </div>
+</form>

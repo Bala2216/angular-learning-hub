@@ -1,0 +1,21 @@
+<div *ngIf="submittedData.length > 0">
+    
+<table class="bg-white">
+  <thead>
+    <tr class="bg-gray-50">
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>Phone Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of submittedData; let i = index">
+      <td class="px-6 py-3">{{ data.name }}</td>
+      <td class="px-6 py-3">{{ data.gender }}</td>
+      <td class="px-6 py-3">{{ data.age }}</td>
+      <td class="px-6 py-3">{{ data.phoneNumber }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
