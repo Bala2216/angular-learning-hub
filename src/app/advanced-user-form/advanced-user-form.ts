@@ -17,12 +17,14 @@ import {
   debounceTime,
   distinctUntilChanged,
   filter,
+  finalize,
   from,
   map,
   mergeMap,
   of,
   Subject,
   switchMap,
+  tap,
   toArray,
 } from 'rxjs';
 
@@ -39,6 +41,7 @@ export class AdvancedUserForm implements OnInit {
   data: any = {};
   usersList: AdvancedUserFormModel[] = [];
   usersWithPosts: any[] = [];
+  isLoading: boolean = false
 
   totalUsers: number = 0;
   maleUsers: number = 0;
@@ -53,7 +56,7 @@ export class AdvancedUserForm implements OnInit {
     this.searchUsersInAPISwitchMap(); // Need cancellation of previous request
     // this.searchUsersAndPostsWithMergeMap(); //Need concurrency
     // this.searchUsersAndPostsWithconcatMap(); //Need sequential execution
-    this.searchUserWithFilter();
+    // this.searchUserWithFilter();
   }
 
   onSearchInputChange(searchTerm: string): void {
@@ -64,6 +67,7 @@ export class AdvancedUserForm implements OnInit {
   searchUserWithFilter(): void {
     this.searchSubject$
       .pipe(
+        tap(() => this.isLoading = true), //tap allows you to perform side effects
         filter((query: string) => query.trim().length > 2), // Ignore short/empty queries
         debounceTime(300), // Wait for user to stop typing
         distinctUntilChanged(), // Avoid duplicate searches
@@ -72,7 +76,8 @@ export class AdvancedUserForm implements OnInit {
             map((res) => res.users),
             catchError(() => of([]))
           )
-        )
+        ),
+        finalize(() => this.isLoading = false), //finalize runs once when the Observable completes or errors out 
       )
       .subscribe((users) => {
         this.usersList = users;
