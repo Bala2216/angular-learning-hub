@@ -1,0 +1,13 @@
+<div class="modal-backdrop" *ngIf="showForm">
+  <div class="modal-content">
+    <h2>Add New User</h2>
+    <input [(ngModel)]="newUser.name" placeholder="Name" />
+    <input [(ngModel)]="newUser.username" placeholder="Username" />
+    <input [(ngModel)]="newUser.email" placeholder="Email" />
+    <textarea [(ngModel)]="newUser.body" placeholder="Comment"></textarea>
+    <div class="modal-actions">
+      <button (click)="onSave()">Save</button>
+      <button class="cancel" (click)="onCancel()">Cancel</button>
+    </div>
+  </div>
+</div>
