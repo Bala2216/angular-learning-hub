@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, signal, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UserData } from '../modal/UserData';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-template-form',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './template-form.component.html',
   styleUrl: './template-form.component.scss',
 })
@@ -17,12 +17,12 @@ export class TemplateFormComponent {
     age: '',
     phoneNumber: '',
   };
-  submitted = false;
+  submitted = signal(false);
   @Output() formSubmitted = new EventEmitter<UserData>();
   @ViewChild('userForm') userForm!: NgForm;
 
   onSubmit() {
-    this.submitted = true;
+    this.submitted.set(true);
     if (
       this.userData.name &&
       this.userData.age &&
@@ -42,6 +42,6 @@ export class TemplateFormComponent {
       age: '',
       phoneNumber: '',
     };
-    this.submitted = false;
+    this.submitted.set(false);
  }
 }

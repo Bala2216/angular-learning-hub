@@ -3,6 +3,5 @@
 @tailwind component;
 @tailwind utilities;
 
-body {
-    margin-left: 5px;
-}
+html, body { height: 100%; margin-left: 5px; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

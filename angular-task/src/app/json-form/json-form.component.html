@@ -1,0 +1,45 @@
+<div class="jsonforms-wrapper">
+  <jsonforms
+    [schema]="schema"
+    [uischema]="uischema"
+    [data]="data()"
+    [renderers]="renderers"
+    (change)="onChange($event)"
+  ></jsonforms
+  ><br />
+  <button
+    (click)="submitEmployee()"
+    class="bg-blue-600 text-white py-2 px-4 rounded-md"
+  >
+    {{ editingIndex() !== null ? "Update" : "Add" }}
+  </button>
+
+  <hr />
+
+  <div class="table-container">
+    <table class="bg-white">
+      <thead>
+        <tr class="bg-gray-50">
+          <th class="px-6 py-3">Name</th>
+          <th class="px-6 py-3">Age</th>
+          <th class="px-6 py-3">Phone Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of data()?.employee ?? []; let i = index">
+          <td class="px-6 py-3">{{ emp.name }}</td>
+          <td class="px-6 py-3">{{ emp.age }}</td>
+          <td class="px-6 py-3">{{ emp.phoneNumber }}</td>
+          <td class="px-6 py-3">
+            <button
+              (click)="editEmployee(i)"
+              class="bg-gray-600 text-white py-2 px-4 rounded-md"
+            >
+              Edit
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

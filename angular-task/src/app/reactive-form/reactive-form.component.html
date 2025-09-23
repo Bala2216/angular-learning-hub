@@ -1,0 +1,37 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <h6>Reactive Forms</h6>
+  <div>
+    <label>Name:</label>
+    <input formControlName="name" />
+    <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+      Name is required (min 3 characters).
+    </div>
+  </div>
+
+  <div>
+    <label>Gender:</label>
+    <label><input type="radio" value="Male" formControlName="gender" /> Male</label>
+    <label><input type="radio" value="Female" formControlName="gender" /> Female</label>
+    <div *ngIf="userForm.get('gender')?.invalid && userForm.get('gender')?.touched">
+      Gender is required.
+    </div>
+  </div>
+
+  <div>
+    <label>Age:</label>
+    <input type="number" formControlName="age" />
+    <div *ngIf="userForm.get('age')?.invalid && userForm.get('age')?.touched">
+      Age must be between 1 and 100.
+    </div>
+  </div>
+
+  <div>
+    <label>Phone Number:</label>
+    <input formControlName="phoneNumber" />
+    <div *ngIf="userForm.get('phoneNumber')?.invalid && userForm.get('phoneNumber')?.touched">
+      Enter a valid 10-digit phone number.
+    </div>
+  </div>
+
+  <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md">Submit</button>
+</form>
