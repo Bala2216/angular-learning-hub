@@ -8,6 +8,7 @@ import { Products } from './Hooks/products/products';
 import { Onboarding } from './employee/onboarding/onboarding';
 import { JsonformsIo } from './jsonforms-io/jsonforms-io';
 import { AdvancedUserForm } from './advanced-user-form/advanced-user-form';
+import { CounterApp } from './ngrx/counter-app/counter-app';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -19,6 +20,6 @@ export const routes: Routes = [
     { path: 'products', component: Products },
     { path: 'user', component: Onboarding },
     { path: 'jsonforms-io', component: JsonformsIo },
-    { path: 'adv-json-forms', component: AdvancedUserForm }
-    // { path: 'rxjsbasic', component: Rxjsbasic }
+    { path: 'adv-json-forms', component: AdvancedUserForm },
+    { path: 'ngrx/counter-app', component: CounterApp }
 ];
