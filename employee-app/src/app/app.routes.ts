@@ -7,6 +7,8 @@ import { EmployeeFeedbackComponent } from './pages/employee-feedback-component/e
 import { UserComponent } from './pages/user-component/user-component';
 import { JsonFormsFeedbackComponent } from './pages/json-forms-feedback-component/json-forms-feedback-component';
 import { StoreUsersComponent } from './pages/store-users-component/store-users-component';
+import { AgGridComponent } from './pages/ag-grid-component/ag-grid-component';
+import { MaterialAngular } from './pages/material-angular/material-angular';
 
 export const routes: Routes = [
   {
@@ -45,6 +47,14 @@ export const routes: Routes = [
       {
         path: 'storeUsers',
         component: StoreUsersComponent
+      },
+      {
+        path: 'ag-grid',
+        component: AgGridComponent
+      },
+      {
+        path: 'material',
+        component: MaterialAngular
       }
     ]
   }

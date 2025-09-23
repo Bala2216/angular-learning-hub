@@ -1,0 +1,19 @@
+<div style="margin: 10px 0">
+  <button (click)="onBtnExport()">Download CSV export file</button>
+</div>
+<div class="row">
+  <div class="col-12">
+    <ag-grid-angular
+      style="width: 100%; height: 500px"
+      [rowData]="userList | async"
+      [columnDefs]="colDefs"
+      [defaultColDef]="defaultColDef"
+      [theme]="theme"
+      [rowSelection]="'multiple'"
+      (gridReady)="onGridReady($event)"
+      [pagination]="true"
+      [paginationPageSizeSelector]="[5, 10, 20, 50, 100]"
+      [paginationPageSize]="10"
+    />
+</div>
+</div>
