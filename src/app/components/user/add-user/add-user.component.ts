@@ -10,6 +10,7 @@ export class AddUserComponent {
   @Input() showForm = false;
   @Output() closeForm = new EventEmitter<void>();
   @Output() addUser = new EventEmitter<Partial<User>>();
+  title: string = 'Add New User';
 
   newUser: Partial<User> = {
     name: '',

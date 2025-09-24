@@ -8,12 +8,12 @@
     "sourceMap": true,
     "outDir": "./dist/out-tsc",
     "moduleResolution": "node",
-    "types": [],
+    "types": ["jest"],
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
