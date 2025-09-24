@@ -1,5 +1,17 @@
-<app-template-form (formSubmitted)="onFormSubmitted($event)"></app-template-form><br/><br/>
+<!-- <app-template-form (formSubmitted)="onFormSubmitted($event)"></app-template-form><br/><br/>
 <app-reactive-form (formSubmitted)="onFormSubmitted($event)"></app-reactive-form>
 <app-data-table [submittedData]="submittedData"></app-data-table>
+<app-json-form></app-json-form> -->
 
-<app-json-form></app-json-form>
+<div class="search-container">
+    <div class="emp-container">All Employees</div>
+  <app-search-bar (search)="searchText = $event"></app-search-bar>
+</div>
+
+<div class="card-grid">
+  <app-employee-card
+    *ngFor="let emp of employees | filter : searchText"
+    [employee]="emp"
+  >
+  </app-employee-card>
+</div>

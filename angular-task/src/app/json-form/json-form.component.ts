@@ -44,18 +44,37 @@ export class JsonFormComponent {
     this.editingIndex.set(index);
   }
 
+  // submitEmployee() {
+  //   const current = this.formData();
+  //   const index = this.editingIndex();
+  //   this.data.update((item) => {
+  //     const updatedList = [...item.employee];
+  //     if (index !== null) {
+  //       updatedList[index] = current;
+  //     } else {
+  //       updatedList.push(current);
+  //     }
+  //     return { employee: updatedList };
+  //   });
+  //   this.editingIndex.set(null);
+  //   this.formData.set({ name: '', age: null, phoneNumber: '' });
+  // }
   submitEmployee() {
     const current = this.formData();
     const index = this.editingIndex();
-    this.data.update((item) => {
-      const updatedList = [...item.employee];
-      if (index !== null) {
-        updatedList[index] = current;
-      } else {
-        updatedList.push(current);
-      }
-      return { employee: updatedList };
-    });
+
+    const updatedList = [...this.data().employee];
+
+    if (index !== null) {
+      updatedList[index] = current;
+    } else {
+      updatedList.push(current);
+    }
+
+    // ✅ Set the full object, not just the array
+    this.data.set({ employee: updatedList });
+
+    // Reset form
     this.editingIndex.set(null);
     this.formData.set({ name: '', age: null, phoneNumber: '' });
   }

@@ -2,7 +2,7 @@
   <jsonforms
     [schema]="schema"
     [uischema]="uischema"
-    [data]="data()"
+    [data]="formData()"
     [renderers]="renderers"
     (change)="onChange($event)"
   ></jsonforms
@@ -26,7 +26,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let emp of data()?.employee ?? []; let i = index">
+        <tr *ngFor="let emp of data().employee; let i = index">
           <td class="px-6 py-3">{{ emp.name }}</td>
           <td class="px-6 py-3">{{ emp.age }}</td>
           <td class="px-6 py-3">{{ emp.phoneNumber }}</td>
@@ -43,3 +43,4 @@
     </table>
   </div>
 </div>
+<!-- <pre>{{ data() | json }}</pre> -->
