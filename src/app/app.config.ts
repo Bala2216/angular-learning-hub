@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 // --- NgRx Imports for Standalone ---
 import { provideStore } from '@ngrx/store';
 import { employeeReducer } from './state/employee.reducer';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(), 
