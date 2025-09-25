@@ -1,3 +1,5 @@
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: grey !important;
+  background-color: rgb(246, 243, 243) !important;
+  border: 1px solid gray !important;
+  border-radius: 5px;
 }
