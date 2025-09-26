@@ -1,0 +1,19 @@
+mat-toolbar{
+  width: 100vw;
+  max-width: 100vw;
+  background-color: burlywood;
+  color: white;
+  align-items: center;
+
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+button{
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+.header-title{
+  cursor: pointer;
+}
