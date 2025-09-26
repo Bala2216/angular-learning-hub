@@ -1,23 +1,28 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectorRef
+} from '@angular/core';
 import { User, UserService } from '../../../services/user.service';
 import { RoleService } from '../../../services/role.service';
-import { Subject, BehaviorSubject, combineLatest, pipe } from 'rxjs';
+import { Subject, BehaviorSubject, combineLatest } from 'rxjs';
 import {
   debounceTime,
   distinctUntilChanged,
   tap,
-  takeUntil,
+  takeUntil
 } from 'rxjs/operators';
-
 import { Store } from '@ngrx/store';
 import { addUser, setUsers } from '../../../store/user/user.actions';
 import { ColDef } from 'ag-grid-community';
 import { MatTableDataSource } from '@angular/material/table';
+// import { JsonFormsChangeEvent } from '@jsonforms/core';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
+  styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit, OnDestroy {
   users: User[] = [];
@@ -30,6 +35,31 @@ export class UserListComponent implements OnInit, OnDestroy {
   private roleSubject = new BehaviorSubject<string>(this.role);
 
   showAddForm = false;
+  showJsonForm = false;
+
+  jsonFormData: any = {};
+  jsonSchema = {
+    type: 'object',
+    properties: {
+      name: { type: 'string' },
+      username: { type: 'string' },
+      email: { type: 'string', format: 'email' },
+      body: { type: 'string' }
+    },
+    required: ['name', 'username', 'email', 'body']
+  };
+
+  jsonUiSchema = {
+    type: 'VerticalLayout',
+    elements: [
+      { type: 'Control', scope: '#/properties/name' },
+      { type: 'Control', scope: '#/properties/username' },
+      { type: 'Control', scope: '#/properties/email' },
+      { type: 'Control', scope: '#/properties/body' }
+    ]
+  };
+
+  dxGridColumns = ['name', 'username', 'email', 'body'];
 
   constructor(
     private store: Store,
@@ -48,7 +78,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
     combineLatest([
       this.roleSubject.asObservable(),
-      this.searchSubject.pipe(debounceTime(300), distinctUntilChanged()),
+      this.searchSubject.pipe(debounceTime(300), distinctUntilChanged())
     ])
       .pipe(takeUntil(this.destroy$))
       .subscribe(([role, search]) => {
@@ -77,6 +107,12 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   toggleAddForm(): void {
     this.showAddForm = !this.showAddForm;
+    this.showJsonForm = false;
+  }
+
+  toggleJsonForm(): void {
+    this.showJsonForm = !this.showJsonForm;
+    this.showAddForm = false;
   }
 
   clearPersistedUsers(): void {
@@ -93,7 +129,7 @@ export class UserListComponent implements OnInit, OnDestroy {
       name: user.name!,
       username: user.username!,
       email: user.email!,
-      body: user.body!,
+      body: user.body!
     };
 
     this.store.dispatch(addUser({ user: newUser }));
@@ -109,26 +145,43 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.users = [...this.users, newUser];
     this.dataSource.data = this.users;
     this.showAddForm = false;
+    this.showJsonForm = false;
     this.cdr.detectChanges();
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+  onJsonFormChange(event: any): void {
+  this.jsonFormData = event.data;
+}
+
+  submitJsonForm(): void {
+    if (
+      this.jsonFormData.name &&
+      this.jsonFormData.username &&
+      this.jsonFormData.email &&
+      this.jsonFormData.body
+    ) {
+      this.handleAddUser(this.jsonFormData);
+      this.jsonFormData = {};
+    }
   }
 
   agGridColumnDefs: ColDef<User>[] = [
     { field: 'name', headerName: 'Name' },
     { field: 'username', headerName: 'Username' },
     { field: 'email', headerName: 'Email' },
-    { field: 'body', headerName: 'Comment' },
+    { field: 'body', headerName: 'Comment' }
   ];
 
   agGridDefaultColDef = {
     sortable: true,
     filter: true,
-    resizable: true,
+    resizable: true
   };
 
   matDisplayedColumns: string[] = ['name', 'username', 'email', 'body'];
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }
