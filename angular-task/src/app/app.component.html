@@ -3,7 +3,7 @@
 <app-data-table [submittedData]="submittedData"></app-data-table>
 <app-json-form></app-json-form> -->
 
-<div class="search-container">
+<!-- <div class="search-container">
     <div class="emp-container">All Employees</div>
   <app-search-bar (search)="searchText = $event"></app-search-bar>
 </div>
@@ -15,3 +15,24 @@
   >
   </app-employee-card>
 </div>
+
+<div class="search-container">
+  <div class="emp-container">All Employees</div>
+<app-search-bar></app-search-bar>
+</div>
+<div class="card-grid">
+<app-employee-card></app-employee-card>
+</div> -->
+
+<!-- using rxjs operators with multiple apis -->
+<div class="search-container">
+  <div class="emp-container">All Employees</div>
+  <app-search (search)="onSearch($event)"></app-search>
+</div>
+
+<div class="card-grid">
+  <app-card-list [data]="results"></app-card-list>
+</div>
+
+<!-- card using ngRX -->
+ <!-- <app-card></app-card> -->

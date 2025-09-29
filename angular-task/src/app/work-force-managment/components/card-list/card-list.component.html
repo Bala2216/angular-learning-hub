@@ -1,0 +1,15 @@
+<div class="card-grid">
+  @for (item of data; track item.name) {
+  <mat-card class="card" cardHighlight>
+    <mat-card-content>
+      <p><b>Name:</b> {{ item.name }}</p>
+      <p><b>Title:</b> {{ item.title }}</p>
+      <p><b>Username:</b> {{ item.username }}</p>
+      <p><b>Email:</b> {{ item.email }}</p>
+      <img mat-card-image [src]="item.photoUrl" alt="User photo" />
+    </mat-card-content>
+  </mat-card>
+  } @empty {
+  <p>No Employees found.</p>
+  }
+</div>

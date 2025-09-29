@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeService {
-  private apiUrl = 'https://jsonplaceholder.typicode.com/users';
+  private usersUrl = 'https://jsonplaceholder.typicode.com/users';
 
   private http = inject(HttpClient);
 
   getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.apiUrl);
+    return this.http.get<Employee[]>(this.usersUrl);
   }
 }

@@ -1,4 +1,8 @@
 <mat-form-field>
   <mat-label>Search Employees</mat-label>
-  <input matInput (input)="onSearch($event)" />
+  <!-- <input matInput (input)="onSearch($event)" /> -->
+  <!-- <input matInput (input)="onSearchChange($event.target?.value)" /> -->
+
+  <input matInput [(ngModel)]="searchText" (ngModelChange)="onSearchChange()" />
+
 </mat-form-field>
