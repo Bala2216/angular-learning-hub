@@ -13,7 +13,15 @@ import { debounceTime, distinctUntilChanged, Subject, switchMap } from 'rxjs';
 import { SearchService } from './work-force-managment/services/search.service';
 import { SearchComponent } from './work-force-managment/components/search/search.component';
 import { CardListComponent } from './work-force-managment/components/card-list/card-list.component';
-import { CardComponent } from './ngRX/components/card/card.component';
+import { FilterComponent } from './ngRX2/components/filter.component';
+import { UserCardComponent } from './ngRX2/components/user-card.component';
+import { UserListComponent } from './ngRX2/components/user-list.component';
+import { Store } from '@ngrx/store';
+import { selectCartCount } from './ngRX2/store/cart.selector';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { CartComponent } from './ngRX2/components/cart.component';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +37,13 @@ import { CardComponent } from './ngRX/components/card/card.component';
     FilterPipe,
     SearchComponent,
     CardListComponent,
-    CardComponent
+    FilterComponent,
+    UserCardComponent,
+    UserListComponent,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    CartComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -41,10 +55,14 @@ export class AppComponent {
   employees: Employee[] = [];
   searchText = '';
 
+  showCart = false;
+
   // search api
   results: CombinedCard[] = [];
   private searchTerm$ = new Subject<string>();
   private searchService = inject(SearchService);
+  private store = inject(Store);
+  cartCount$ = this.store.select(selectCartCount);
 
   ngOnInit() {
     this.searchService.searchCombined('').subscribe((data) => {
@@ -64,9 +82,18 @@ export class AppComponent {
   onSearch(term: string) {
     this.searchTerm$.next(term);
   }
-
   onFormSubmitted(data: UserData) {
     this.submittedData = [...this.submittedData, data];
     this.latestUserData = { ...data };
+  }
+
+  //ngRX
+  filterText = '';
+  onFilter(value: string) {
+    this.filterText = value;
+  }
+
+  toggleCart() {
+    this.showCart = !this.showCart;
   }
 }

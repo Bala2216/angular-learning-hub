@@ -25,14 +25,37 @@
 </div> -->
 
 <!-- using rxjs operators with multiple apis -->
-<div class="search-container">
+<!-- <div class="search-container">
   <div class="emp-container">All Employees</div>
   <app-search (search)="onSearch($event)"></app-search>
 </div>
-
 <div class="card-grid">
   <app-card-list [data]="results"></app-card-list>
+</div> -->
+
+
+<!-- card filter using ngRX -->
+<mat-toolbar color="primary">
+  <span>My Store</span>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="toggleCart()">
+    <mat-icon>shopping_cart</mat-icon>
+    <span class="cart-count">{{ cartCount$ | async }}</span>
+  </button>
+</mat-toolbar>
+
+@if (!showCart) {
+<div class="search-container">
+  <div class="emp-container">All Employees</div>
+<app-filter (filter)="onFilter($event)"></app-filter>
 </div>
 
-<!-- card using ngRX -->
- <!-- <app-card></app-card> -->
+
+<div class="card-grid">
+<app-user-list [filterText]="filterText"></app-user-list>
+</div>
+} @else {
+  <div class="card-grid">
+<app-cart></app-cart>
+</div>
+}

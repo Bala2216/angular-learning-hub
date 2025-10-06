@@ -3,7 +3,23 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideStore } from '@ngrx/store';
+import { cartReducer, userReducer } from './ngRX2/store/user.reducer';
+import { provideEffects } from '@ngrx/effects';
+import { UserEffects } from './ngRX2/store/user.effects';
+import { provideHttpClient } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideAnimationsAsync()]
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideHttpClient(),
+    provideAnimations(),
+    provideAnimationsAsync(),
+    provideStore({ userState: userReducer, cart: cartReducer }),
+    provideEffects([UserEffects]),
+    provideStoreDevtools(),
+  ],
 };

@@ -26,10 +26,6 @@ export class SearchBar {
   }
 
   onSearchChange(): void {
-    //  const input = event.target as HTMLInputElement;
-    //  const value = input.value;
-    //  this.userDataService.setFilterText(value);
-
     this.userDataService.setFilterText(this.searchText);
   }
 }
