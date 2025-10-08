@@ -17,7 +17,7 @@ import { Store } from '@ngrx/store';
 import { addUser, setUsers } from '../../../store/user/user.actions';
 import { ColDef } from 'ag-grid-community';
 import { MatTableDataSource } from '@angular/material/table';
-// import { JsonFormsChangeEvent } from '@jsonforms/core';
+import { angularMaterialRenderers } from '@jsonforms/angular-material';
 
 @Component({
   selector: 'app-user-list',
@@ -58,6 +58,8 @@ export class UserListComponent implements OnInit, OnDestroy {
       { type: 'Control', scope: '#/properties/body' }
     ]
   };
+
+  materialRenderers = angularMaterialRenderers;
 
   dxGridColumns = ['name', 'username', 'email', 'body'];
 
@@ -108,11 +110,13 @@ export class UserListComponent implements OnInit, OnDestroy {
   toggleAddForm(): void {
     this.showAddForm = !this.showAddForm;
     this.showJsonForm = false;
+    this.cdr.detectChanges();
   }
 
   toggleJsonForm(): void {
     this.showJsonForm = !this.showJsonForm;
     this.showAddForm = false;
+    this.cdr.detectChanges();
   }
 
   clearPersistedUsers(): void {
@@ -150,8 +154,8 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   onJsonFormChange(event: any): void {
-  this.jsonFormData = event.data;
-}
+    this.jsonFormData = event.data;
+  }
 
   submitJsonForm(): void {
     if (
@@ -162,7 +166,15 @@ export class UserListComponent implements OnInit, OnDestroy {
     ) {
       this.handleAddUser(this.jsonFormData);
       this.jsonFormData = {};
+      this.cdr.detectChanges();
+    } else {
+      alert('Please fill in all required fields.');
     }
+  }
+
+  resetJsonForm(): void {
+    this.jsonFormData = {};
+    this.cdr.detectChanges();
   }
 
   agGridColumnDefs: ColDef<User>[] = [
