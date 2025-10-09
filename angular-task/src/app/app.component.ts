@@ -22,6 +22,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CartComponent } from './ngRX2/components/cart.component';
+import { GridComponent } from './agGrid/components/grid/grid.component';
+import { UserGridComponent } from './agGrid/components/user-grid/user-grid.component';
+import { FullGridComponent } from './agGrid/components/full-grid/full-grid.component';
 
 @Component({
   selector: 'app-root',
@@ -43,7 +46,10 @@ import { CartComponent } from './ngRX2/components/cart.component';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    CartComponent
+    CartComponent,
+    GridComponent,
+    UserGridComponent,
+    FullGridComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

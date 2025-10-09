@@ -1,0 +1,23 @@
+<div class="p-6 space-y-4">
+  <h1 class="text-2xl font-bold">Users</h1>
+
+  <div class="flex gap-4">
+    <button (click)="onExport()" class="bg-green-500 text-white px-4 py-2 rounded">Export Data</button>
+  </div>
+
+  <ag-grid-angular
+    class="ag-theme-alpine h-[600px] w-full"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [gridOptions]="gridOptions">
+  </ag-grid-angular>
+
+  <div class="mt-4">
+    <h2 class="text-lg font-semibold">Selected Users:</h2>
+    <ul class="list-disc pl-5">
+      <li *ngFor="let user of selectedRows">
+        {{ user.firstName }} {{ user.lastName }} ({{ user.email }})
+      </li>
+    </ul>
+  </div>
+</div>
