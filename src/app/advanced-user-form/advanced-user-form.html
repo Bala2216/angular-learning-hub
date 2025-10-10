@@ -30,8 +30,18 @@
           </div>
         </div>
 
+        <!-- <h2>User List</h2>
+
+<ul *ngIf="users$ | async as users">
+  <li *ngFor="let user of users">
+    {{ user.fullName }} ({{ user.gender }})
+  </li>
+</ul>
+ -->
+
+
         <app-user-table
-          [usersList]="usersList"
+          [usersList]="users$ | async"
           [searchText]="searchText"
           (onEdit)="onEdit($event)"
           (onDelete)="onDelete($event)"

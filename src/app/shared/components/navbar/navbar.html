@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="#">MyApp</a>
     <div class="collapse navbar-collapse">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav me-auto d-flex gap-3">
         <li class="nav-item">
           <a class="nav-link" routerLink="/dashboard">Dashboard</a>
         </li>
@@ -23,14 +23,14 @@
 
         <li class="nav-item">
           <a class="nav-link" routerLink="/adv-json-forms">Advanced JSON Forms</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" (click)="logout()" style="cursor:pointer;">Logout</a>
         </li>        
 
         <li class="nav-item">
           <a class="nav-link" routerLink="/ngrx/counter-app">NGRX - Counter App</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" (click)="logout()" style="cursor:pointer;" class="mt-2 text-danger">Logout</a>
         </li>
 
       </ul>

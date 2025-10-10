@@ -21,16 +21,21 @@ import {
   from,
   map,
   mergeMap,
+  Observable,
   of,
   Subject,
   switchMap,
   tap,
   toArray,
 } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { addUser, loadUsers } from '../store/users/users.actions';
+import { selectUsers } from '../store/users/users.selectors';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-advanced-user-form',
-  imports: [JsonFormsModule, FormsModule, SearchInput, UserTable],
+  imports: [JsonFormsModule, FormsModule, SearchInput, UserTable, CommonModule],
   templateUrl: './advanced-user-form.html',
   styleUrl: './advanced-user-form.css',
 })
@@ -49,11 +54,19 @@ export class AdvancedUserForm implements OnInit {
 
   searchText: string = '';
   private searchSubject$ = new Subject<string>();
-  constructor(private advancedUserFormService: advancedUserFormService) {}
+  constructor(private advancedUserFormService: advancedUserFormService, private store: Store) {}
+
+  users$!: Observable<AdvancedUserFormModel[]>
 
   ngOnInit(): void {
-    this.getUsersListOnInitialLoad();
-    this.searchUsersInAPISwitchMap(); // Need cancellation of previous request
+
+    
+    this.store.dispatch(loadUsers());
+    this.users$ = this.store.select(selectUsers);
+
+console.log('users$', this.users$)
+    // this.getUsersListOnInitialLoad();
+    // this.searchUsersInAPISwitchMap(); // Need cancellation of previous request
     // this.searchUsersAndPostsWithMergeMap(); //Need concurrency
     // this.searchUsersAndPostsWithconcatMap(); //Need sequential execution
     // this.searchUserWithFilter();
@@ -223,11 +236,13 @@ export class AdvancedUserForm implements OnInit {
   onSubmit() {
     this.advancedUserFormService.createUser(this.data).subscribe((resp: any) => {
       console.log('created', resp);
-      this.usersList.push({
+      const newUser = {
         ...resp,
         fullName: `${resp.firstName} ${resp.lastName}`,
         gender: resp.gender.charAt(0).toUpperCase() + resp.gender.slice(1),
-      });
+      }
+      this.usersList.push(newUser);
+      this.store.dispatch(addUser({ user: newUser }));
       this.sortUsersByIdDesc();
       this.data = {};
       this.closeModal();
