@@ -1,0 +1,64 @@
+<div class="p-6 space-y-6 bg-gray-50 min-h-screen">
+  <h1 class="text-3xl font-bold text-gray-800">Claim Management</h1>
+
+  <!-- Filter Dropdown -->
+  <div class="flex items-center gap-4">
+    <label for="claimType" class="text-lg font-medium text-gray-700">Filter by Type:</label>
+    <select
+      id="claimType"
+      [(ngModel)]="selectedType"
+      (change)="filterClaims()"
+      class="px-4 py-2 border rounded-md shadow-sm focus:ring focus:ring-blue-300"
+    >
+      <option value="all">All</option>
+      <option value="health">Health</option>
+      <option value="vehicle">Vehicle</option>
+      <option value="property">Property</option>
+    </select>
+  </div>
+
+  <!-- Success Message -->
+  <div *ngIf="updateSuccess" class="bg-green-100 text-green-800 px-4 py-2 rounded shadow-sm">
+    ✅ Claim updated successfully!
+  </div>
+
+  <!-- Health Claims Table -->
+  <div *ngIf="selectedType === 'all' || selectedType === 'health'" class="bg-white p-4 rounded shadow">
+    <h2 class="text-xl font-semibold mb-2 text-blue-700">Health Claims</h2>
+    <ag-grid-angular
+      class="ag-theme-alpine w-full"
+      style="height: 200px;"
+      [rowData]="healthClaims"
+      [columnDefs]="healthColumns"
+      [defaultColDef]="{ sortable: true, filter: true, resizable: true, editable: true }"
+      (cellValueChanged)="onCellValueChanged($event)"
+    ></ag-grid-angular>
+  </div>
+
+  <!-- Vehicle Claims Table -->
+  <div *ngIf="selectedType === 'all' || selectedType === 'vehicle'" class="bg-white p-4 rounded shadow">
+    <h2 class="text-xl font-semibold mb-2 text-blue-700">Vehicle Claims</h2>
+    <ag-grid-angular
+      class="ag-theme-alpine w-full"
+      style="height: 200px;"
+      [rowData]="vehicleClaims"
+      [columnDefs]="vehicleColumns"
+      [defaultColDef]="{ sortable: true, filter: true, resizable: true, editable: true }"
+      (cellValueChanged)="onCellValueChanged($event)"
+    ></ag-grid-angular>
+  </div>
+
+  <!-- Property Claims Table -->
+  <div *ngIf="selectedType === 'all' || selectedType === 'property'" class="bg-white p-4 rounded shadow">
+    <h2 class="text-xl font-semibold mb-2 text-blue-700">Property Claims</h2>
+    <ag-grid-angular
+      class="ag-theme-alpine w-full"
+      style="height: 200px;"
+      [rowData]="propertyClaims"
+      [columnDefs]="propertyColumns"
+      [defaultColDef]="{ sortable: true, filter: true, resizable: true, editable: true }"
+      (cellValueChanged)="onCellValueChanged($event)"
+    ></ag-grid-angular>
+  </div>
+</div>
+

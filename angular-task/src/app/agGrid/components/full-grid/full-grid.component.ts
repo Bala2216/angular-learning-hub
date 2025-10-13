@@ -10,13 +10,13 @@ import {
   ModuleRegistry,
 } from 'ag-grid-community';
 import { AllCommunityModule } from 'ag-grid-community';
-import { ColumnsToolPanelModule, SideBarModule } from 'ag-grid-enterprise';
+// import { ColumnsToolPanelModule, SideBarModule } from 'ag-grid-enterprise';
 import { FormsModule } from '@angular/forms';
 
 ModuleRegistry.registerModules([
   AllCommunityModule,
-  SideBarModule,
-  ColumnsToolPanelModule,
+  // SideBarModule,
+  // ColumnsToolPanelModule,
 ]);
 
 interface User {

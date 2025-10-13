@@ -25,6 +25,8 @@ import { CartComponent } from './ngRX2/components/cart.component';
 import { GridComponent } from './agGrid/components/grid/grid.component';
 import { UserGridComponent } from './agGrid/components/user-grid/user-grid.component';
 import { FullGridComponent } from './agGrid/components/full-grid/full-grid.component';
+import { RouterModule } from '@angular/router';
+import { LayoutComponent } from './insurance-portal/components/layout/layout.component';
 
 @Component({
   selector: 'app-root',
@@ -50,6 +52,8 @@ import { FullGridComponent } from './agGrid/components/full-grid/full-grid.compo
     GridComponent,
     UserGridComponent,
     FullGridComponent,
+    RouterModule,
+    LayoutComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -93,7 +97,7 @@ export class AppComponent {
     this.latestUserData = { ...data };
   }
 
-  //ngRX
+  // ngRX
   filterText = '';
   onFilter(value: string) {
     this.filterText = value;

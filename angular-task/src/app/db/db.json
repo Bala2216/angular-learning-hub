@@ -1,0 +1,129 @@
+{
+  "claims": [
+    {
+      "id": "1",
+      "type": "health",
+      "memberName": "Alice",
+      "details": {
+        "hospitalName": "Sunrise Hospital",
+        "treatmentDate": "2025-10-01",
+        "amount": 15000
+      }
+    },
+    {
+      "id": "2",
+      "type": "vehicle",
+      "memberName": "Bob",
+      "details": {
+        "vehicleNumber": "MH12AB1234",
+        "accidentDate": "2025-09-15",
+        "damageDescription": "Front bumper damage"
+      }
+    },
+    {
+      "id": "a4ef",
+      "type": "health",
+      "memberName": "Antony",
+      "details": {
+        "hospitalName": "Appolo",
+        "treatmentDate": "2025-10-06",
+        "amount": 10000
+      }
+    },
+    {
+      "id": "64c9",
+      "type": "vehicle",
+      "memberName": "Mark",
+      "details": {
+        "vehicleNumber": "TS8273",
+        "accidentDate": "2025-10-01",
+        "damageDescription": "Back light damage"
+      }
+    },
+    {
+      "id": "83c9",
+      "type": "health",
+      "memberName": "Andy",
+      "details": {
+        "hospitalName": "Star Hospital",
+        "treatmentDate": "2025-10-05",
+        "amount": 25000
+      }
+    },
+    {
+      "id": "6716",
+      "type": "property",
+      "memberName": "Kevin",
+      "details": {
+        "propertyAddress": "Mumbai",
+        "incidentDate": "2025-10-03",
+        "lossDescription": "short circuit damaged house hold items"
+      }
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "af91",
+      "username": "admin2",
+      "password": "admin2",
+      "role": "admin"
+    },
+    {
+      "id": "8b1f",
+      "username": "",
+      "password": "",
+      "role": "user"
+    },
+    {
+      "id": "3478",
+      "username": "",
+      "password": "",
+      "role": "user"
+    },
+    {
+      "id": "11fe",
+      "username": "",
+      "password": "",
+      "role": "user"
+    },
+    {
+      "id": "8f05",
+      "username": "admin",
+      "password": "admin",
+      "role": "admin"
+    }
+  ],
+  "employees": [
+    {
+      "id": "2",
+      "name": "Bob (edited)",
+      "email": "bob@example.com"
+    },
+    {
+      "id": "3",
+      "name": "Charlie",
+      "email": "charlie@example.com"
+    },
+    {
+      "id": "4",
+      "name": "Alice",
+      "email": "alice@example.com"
+    },
+    {
+      "id": "5",
+      "name": "Bob",
+      "email": "bob@example.com"
+    },
+    {
+      "id": "6",
+      "name": "Charlie",
+      "email": "charlie@example.com"
+    }
+  ]
+}

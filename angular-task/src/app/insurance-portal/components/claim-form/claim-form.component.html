@@ -1,0 +1,52 @@
+<div class="max-w-xl mx-auto p-6 bg-white shadow rounded">
+  <h2 class="text-2xl font-bold mb-4">Submit Insurance Claim</h2>
+
+  <label class="block mb-2 font-semibold">Claim Type</label>
+  <select [ngModel]="claimType()" (ngModelChange)="claimType.set($event)" class="mb-4 p-2 border rounded w-full">
+    <option value="health">Health</option>
+    <option value="vehicle">Vehicle</option>
+    <option value="property">Property</option>
+  </select>
+
+  <label class="block mb-2 font-semibold">Member Name</label>
+  <input [ngModel]="memberName()" (ngModelChange)="memberName.set($event)" class="mb-4 p-2 border rounded w-full" />
+
+  @if (claimType() === 'health') {
+    <div>
+      <label>Hospital Name</label>
+      <input [(ngModel)]="details().hospitalName" class="mb-2 p-2 border rounded w-full" />
+      <label>Treatment Date</label>
+      <input type="date" [(ngModel)]="details().treatmentDate" class="mb-2 p-2 border rounded w-full" />
+      <label>Amount</label>
+      <input type="number" [(ngModel)]="details().amount" class="mb-4 p-2 border rounded w-full" />
+    </div>
+  }
+
+  @if (claimType() === 'vehicle') {
+    <div>
+      <label>Vehicle Number</label>
+      <input [(ngModel)]="details().vehicleNumber" class="mb-2 p-2 border rounded w-full" />
+      <label>Accident Date</label>
+      <input type="date" [(ngModel)]="details().accidentDate" class="mb-2 p-2 border rounded w-full" />
+      <label>Damage Description</label>
+      <textarea [(ngModel)]="details().damageDescription" class="mb-4 p-2 border rounded w-full"></textarea>
+    </div>
+  }
+
+  @if (claimType() === 'property') {
+    <div>
+      <label>Property Address</label>
+      <input [(ngModel)]="details().propertyAddress" class="mb-2 p-2 border rounded w-full" />
+      <label>Incident Date</label>
+      <input type="date" [(ngModel)]="details().incidentDate" class="mb-2 p-2 border rounded w-full" />
+      <label>Loss Description</label>
+      <textarea [(ngModel)]="details().lossDescription" class="mb-4 p-2 border rounded w-full"></textarea>
+    </div>
+  }
+
+  <button (click)="submit()" class="bg-blue-600 text-white px-4 py-2 rounded">Submit</button>
+
+  @if (submitted()) {
+    <p class="mt-4 text-green-600 font-semibold">Claim submitted successfully!</p>
+  }
+</div>

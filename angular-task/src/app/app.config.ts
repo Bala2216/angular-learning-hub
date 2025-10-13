@@ -10,6 +10,7 @@ import { UserEffects } from './ngRX2/store/user.effects';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,8 +19,12 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAnimations(),
     provideAnimationsAsync(),
-    provideStore({ userState: userReducer, cart: cartReducer }),
+    provideStore({ 
+      userState: userReducer, 
+      cart: cartReducer 
+    }),
     provideEffects([UserEffects]),
     provideStoreDevtools(),
+    //provideHttpClientTesting(), // if using jest unit testing enable
   ],
 };
