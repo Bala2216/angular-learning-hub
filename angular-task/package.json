@@ -32,6 +32,10 @@
     "ag-grid-community": "^34.2.0",
     "ag-grid-enterprise": "^34.2.0",
     "dayjs": "^1.11.18",
+    "devextreme": "^25.1.5",
+    "devextreme-angular": "^25.1.5",
+    "file-saver": "^2.0.5",
+    "jspdf": "^2.5.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -39,6 +43,7 @@
     "@angular-devkit/build-angular": "^18.2.21",
     "@angular/cli": "^20.3.2",
     "@angular/compiler-cli": "^18.2.0",
+    "@types/file-saver": "^2.0.7",
     "@types/jasmine": "~5.1.0",
     "@types/jest": "^30.0.0",
     "autoprefixer": "^10.4.21",

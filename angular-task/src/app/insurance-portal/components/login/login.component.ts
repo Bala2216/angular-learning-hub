@@ -1,24 +1,25 @@
-// login.component.ts
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+
+ModuleRegistry.registerModules([AllCommunityModule]);
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
   form: FormGroup;
   errorMessage = '';
+  private fb = inject(FormBuilder);
+  private auth = inject(AuthService);
+  private router = inject(Router);
 
-  constructor(
-    private fb: FormBuilder,
-    private auth: AuthService,
-    private router: Router
-  ) {
+  constructor() {
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -32,8 +33,17 @@ export class LoginComponent {
     }
     const { username, password } = this.form.value;
     this.auth.login(username, password).subscribe({
-      next: () => this.router.navigate(['/claims']),
-      error: (err) => (this.errorMessage = err.message || 'login failed'),
+      next: (user) => {
+         if (this.auth.getRole() === 'admin') {
+          this.router.navigateByUrl('/claims');
+         } else {
+           this.router.navigateByUrl('/submit');
+         }
+      },
+      error: (err) => {
+        console.error('Login failed:', err);
+        this.errorMessage = 'Invalid username or password';
+      },
     });
   }
 

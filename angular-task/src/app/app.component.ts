@@ -1,59 +1,59 @@
 import { Component, inject } from '@angular/core';
-import { TemplateFormComponent } from "./template-form/template-form.component";
-import { DataTableComponent } from "./data-table/data-table.component";
+// import { TemplateFormComponent } from "./template-form/template-form.component";
+// import { DataTableComponent } from "./data-table/data-table.component";
 import { UserData } from './modal/UserData';
-import { ReactiveFormComponent } from "./reactive-form/reactive-form.component";
-import { JsonFormComponent } from './json-form/json-form.component';
+// import { ReactiveFormComponent } from "./reactive-form/reactive-form.component";
+// import { JsonFormComponent } from './json-form/json-form.component';
 import { CombinedCard, Employee } from './work-force-managment/models/employee.model';
-import { SearchBar } from './work-force-managment/components/search-bar/search-bar';
-import { EmployeeCard } from './work-force-managment/components/employee-card/employee-card';
+// import { SearchBar } from './work-force-managment/components/search-bar/search-bar';
+// import { EmployeeCard } from './work-force-managment/components/employee-card/employee-card';
 import { CommonModule } from '@angular/common';
-import { FilterPipe } from './work-force-managment/pipes/filter.pipe';
+// import { FilterPipe } from './work-force-managment/pipes/filter.pipe';
 import { debounceTime, distinctUntilChanged, Subject, switchMap } from 'rxjs';
 import { SearchService } from './work-force-managment/services/search.service';
-import { SearchComponent } from './work-force-managment/components/search/search.component';
-import { CardListComponent } from './work-force-managment/components/card-list/card-list.component';
-import { FilterComponent } from './ngRX2/components/filter.component';
-import { UserCardComponent } from './ngRX2/components/user-card.component';
-import { UserListComponent } from './ngRX2/components/user-list.component';
+// import { SearchComponent } from './work-force-managment/components/search/search.component';
+// import { CardListComponent } from './work-force-managment/components/card-list/card-list.component';
+// import { FilterComponent } from './ngRX2/components/filter.component';
+// import { UserCardComponent } from './ngRX2/components/user-card.component';
+// import { UserListComponent } from './ngRX2/components/user-list.component';
 import { Store } from '@ngrx/store';
 import { selectCartCount } from './ngRX2/store/cart.selector';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { CartComponent } from './ngRX2/components/cart.component';
-import { GridComponent } from './agGrid/components/grid/grid.component';
-import { UserGridComponent } from './agGrid/components/user-grid/user-grid.component';
-import { FullGridComponent } from './agGrid/components/full-grid/full-grid.component';
+// import { CartComponent } from './ngRX2/components/cart.component';
+// import { GridComponent } from './agGrid/components/grid/grid.component';
+// import { UserGridComponent } from './agGrid/components/user-grid/user-grid.component';
+// import { FullGridComponent } from './agGrid/components/full-grid/full-grid.component';
 import { RouterModule } from '@angular/router';
-import { LayoutComponent } from './insurance-portal/components/layout/layout.component';
+// import { LayoutComponent } from './insurance-portal/components/layout/layout.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    TemplateFormComponent,
-    DataTableComponent,
-    ReactiveFormComponent,
-    JsonFormComponent,
-    SearchBar,
-    EmployeeCard,
+    // TemplateFormComponent,
+    // DataTableComponent,
+    // ReactiveFormComponent,
+    // JsonFormComponent,
+    // SearchBar,
+    // EmployeeCard,
     CommonModule,
-    FilterPipe,
-    SearchComponent,
-    CardListComponent,
-    FilterComponent,
-    UserCardComponent,
-    UserListComponent,
+    // FilterPipe,
+    // SearchComponent,
+    // CardListComponent,
+    // FilterComponent,
+    // UserCardComponent,
+    // UserListComponent,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    CartComponent,
-    GridComponent,
-    UserGridComponent,
-    FullGridComponent,
+    // CartComponent,
+    // GridComponent,
+    // UserGridComponent,
+    // FullGridComponent,
     RouterModule,
-    LayoutComponent
+    //LayoutComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

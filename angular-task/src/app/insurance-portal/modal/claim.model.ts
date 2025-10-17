@@ -23,7 +23,7 @@ export interface PropertyClaim {
   lossDescription: string;
 }
 
-export interface Employee {
+export interface User {
   id: number;
   name: string;
   email: string;

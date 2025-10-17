@@ -1,34 +1,64 @@
 <div class="p-4">
-  <input (keyup)="applyFilter($event)" placeholder="Filter users" class="mb-4 p-2 border rounded" />
+  <input
+    (keyup)="applyFilter($event)"
+    placeholder="Filter users"
+    class="mb-4 p-2 border rounded w-full"
+  />
 
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-full">
 
+    <!-- ID Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
       <td mat-cell *matCellDef="let user">{{ user.id }}</td>
     </ng-container>
 
+    <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-      <td mat-cell *matCellDef="let user">{{ user.name }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-      <td mat-cell *matCellDef="let user">{{ user.email }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let user">
-        <button (click)="editUser(user)" class="text-blue-600 hover:underline mr-2">Edit</button>
-        <button (click)="deleteUser(user)" class="text-red-600 hover:underline">Delete</button>
+        <ng-container *ngIf="editingUserId === user.id; else viewName">
+          <input [(ngModel)]="editedUser.name" class="border p-1 w-full" />
+        </ng-container>
+        <ng-template #viewName>{{ user.name }}</ng-template>
       </td>
     </ng-container>
 
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let user">
+        <ng-container *ngIf="editingUserId === user.id; else viewEmail">
+          <input [(ngModel)]="editedUser.email" class="border p-1 w-full" />
+        </ng-container>
+        <ng-template #viewEmail>{{ user.email }}</ng-template>
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let user">
+        <ng-container *ngIf="editingUserId === user.id; else actionButtons">
+          <button (click)="saveEdit()" class="text-green-600 hover:underline mr-2">Save</button>
+          <button (click)="cancelEdit()" class="text-gray-600 hover:underline">Cancel</button>
+        </ng-container>
+        <ng-template #actionButtons>
+          <button (click)="startEdit(user)" class="text-blue-600 hover:underline mr-2">Edit</button>
+          <button (click)="deleteUser(user)" class="text-red-600 hover:underline">Delete</button>
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10,15]" showFirstLastButtons></mat-paginator>
+  <!-- Paginator -->
+  <mat-paginator
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 15]"
+    showFirstLastButtons
+  ></mat-paginator>
 </div>

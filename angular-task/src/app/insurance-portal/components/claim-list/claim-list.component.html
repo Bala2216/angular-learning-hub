@@ -3,7 +3,9 @@
 
   <!-- Filter Dropdown -->
   <div class="flex items-center gap-4">
-    <label for="claimType" class="text-lg font-medium text-gray-700">Filter by Type:</label>
+    <label for="claimType" class="text-lg font-medium text-gray-700"
+      >Filter by Type:</label
+    >
     <select
       id="claimType"
       [(ngModel)]="selectedType"
@@ -18,47 +20,69 @@
   </div>
 
   <!-- Success Message -->
-  <div *ngIf="updateSuccess" class="bg-green-100 text-green-800 px-4 py-2 rounded shadow-sm">
+  @if(updateSuccess){
+  <div class="bg-green-100 text-green-800 px-4 py-2 rounded shadow-sm">
     ✅ Claim updated successfully!
   </div>
+  }
 
   <!-- Health Claims Table -->
-  <div *ngIf="selectedType === 'all' || selectedType === 'health'" class="bg-white p-4 rounded shadow">
+  @if(selectedType === 'all' || selectedType === 'health'){
+  <div class="bg-white p-4 rounded shadow">
     <h2 class="text-xl font-semibold mb-2 text-blue-700">Health Claims</h2>
     <ag-grid-angular
       class="ag-theme-alpine w-full"
-      style="height: 200px;"
+      style="height: 200px"
       [rowData]="healthClaims"
       [columnDefs]="healthColumns"
-      [defaultColDef]="{ sortable: true, filter: true, resizable: true, editable: true }"
+      [defaultColDef]="{
+        sortable: true,
+        filter: true,
+        resizable: true,
+        editable: true
+      }"
       (cellValueChanged)="onCellValueChanged($event)"
     ></ag-grid-angular>
   </div>
+  }
 
   <!-- Vehicle Claims Table -->
-  <div *ngIf="selectedType === 'all' || selectedType === 'vehicle'" class="bg-white p-4 rounded shadow">
+  @if(selectedType === 'all' || selectedType === 'vehicle'){
+  <div class="bg-white p-4 rounded shadow">
     <h2 class="text-xl font-semibold mb-2 text-blue-700">Vehicle Claims</h2>
     <ag-grid-angular
       class="ag-theme-alpine w-full"
-      style="height: 200px;"
+      style="height: 200px"
       [rowData]="vehicleClaims"
       [columnDefs]="vehicleColumns"
-      [defaultColDef]="{ sortable: true, filter: true, resizable: true, editable: true }"
+      [defaultColDef]="{
+        sortable: true,
+        filter: true,
+        resizable: true,
+        editable: true
+      }"
       (cellValueChanged)="onCellValueChanged($event)"
     ></ag-grid-angular>
   </div>
+  }
 
   <!-- Property Claims Table -->
-  <div *ngIf="selectedType === 'all' || selectedType === 'property'" class="bg-white p-4 rounded shadow">
+  @if(selectedType === 'all' || selectedType === 'property'){
+  <div class="bg-white p-4 rounded shadow">
     <h2 class="text-xl font-semibold mb-2 text-blue-700">Property Claims</h2>
     <ag-grid-angular
       class="ag-theme-alpine w-full"
-      style="height: 200px;"
+      style="height: 200px"
       [rowData]="propertyClaims"
       [columnDefs]="propertyColumns"
-      [defaultColDef]="{ sortable: true, filter: true, resizable: true, editable: true }"
+      [defaultColDef]="{
+        sortable: true,
+        filter: true,
+        resizable: true,
+        editable: true
+      }"
       (cellValueChanged)="onCellValueChanged($event)"
     ></ag-grid-angular>
   </div>
+  }
 </div>
-

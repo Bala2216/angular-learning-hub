@@ -64,8 +64,8 @@
   "users": [
     {
       "id": "1",
-      "username": "admin",
-      "password": "admin123",
+      "username": "admin1",
+      "password": "admin1",
       "role": "admin"
     },
     {
@@ -75,55 +75,84 @@
       "role": "admin"
     },
     {
-      "id": "8b1f",
-      "username": "",
-      "password": "",
-      "role": "user"
-    },
-    {
-      "id": "3478",
-      "username": "",
-      "password": "",
-      "role": "user"
-    },
-    {
-      "id": "11fe",
-      "username": "",
-      "password": "",
-      "role": "user"
-    },
-    {
       "id": "8f05",
       "username": "admin",
       "password": "admin",
+      "role": "admin"
+    },
+    {
+      "id": "8caa",
+      "username": "admin3",
+      "password": "admin3",
+      "role": "user"
+    },
+    {
+      "id": "7ce0",
+      "username": "admin6",
+      "password": "admin6",
+      "role": "admin"
+    },
+    {
+      "id": "1886",
+      "username": "admin6",
+      "password": "admin6",
       "role": "admin"
     }
   ],
   "employees": [
     {
-      "id": "2",
-      "name": "Bob (edited)",
-      "email": "bob@example.com"
-    },
-    {
-      "id": "3",
-      "name": "Charlie",
-      "email": "charlie@example.com"
-    },
-    {
-      "id": "4",
-      "name": "Alice",
-      "email": "alice@example.com"
-    },
-    {
       "id": "5",
-      "name": "Bob",
-      "email": "bob@example.com"
+      "name": "Joe",
+      "role": "admin",
+      "email": "joe@example.com"
     },
     {
-      "id": "6",
-      "name": "Charlie",
-      "email": "charlie@example.com"
+      "id": "4227",
+      "name": "Mark",
+      "role": "user",
+      "email": "mark@example.com"
+    },
+    {
+      "id": "46fc",
+      "name": "sudha",
+      "role": "admin",
+      "email": "sudha@gmail.com"
+    },
+    {
+      "id": "7706",
+      "name": "Test",
+      "role": "user",
+      "email": "test@gmail.com"
+    }
+  ],
+  "employees1": [
+    {
+      "id": "d2c3",
+      "firstName": "Mark",
+      "lastName": "",
+      "email": "s@gmail.com",
+      "phone": "",
+      "jobTitle": "Developer",
+      "department": "",
+      "experience": null,
+      "salary": null,
+      "isActive": false,
+      "gender": "",
+      "age": null
+    },
+    {
+      "id": "fd7e",
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "phone": "",
+      "jobTitle": "",
+      "department": "",
+      "experience": null,
+      "salary": null,
+      "isActive": false,
+      "gender": "",
+      "age": null
     }
   ]
 }

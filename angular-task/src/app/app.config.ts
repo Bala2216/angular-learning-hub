@@ -11,6 +11,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { employeeReducer } from './insurance-portal/ngRX/store/employee.reducer';
+import { EmployeeEffects } from './insurance-portal/ngRX/store/employee.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,11 +21,12 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAnimations(),
     provideAnimationsAsync(),
-    provideStore({ 
-      userState: userReducer, 
-      cart: cartReducer 
+    provideStore({
+      userState: userReducer,
+      cart: cartReducer,
+      employees: employeeReducer,
     }),
-    provideEffects([UserEffects]),
+    provideEffects([UserEffects, EmployeeEffects]),
     provideStoreDevtools(),
     //provideHttpClientTesting(), // if using jest unit testing enable
   ],

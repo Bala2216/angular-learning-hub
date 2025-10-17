@@ -32,7 +32,6 @@ export class RegisterComponent {
       return;
     }
     this.auth.register(this.form.value).subscribe(() => {
-      alert('Registration successful');
       this.router.navigate(['/login']);
     });
   }

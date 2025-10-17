@@ -1,0 +1,56 @@
+<mat-horizontal-stepper [linear]="true">
+  <mat-step label="Personal Info">
+    <jsonforms
+      [schema]="schema"
+      [uischema]="personalUISchema"
+      [data]="data"
+      [renderers]="renderers"
+      (change)="onChange($event)"
+    ></jsonforms>
+    <button mat-button matStepperNext>Next</button>
+  </mat-step>
+
+  <mat-step label="Job Info">
+    <jsonforms
+      [schema]="schema"
+      [uischema]="jobUISchema"
+      [data]="data"
+      [renderers]="renderers"
+      (change)="onChange($event)"
+    ></jsonforms>
+    <button mat-button matStepperPrevious>Back</button>
+    <button mat-button matStepperNext>Next</button>
+  </mat-step>
+
+  <mat-step label="Status Info">
+    <jsonforms
+      [schema]="schema"
+      [uischema]="statusUISchema"
+      [data]="data"
+      [renderers]="renderers"
+      (change)="onChange($event)"
+    ></jsonforms>
+    <button mat-button matStepperPrevious>Back</button>
+    <button mat-button (click)="submit()">Submit</button>
+  </mat-step>
+</mat-horizontal-stepper>
+
+<table mat-table [dataSource]="employees" class="mat-elevation-z8 mt-4">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let emp">{{ emp.firstName }} {{ emp.lastName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>Email</th>
+    <td mat-cell *matCellDef="let emp">{{ emp.email }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="jobTitle">
+    <th mat-header-cell *matHeaderCellDef>Job Title</th>
+    <td mat-cell *matCellDef="let emp">{{ emp.jobTitle }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

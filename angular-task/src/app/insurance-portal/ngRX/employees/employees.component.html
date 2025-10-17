@@ -1,0 +1,121 @@
+<div class="max-w-3xl mx-auto p-4">
+  <!-- <app-employee-form [editEmployee]="selectedEmployee"></app-employee-form>
+<br/> -->
+  <ul class="space-y-3">
+    <div class="flex justify-end mb-4">
+      <button
+        (click)="openAddModal()"
+        class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+      >
+        Add Employee
+      </button>
+    </div>
+
+    <li
+      *ngFor="let emp of employees$ | async"
+      class="flex justify-between items-center bg-white shadow p-4 rounded-md"
+    >
+      <div>
+        <p class="font">
+          <span class="font-semibold">Name:</span> {{ emp.name }}
+        </p>
+        <p class="font">
+          <span class="font-semibold">Email:</span> {{ emp.email }}
+        </p>
+        <p class="text-sm text-gray-600">
+          <span class="font-semibold">Role:</span> {{ emp.role }}
+        </p>
+      </div>
+      <div class="flex space-x-2 ml-auto">
+        <button
+          (click)="edit(emp)"
+          class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+        >
+          Edit
+        </button>
+        <button
+          *ngIf="emp.id !== undefined"
+          (click)="confirmDelete(emp)"
+          class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+        >
+          Delete
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Modal Overlay -->
+<div
+  *ngIf="showModal"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+>
+  <!-- Modal Content -->
+  <div class="bg-white p-6 rounded shadow-lg w-full max-w-md">
+    <!-- <h2 class="text-xl font-bold mb-4 text-center">Edit Employee</h2> -->
+    <h2 class="text-xl font-bold mb-4 text-center">
+  {{ isEditMode ? 'Edit Employee' : 'Add Employee' }}
+</h2>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+      <input
+        formControlName="name"
+        placeholder="Name"
+        class="w-full px-4 py-2 border rounded"
+      />
+      <input
+        formControlName="role"
+        placeholder="Role"
+        class="w-full px-4 py-2 border rounded"
+      />
+      <input
+        formControlName="email"
+        placeholder="Email"
+        class="w-full px-4 py-2 border rounded"
+      />
+      <div class="flex justify-end space-x-2">
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          {{ isEditMode ? 'Update' : 'Add' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div
+  *ngIf="showDeleteModal"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+>
+  <div class="bg-white p-6 rounded shadow-lg w-full max-w-sm text-center">
+    <h2 class="text-lg font-semibold mb-4">Confirm Deletion</h2>
+    <p class="mb-6">
+      Are you sure you want to delete
+      <strong>{{ selectedEmployee?.name }}</strong
+      >?
+    </p>
+    <div class="flex justify-center space-x-4">
+      <button
+        (click)="cancelDelete()"
+        class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+      >
+        Cancel
+      </button>
+      <button
+        (click)="deleteConfirmed()"
+        class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
