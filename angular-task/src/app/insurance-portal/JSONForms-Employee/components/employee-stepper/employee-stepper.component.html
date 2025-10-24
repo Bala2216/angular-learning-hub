@@ -1,0 +1,28 @@
+<mat-horizontal-stepper *ngIf="schemasReady && schemas.length > 0"
+  [selectedIndex]="step < schemas.length ? step : 0">
+  <mat-step
+    *ngFor="let stepSchema of schemas; let i = index"
+    [label]="'Step ' + (i + 1)"
+  >
+    <!-- <ng-container > -->
+      <jsonforms
+        [schema]="stepSchema.schema"
+        [uischema]="stepSchema.uiSchema"
+        [data]="stepSchema.data"
+        [renderers]="renderers"
+        (dataChange)="stepSchema.data = $event.data"
+      >
+      </jsonforms>
+    
+    <div class="step-buttons">
+      <button mat-button *ngIf="i > 0" (click)="prevStep()">Back</button>
+      <button mat-button *ngIf="i < schemas.length - 1" (click)="nextStep()">
+        Next
+      </button>
+      <button mat-button *ngIf="i === schemas.length - 1" (click)="submit()">
+        Submit
+      </button>
+    </div>
+    <!-- </ng-container> -->
+  </mat-step>
+</mat-horizontal-stepper>

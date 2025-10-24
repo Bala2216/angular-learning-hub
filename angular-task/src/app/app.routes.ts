@@ -58,6 +58,20 @@ export const routes: Routes = [
             '../app/insurance-portal/devExtrme/dx-datagrid.component'
           ).then((m) => m.DxDataGridComponent),
       },
+      {
+        path: 'counter',
+        loadComponent: () =>
+          import('../app/insurance-portal/ngRX/counter/counter.component').then(
+            (m) => m.CounterComponent
+          ),
+      },
+      {
+        path: 'employee-step',
+        loadComponent: () =>
+          import(
+            '../app/insurance-portal/JSONForms-Employee/components/employee-stepper/employee-stepper.component'
+          ).then((m) => m.EmployeeStepperComponent),
+      },
       { path: '', redirectTo: 'submit', pathMatch: 'full' },
     ],
   },

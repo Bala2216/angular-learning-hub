@@ -13,6 +13,8 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { employeeReducer } from './insurance-portal/ngRX/store/employee.reducer';
 import { EmployeeEffects } from './insurance-portal/ngRX/store/employee.effects';
+import { counterReducer } from './insurance-portal/ngRX/counter/store/counter.reducer';
+import { employeeReducer1 } from './insurance-portal/JSONForms-Employee/store/employee.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,9 +27,11 @@ export const appConfig: ApplicationConfig = {
       userState: userReducer,
       cart: cartReducer,
       employees: employeeReducer,
+      counter: counterReducer,
+      employees1: employeeReducer1,
     }),
     provideEffects([UserEffects, EmployeeEffects]),
-    provideStoreDevtools(),
+    provideStoreDevtools()
     //provideHttpClientTesting(), // if using jest unit testing enable
   ],
 };
