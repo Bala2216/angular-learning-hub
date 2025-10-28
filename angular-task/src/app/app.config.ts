@@ -15,6 +15,7 @@ import { employeeReducer } from './insurance-portal/ngRX/store/employee.reducer'
 import { EmployeeEffects } from './insurance-portal/ngRX/store/employee.effects';
 import { counterReducer } from './insurance-portal/ngRX/counter/store/counter.reducer';
 import { employeeReducer1 } from './insurance-portal/JSONForms-Employee/store/employee.reducer';
+import { favoriteReducer } from './insurance-portal/ngRX/products/states/favorite-product/reducer/app.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,6 +30,7 @@ export const appConfig: ApplicationConfig = {
       employees: employeeReducer,
       counter: counterReducer,
       employees1: employeeReducer1,
+      favorite: favoriteReducer,
     }),
     provideEffects([UserEffects, EmployeeEffects]),
     provideStoreDevtools()

@@ -5,6 +5,7 @@ import { LoginComponent } from './insurance-portal/components/login/login.compon
 import { RegisterComponent } from './insurance-portal/components/register/register.component';
 import { AdminGuard } from './insurance-portal/guard/admin.guard';
 import { LayoutComponent } from './insurance-portal/components/layout/layout.component';
+import { getProductsResolver } from './insurance-portal/ngRX/products/modules/product/resolvers/get-products.resolver';
 
 export const routes: Routes = [
   {
@@ -71,6 +72,23 @@ export const routes: Routes = [
           import(
             '../app/insurance-portal/JSONForms-Employee/components/employee-stepper/employee-stepper.component'
           ).then((m) => m.EmployeeStepperComponent),
+      },
+      {
+        path: 'products',
+        loadComponent: () =>
+          import(
+            '../app/insurance-portal/ngRX/products/modules/product/pages/home-product/home-product.component'
+          ).then((m) => m.HomeProductComponent),
+        resolve: { products: getProductsResolver },
+        data: { title: 'Products' },
+      },
+      {
+        path: 'favorites',
+        loadComponent: () =>
+          import(
+            '../app/insurance-portal/ngRX/products/modules/favorite-product/pages/home-favorite-product/home-favorite-product.component'
+          ).then((m) => m.HomeFavoriteProductComponent),
+        data: { title: 'Favotire Products' },
       },
       { path: '', redirectTo: 'submit', pathMatch: 'full' },
     ],

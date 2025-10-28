@@ -1,0 +1,28 @@
+@if (data) {
+<app-header-favorite-product
+  (clickClearEvent)="clearFavoriteList()"
+></app-header-favorite-product>
+} @else {
+<p>No favorite products found.</p>
+}
+
+<mat-grid-list [cols]="colsDesktop" [rowHeight]="rowHeight">
+  <mat-grid-tile *ngFor="let product of data">
+    <mat-card class="card">
+      <img mat-card-image class="card-image" src="{{ product.image }}" />
+      <mat-icon
+        aria-hidden="false"
+        class="mat-icon-md icon"
+        title="remove product of the favorites"
+        (click)="removeProductFavorites(product)"
+        >delete</mat-icon
+      >
+      <mat-card-content class="card-content">
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>{{
+          product.price | currency : "USD" : "symbol" : "1.2-2"
+        }}</mat-card-subtitle>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

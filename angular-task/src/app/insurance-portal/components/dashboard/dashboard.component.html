@@ -50,14 +50,28 @@
       routerLinkActive="bg-blue-600 text-black"
       class="px-4 py-2 bg-white border rounded hover:bg-blue-100"
     >
-      counter
+      Counter
     </button>
     <button
       routerLink="/employee-step"
       routerLinkActive="bg-blue-600 text-black"
       class="px-4 py-2 bg-white border rounded hover:bg-blue-100"
     >
-      Employee-step
+      Employee-Info
+    </button>
+    <button
+      routerLink="/products"
+      routerLinkActive="bg-blue-600 text-black"
+      class="px-4 py-2 bg-white border rounded hover:bg-blue-100"
+    >
+      Products
+    </button>
+    <button
+      routerLink="/favorites"
+      routerLinkActive="bg-blue-600 text-black"
+      class="px-4 py-2 bg-white border rounded hover:bg-blue-100"
+    >
+      Favorites
     </button>
 
      <button
@@ -70,6 +84,14 @@
   </nav>
 
   <div class="bg-white p-4 rounded shadow">
+    <app-header></app-header>
     <router-outlet></router-outlet>
+    <app-footer></app-footer>
   </div>
-</div>
+
+   
+<!-- <main class="container" >
+<router-outlet></router-outlet>
+</main>
+
+</div> -->

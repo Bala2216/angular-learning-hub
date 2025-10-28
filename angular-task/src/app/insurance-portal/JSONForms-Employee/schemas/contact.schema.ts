@@ -10,7 +10,7 @@ export const contactSchema = {
 export const contactUISchema = {
   type: 'VerticalLayout',
   elements: [
-    { type: 'Control', scope: '#/properties/email' },
+    { type: 'Control', scope: '#/properties/email', options: { readonly: true} },
     { type: 'Control', scope: '#/properties/phone' },
   ],
 };
