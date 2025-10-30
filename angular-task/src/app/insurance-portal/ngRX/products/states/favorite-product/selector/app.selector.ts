@@ -8,12 +8,12 @@ export const selectAppState = createFeatureSelector<AppState>('favorite');
 // get All favorites products
 export const selectProducts = createSelector(
   selectAppState,
-  (state: AppState) => state.products
+  (state: AppState) => state?.products || []
 );
 
 // get One favorite product by ID
 export const selectProductById = createSelector(
   selectProducts,
   (products: FavoriteProduct[], props: { productId: number }) =>
-    products.find(product => product.id === props.productId)
+    products.find((product) => product.id === props.productId)
 );

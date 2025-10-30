@@ -38,26 +38,33 @@
     >
       Employee-NgRx
     </button>
-     <button
+    <button
       routerLink="/dx-datagrid"
       routerLinkActive="bg-blue-600 text-black"
       class="px-4 py-2 bg-white border rounded hover:bg-blue-100"
     >
       Employee-DataGrid
     </button>
-    <button
+    <!-- <button
       routerLink="/counter"
       routerLinkActive="bg-blue-600 text-black"
       class="px-4 py-2 bg-white border rounded hover:bg-blue-100"
     >
       Counter
-    </button>
+    </button> -->
     <button
       routerLink="/employee-step"
       routerLinkActive="bg-blue-600 text-black"
       class="px-4 py-2 bg-white border rounded hover:bg-blue-100"
     >
-      Employee-Info
+      Employee-step
+    </button>
+    <button
+      routerLink="/shopping"
+      routerLinkActive="bg-blue-600 text-black"
+      class="px-4 py-2 bg-white border rounded hover:bg-blue-100"
+    >
+      Shopping Cart
     </button>
     <button
       routerLink="/products"
@@ -66,32 +73,21 @@
     >
       Products
     </button>
-    <button
+    <!-- <button
       routerLink="/favorites"
       routerLinkActive="bg-blue-600 text-black"
       class="px-4 py-2 bg-white border rounded hover:bg-blue-100"
     >
       Favorites
-    </button>
+    </button> -->
 
-     <button
-    (click)="logout()"
-    class="ml-auto px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-  >
-    Logout
-  </button>
-  
+    <button
+      (click)="logout()"
+      class="ml-auto px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+    >
+      Logout
+    </button>
   </nav>
 
-  <div class="bg-white p-4 rounded shadow">
-    <app-header></app-header>
-    <router-outlet></router-outlet>
-    <app-footer></app-footer>
-  </div>
-
-   
-<!-- <main class="container" >
-<router-outlet></router-outlet>
-</main>
-
-</div> -->
+  <router-outlet></router-outlet>
+</div>

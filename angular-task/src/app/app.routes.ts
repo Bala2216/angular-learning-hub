@@ -59,12 +59,18 @@ export const routes: Routes = [
             '../app/insurance-portal/devExtrme/dx-datagrid.component'
           ).then((m) => m.DxDataGridComponent),
       },
+      // {
+      //   path: 'counter',
+      //   loadComponent: () =>
+      //     import('../app/insurance-portal/ngRX/counter/counter.component').then(
+      //       (m) => m.CounterComponent
+      //     ),
+      // },
       {
-        path: 'counter',
-        loadComponent: () =>
-          import('../app/insurance-portal/ngRX/counter/counter.component').then(
-            (m) => m.CounterComponent
-          ),
+        path: 'shopping',
+        loadChildren: () =>
+          import('./insurance-portal/shopping-cart/shopping-cart.routes')
+            .then((m) => m.SHOPPING_CART_ROUTES)
       },
       {
         path: 'employee-step',
@@ -82,14 +88,14 @@ export const routes: Routes = [
         resolve: { products: getProductsResolver },
         data: { title: 'Products' },
       },
-      {
-        path: 'favorites',
-        loadComponent: () =>
-          import(
-            '../app/insurance-portal/ngRX/products/modules/favorite-product/pages/home-favorite-product/home-favorite-product.component'
-          ).then((m) => m.HomeFavoriteProductComponent),
-        data: { title: 'Favotire Products' },
-      },
+      // {
+      //   path: 'favorites',
+      //   loadComponent: () =>
+      //     import(
+      //       '../app/insurance-portal/ngRX/products/modules/favorite-product/pages/home-favorite-product/home-favorite-product.component'
+      //     ).then((m) => m.HomeFavoriteProductComponent),
+      //   data: { title: 'Favotire Products' },
+      // },
       { path: '', redirectTo: 'submit', pathMatch: 'full' },
     ],
   },

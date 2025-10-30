@@ -1,0 +1,19 @@
+<div class="product-list">
+  @for (product of products$ | async; track product.id) {
+    <mat-card class="product-card">
+      <img mat-card-image [src]="product.image" 
+           [alt]="product.title"
+           (error)="handleImageError($event)">
+      <mat-card-content>
+        <h2>{{product.title}}</h2>
+        <p>{{product.description}}</p>
+        <p class="price">Price: ${{product.price}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="addToCart(product)">
+          Add to Cart
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  }
+</div>

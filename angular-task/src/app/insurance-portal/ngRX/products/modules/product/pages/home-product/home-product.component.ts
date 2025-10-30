@@ -14,11 +14,13 @@ import { selectProducts } from '../../../../states/favorite-product/selector/app
 import { GridList } from '../../../../commons/grid-list.class';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../shared/shared.module';
+import { HeaderComponent } from '../../../../components/header/header.component';
+import { FooterComponent } from '../../../../components/footer/footer.component';
 
 @Component({
   selector: 'app-home-product',
   standalone: true,
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, HeaderComponent, FooterComponent],
   templateUrl: './home-product.component.html',
   styleUrls: ['./home-product.component.scss'],
 })
