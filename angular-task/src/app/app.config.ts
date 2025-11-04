@@ -12,6 +12,9 @@ import { employeeReducer } from './insurance-portal/ngRX/store/employee.reducer'
 import { counterReducer } from './insurance-portal/ngRX/counter/store/counter.reducer';
 import { employeeReducer1 } from './insurance-portal/JSONForms-Employee/store/employee.reducer';
 import { favoriteReducer } from './insurance-portal/ngRX/products/states/favorite-product/reducer/app.reducer';
+import { productReducer } from './product-dashboard/store/product.reducer';
+import { ProductEffects } from './product-dashboard/store/product.effects';
+import { cartReducer } from './product-dashboard/store/cart/cart.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,8 +29,10 @@ export const appConfig: ApplicationConfig = {
       counter: counterReducer,
       employees1: employeeReducer1,
       favorite: favoriteReducer,
+      products: productReducer,
+      cart: cartReducer,
     }),
-    provideEffects(),
+    provideEffects(ProductEffects),
     provideStoreDevtools({ maxAge: 25, logOnly: false }),
   ],
 };

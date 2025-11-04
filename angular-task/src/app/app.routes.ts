@@ -69,8 +69,9 @@ export const routes: Routes = [
       {
         path: 'shopping',
         loadChildren: () =>
-          import('./insurance-portal/shopping-cart/shopping-cart.routes')
-            .then((m) => m.SHOPPING_CART_ROUTES)
+          import('./insurance-portal/shopping-cart/shopping-cart.routes').then(
+            (m) => m.SHOPPING_CART_ROUTES
+          ),
       },
       {
         path: 'employee-step',
@@ -87,6 +88,13 @@ export const routes: Routes = [
           ).then((m) => m.HomeProductComponent),
         resolve: { products: getProductsResolver },
         data: { title: 'Products' },
+      },
+      {
+        path: 'dashboard-products',
+        loadComponent: () =>
+          import(
+            '../app/product-dashboard/components/dashboard.component'
+          ).then((m) => m.DashboardComponent),
       },
       // {
       //   path: 'favorites',
