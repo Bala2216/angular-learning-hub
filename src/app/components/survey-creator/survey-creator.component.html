@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="role-selector">
+    <label for="role">Select Role:</label>
+    <select id="role" [value]="selectedRole" (change)="onRoleChange($event)">
+      <option value="">Select Role</option>
+      <option value="Admin">Admin</option>
+      <option value="User">User</option>
+      <option value="Guest">Guest</option>
+    </select>
+  </div>
+
+  <h2>{{ surveyForm.value.title | uppercase }}</h2>
+
+  <form [formGroup]="surveyForm">
+    <label>Survey Title:</label>
+    <input
+      #surveyTitleInput
+      formControlName="title"
+      placeholder="Enter survey title"
+    />
+
+    <div formArrayName="questions">
+      <div
+        *ngFor="let question of questions.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <label>{{ question.value.label | titlecase }}</label>
+        <input formControlName="label" placeholder="Enter question text" />
+
+        <div *ngIf="question.value.type === 'multiple'">
+          <label>Options:</label>
+          <div *ngFor="let opt of question.value.options; let j = index">
+            <input [value]="opt | lowercase" />
+          </div>
+        </div>
+
+        <button (click)="removeQuestion(i)">Remove</button>
+      </div>
+    </div>
+
+    <button type="button" (click)="addQuestion('text')">
+      Add Text Question
+    </button>
+    <button type="button" (click)="addQuestion('rating')">
+      Add Rating Question
+    </button>
+    <button type="button" (click)="addQuestion('multiple')">
+      Add Multiple Choice Question
+    </button>
+    <br /><br />
+    <button type="button" (click)="saveSurvey()">Save Survey</button>
+    <button type="button" (click)="clearSurvey()">Clear Survey</button>
+  </form>
+</div>

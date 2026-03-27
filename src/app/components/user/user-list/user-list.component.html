@@ -1,0 +1,96 @@
+
+<div class="user-list-container">
+  <div class="search-box" *ngIf="role === 'Admin'">
+    <div class="search-add-wrapper">
+      <app-input [(searchText)]="searchText" (searchTextChange)="onSearchChange($event)"></app-input>
+      <button class="add-user-button" (click)="toggleAddForm()">+ Add User</button>
+      <button class="json-form-toggle" (click)="toggleJsonForm()">+ Add User via JSON Form</button>
+      <button class="clear-user-button" (click)="clearPersistedUsers()">Clear Added Users</button>
+    </div>
+  </div>
+
+  <app-add-user
+    [showForm]="showAddForm"
+    (closeForm)="toggleAddForm()"
+    (addUser)="handleAddUser($event)">
+  </app-add-user>
+
+  <div *ngIf="showJsonForm" class="json-form-wrapper styled-form">
+    <jsonforms
+  [data]="jsonFormData"
+  [schema]="jsonSchema"
+  [uischema]="jsonUiSchema"
+  [renderers]="materialRenderers"
+  [validationMode]="'ValidateAndShow'"
+  (change)="onJsonFormChange($event)">
+</jsonforms>
+    <div class="json-submit-wrapper">
+      <button (click)="submitJsonForm()" class="submit-json-button">Submit JSON User</button>
+      <button (click)="resetJsonForm()" class="submit-json-button reset">Reset</button>
+    </div>
+  </div>
+
+  <div class="user-cards">
+    <div
+      class="user-card boxed"
+      *ngFor="let user of users | userFilter: searchText"
+      [appGenderColor]="user.email"
+      [title]="user.email.split('@')[1]">
+      <h3>{{ user.name }}</h3>
+      <p><strong>Username:</strong> {{ user.username }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Comment:</strong> {{ user.body }}</p>
+    </div>
+  </div>
+
+  <div class="ag-grid-wrapper" style="margin: 20px 0;">
+    <ag-grid-angular
+      class="ag-theme-alpine"
+      style="width: 100%; height: 400px;"
+      [rowData]="users"
+      [columnDefs]="agGridColumnDefs"
+      [defaultColDef]="agGridDefaultColDef"
+      [pagination]="true"
+      [paginationPageSize]="10">
+    </ag-grid-angular>
+  </div>
+
+  <div class="mat-table-wrapper" style="margin: 20px 0;">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef>Username</th>
+        <td mat-cell *matCellDef="let user">{{ user.username }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="body">
+        <th mat-header-cell *matHeaderCellDef>Comment</th>
+        <td mat-cell *matCellDef="let user">{{ user.body }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="matDisplayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: matDisplayedColumns;"></tr>
+    </table>
+  </div>
+
+  <div class="dx-grid-wrapper styled-grid">
+    <dx-data-grid
+      [dataSource]="users"
+      [columns]="dxGridColumns"
+      [showBorders]="true"
+      [columnAutoWidth]="true"
+      [wordWrapEnabled]="true"
+      [paging]="{ pageSize: 10 }"
+      [pager]="{ showPageSizeSelector: true, allowedPageSizes: [5, 10, 20], showInfo: true }">
+    </dx-data-grid>
+  </div>
+</div>

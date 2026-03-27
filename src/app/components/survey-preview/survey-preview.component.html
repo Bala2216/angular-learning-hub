@@ -1,0 +1,19 @@
+<div class="preview-container">
+  <h3>Preview: {{ surveyData.title | titlecase }}</h3>
+  <p><strong>Date:</strong> {{ today | date:'fullDate' }}</p>
+
+  <div class="question-list">
+    <h4>Questions</h4>
+    <div *ngFor="let q of surveyData.questions" class="question-card">
+      <p><strong>Label:</strong> {{ q.label | slice:0:50 }}</p>
+      <p><strong>Type:</strong> {{ q.type | uppercase }}</p>
+
+      <div *ngIf="q.type === 'multiple' && q.options?.length">
+        <p><strong>Options:</strong></p>
+        <ul>
+          <li *ngFor="let opt of q.options">{{ opt }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

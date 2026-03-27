@@ -1,0 +1,17 @@
+<h1>{{ title }}</h1>
+
+<div class="top-right-role">
+  {{ currentRole }}
+</div>
+
+<nav class="nav-bar">
+  <a routerLink="/survey" routerLinkActive="active">Survey</a>
+  <a routerLink="/feedback" routerLinkActive="active">Feedback</a>
+  <a routerLink="/preview" routerLinkActive="active">Preview</a>
+  <a routerLink="/user-list" routerLinkActive="active">User</a>
+</nav>
+
+<app-survey-creator *ngIf="currentRoute === '/survey'"></app-survey-creator>
+<app-feedback-form *ngIf="currentRoute === '/feedback'"></app-feedback-form>
+<app-survey-preview *ngIf="currentRoute === '/preview'"></app-survey-preview>
+<app-user-list *ngIf="currentRoute === '/user-list'"></app-user-list>
